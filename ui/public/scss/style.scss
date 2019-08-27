@@ -1,0 +1,105 @@
+@import "variables/_variables";
+@import "typography/_typography";
+@import "nav/nav";
+@import "productos/productos";
+
+header {
+  background: $gris;
+  #header_top {
+  }
+  #top_header {
+    #top_titulo {
+      text-transform: uppercase;
+      color: $naranja;
+      font-weight: bold;
+      text-shadow: #000000bf 2px 2px 3px;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+  }
+}
+
+.top_boton {
+  border: $naranja 2px solid;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+#menu_banner_top {
+  #top_menu {
+    list-style: none;
+    margin: 2rem 1rem;
+    padding: 0px;
+    li {
+      height: 2.3rem;
+      width: 90%;
+      a {
+        border: 2px $gris solid;
+        border-radius: 10px;
+        padding: 5px;
+        width: 100%;
+        display: block;
+        margin: 7px 0px;
+        color: $gris_oscuro;
+        font-style: italic;
+      }
+    }
+  }
+}
+#main_content{
+
+}
+#home_tiles{
+  h2{
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .home_tile{
+    height: 300px;
+  }
+}
+.naranja_bg{
+  background: $naranja;
+}
+.verde_bg{
+  background: $verde;
+}
+.gris_bg{
+  background: $gris;
+}
+.azul_bg{
+  background: $azul;
+}
+.aqua_bg{
+  background: $aqua;
+}
+footer{
+  background: $gris;
+  height: 30vh;
+  margin-top: 5vh;
+  padding: 10px 0px;
+  ul{
+    list-style: none;
+  }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {
+
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+
+}
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {
+
+}
+
+// Extra large devices (large desktops)
+// No media query since the extra-large breakpoint has no upper bound on its width
