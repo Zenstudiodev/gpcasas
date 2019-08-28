@@ -19,24 +19,26 @@ $this->layout('public/public_master');
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col aqua_bg home_tile  align-self-center">
-                <span class="home_tile">-</span>
+                <span class="home_tile_icon"><i class="fas fa-truck-loading"></i></span>
                 <h2>Alquiler</h2>
             </div>
             <div class="col naranja_bg home_tile">
-                <span class="home_tile">-</span>
+                <span class="home_tile_icon"><i class="fas fa-sign"></i></span>
                 <h2>Compra</h2>
             </div>
             <div class="col azul_bg home_tile">
-                <span class="home_tile">-</span>
+                <span class="home_tile_icon"><i class="fas fa-hand-holding-usd"></i></span>
                 <h2>Crédito</h2>
             </div>
             <div class="col verde_bg home_tile">
-                <span class="home_tile">-</span>
+                <span class="home_tile_icon">
+                    <i class="fas fa-tape"></i>
+                </span>
                 <h2>Remodelación</h2>
             </div>
             <div class="col gris_bg home_tile">
-                <span class="home_tile">-</span>
-                <h2>Accesorios</h2>
+                <span class="home_tile_icon"><i class="fas fa-shopping-cart"></i></span>
+                <h2>Tienda</h2>
             </div>
         </div>
     </div>
