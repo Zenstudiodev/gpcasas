@@ -49,17 +49,20 @@ header {
     }
   }
 }
-#main_content{
+
+#main_content {
 
 }
-#home_tiles{
-  h2{
+
+#home_tiles {
+  h2 {
     color: #fff;
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 1.5rem;
   }
-  .home_tile{
+  .home_tile {
     height: 300px;
     padding-top: 50px;
   }
@@ -72,45 +75,93 @@ header {
     display: block;
   }
 }
-.naranja_bg{
+
+//busqueda
+#cuadro_busqueda{
+  border: solid $naranja 2px;
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+.naranja_bg {
   background: $naranja;
 }
-.verde_bg{
+
+.verde_bg {
   background: $verde;
 }
-.gris_bg{
+
+.gris_bg {
   background: $gris;
 }
-.azul_bg{
+
+.azul_bg {
   background: $azul;
 }
-.aqua_bg{
+
+.aqua_bg {
   background: $aqua;
 }
-footer{
+
+.negro_gb {
+  background: #000;
+}
+
+footer {
   background: $gris;
   height: 30vh;
   margin-top: 5vh;
   padding: 10px 0px;
-  ul{
+  ul {
     list-style: none;
   }
 }
 
-// Small devices (landscape phones, less than 768px)
-@media (max-width: 767.98px) {
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+  header {
+    height: 12vh;
+    #top_header {
 
+      .top_boton {
+        padding: 3px;
+        font-size: .75rem;
+        margin: 5px 0px;
+        height: 27px;
+        display: block;
+      }
+    }
+  }
+
+
+  #home_tiles {
+    h2 {
+      font-size: .75rem;
+    }
+    .home_tile {
+      height: 180px;
+    }
+    span.home_tile_icon {
+      font-size: 3rem;
+    }
+  }
+  footer {
+    height: auto;
+  }
 }
 
-// Medium devices (tablets, less than 992px)
-@media (max-width: 991.98px) {
-
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) {
 }
 
-// Large devices (desktops, less than 1200px)
-@media (max-width: 1199.98px) {
-
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {
 }
 
-// Extra large devices (large desktops)
-// No media query since the extra-large breakpoint has no upper bound on its width
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) {
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+}

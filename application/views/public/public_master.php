@@ -25,13 +25,22 @@
     <div id="top_header">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-md-2">
+                <div class="d-block d-sm-none col-2 ">
+                    <a id="movil_menu_open">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                    <a id="movil_menu_close">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-2">
                     <img src="<?php echo base_url()?>ui/public/images/logo.png" class="img-fluid">
                 </div>
-                <div class="col-md-7 text-center">
+                <div class="d-none d-sm-block col-md-7 text-center">
                     <span id="top_titulo" >www.gpcasas.net</span>
                 </div>
-                <div class="col-md-3">
+                <div class="col-4 col-md-3">
                     <a class="top_boton">Ingresar <i class="fas fa-sign-in-alt"></i></a>
                     <a class="top_boton">Registrarse <i class="fas fa-user-plus"></i></a>
                 </div>
@@ -67,12 +76,12 @@
 <!-- /.content-wrapper -->
 <footer>
     <div class="container">
-        <div class="row">
-            <div class="col-md-2">
+        <div class="row justify-content-center">
+            <div class=" col-6 col-md-2">
                 <img src="<?php echo base_url()?>ui/public/images/logo.png" class="img-fluid">
             </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-5">
+            <div class=" col-md-2"></div>
+            <div class="col-6 col-md-5">
                 <ul>
                     <li><a>Quienes somos</a></li>
                     <li><a>Creditos Bancarios</a></li>
@@ -81,7 +90,7 @@
                     <li><a>Contactenos</a></li>
                 </ul>
             </div>
-            <div class="col-md-3">
+            <div class="col-6 col-md-3">
                 <ul>
                     <li><i class="fab fa-facebook-square"></i> gpcasas_net</li>
                     <li><i class="fab fa-instagram"></i> gpcasas_net</li>
@@ -106,5 +115,18 @@
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/90b8541e9b.js"></script>
 <?php echo $this->section('js_p') ?>
+
+<script>
+    $("#movil_menu_open").click(function () {
+        $("#top_menu").addClass('movil_menu_display');
+        $("#movil_menu_close").addClass('movil_menu_close_display');
+        $("#movil_menu_open").addClass('movil_menu_open_hide');
+    });
+    $("#movil_menu_close").click(function () {
+        $("#top_menu").removeClass('movil_menu_display');
+        $("#movil_menu_close").removeClass('movil_menu_close_display');
+        $("#movil_menu_open").removeClass('movil_menu_open_hide');
+    });
+</script>
 </body>
 </html>
