@@ -1,20 +1,11 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Carlos
- * Date: 13/09/2019
- * Time: 5:25 PM
+ * User: potato
+ * Date: 30/09/2019
+ * Time: 02:23 PM
  */
-
 $CI =& get_instance();
-
-if ($CI->ion_auth->logged_in()) {
-    //echo'logeado';
-}
-else{
-   // echo'no logeado';
-}
-
 ?>
 <!doctype html>
 <html lang="es">
@@ -22,7 +13,6 @@ else{
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="manifest" href="/manifest.json">
 
     <link rel="apple-touch-icon" sizes="57x57" href="/ui/public/images/icons/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/ui/public/images/icons/apple-icon-60x60.png">
@@ -61,9 +51,9 @@ else{
                 </div>
 
                 <div class="col-6 col-md-2">
-                   <a href="<?php echo base_url()?>">
-                       <img src="<?php echo base_url()?>ui/public/images/logo.png" class="img-fluid">
-                   </a>
+                    <a href="<?php echo base_url()?>">
+                        <img src="<?php echo base_url()?>ui/public/images/logo.png" class="img-fluid">
+                    </a>
                 </div>
                 <div class="d-none d-sm-block col-md-7 text-center">
                     <span id="top_titulo" >www.gpcasas.net</span>
@@ -71,16 +61,11 @@ else{
                 <div class="col-4 col-md-3">
                     <?php
                     if ($CI->ion_auth->logged_in()) { ?>
-                    <a class="top_boton" href="<?php echo base_url()?>User/perfil">Perfil <i class="fas fa-sign-in-alt"></i></a>
-                    <?php
-                    if ($CI->ion_auth->is_admin()) { ?>
-                        <a class="top_boton" href="<?php echo base_url()?>Admin">Admin panel <i class="fas fa-sign-in-alt"></i></a>
-                    <?php }?>
-
+                        <a class="top_boton" href="<?php echo base_url()?>User/perfil">Perfil <i class="fas fa-sign-in-alt"></i></a>
                     <?php }
                     else{ ?>
-                    <a class="top_boton"  href="<?php echo base_url()?>User/login">Ingresar <i class="fas fa-sign-in-alt"></i></a>
-                    <a class="top_boton">Registrarse <i class="fas fa-user-plus"></i></a>
+                        <a class="top_boton"  href="<?php echo base_url()?>User/login">Ingresar <i class="fas fa-sign-in-alt"></i></a>
+                        <a class="top_boton">Registrarse <i class="fas fa-user-plus"></i></a>
                     <?php }?>
 
                 </div>
@@ -91,29 +76,36 @@ else{
 <section id="menu_banner_top">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3">
-                <ul id="top_menu">
-                    <li><a>Anuncia tu propiedad</a></li>
-                    <li><a>Anuncia tu accesorio</a></li>
-                    <li><a>Reglamento</a></li>
-                    <li><a>Contactanos</a></li>
+            <div class="col-md-2">
+                <ul class="nav flex-column" id="top_menu">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="<?php echo base_url()?>admin/subir_propiedad">Subir propiedad</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Propiedades Pendientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Lista de usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Canners</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
                 </ul>
             </div>
-            <div class="col-md-9">
-                <div id="banner_container">
-                    <img src="<?php echo base_url()?>ui/public/images/banner.jpg" class="img-fluid">
-                </div>
+            <div class="col-md-10">
+                <section id="main_content">
+                    <!-- Content Wrapper. Contains page content -->
+                    <?php echo $this->section('page_content') ?>
+                    <!-- /.content-wrapper -->
+                </section>
             </div>
         </div>
     </div>
 </section>
-<section id="main_content">
 
-</section>
-
-<!-- Content Wrapper. Contains page content -->
-<?php echo $this->section('page_content') ?>
-<!-- /.content-wrapper -->
 <footer>
     <div class="container">
         <div class="row justify-content-center">
@@ -155,19 +147,6 @@ else{
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/90b8541e9b.js"></script>
 <?php echo $this->section('js_p') ?>
-
-<script>
-    //service
-    // CODELAB: Register service worker.
-    /*if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then((reg) => {
-                    console.log('Service worker registered.', reg);
-                });
-        });
-    }*/
-</script>
 
 <script>
     $("#movil_menu_open").click(function () {
