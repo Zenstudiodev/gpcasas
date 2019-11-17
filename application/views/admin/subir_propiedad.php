@@ -75,8 +75,8 @@ $tamaño_terreno_propiedad_input = array(
 );
 
 $tipo_medida_propiedad_select = array(
-    'name' => 'tipo_propiedad',
-    'id' => 'tipo_propiedad',
+    'name' => 'tipo_medida_propiedad',
+    'id' => 'tipo_medida_propiedad',
     'class' => ' browser-default form-control',
     'required' => 'required'
 );
@@ -206,7 +206,6 @@ $cuarto_servicio_propiedad_s = array(
     'value' => 'si',
     'checked' => false,
 );
-
 $cuarto_servicio_propiedad_n = array(
     'name' => 'cuarto_servicio_propiedad',
     'id' => 'cuarto_servicio_propiedad_n',
@@ -260,7 +259,7 @@ $calentador_agua_propiedad_s = array(
 $calentador_agua_propiedad_n = array(
     'name' => 'calentador_agua_propiedad',
     'id' => 'calentador_agua_propiedad_n',
-    'value' => 'si',
+    'value' => 'no',
     'checked' => false,
 );
 
@@ -277,6 +276,18 @@ $garage_propiedad_options = array(
     '3 carro' => '3 carro',
     '4 carro' => '4 carro',
     'más de 4 carros' => 'más de 4 carros'
+);
+$parqueo_propiedad_s = array(
+    'name' => 'parqueo_propiedad',
+    'id' => 'parqueo_propiedad_s',
+    'value' => 'si',
+    'checked' => false,
+);
+$parqueo_propiedad_n = array(
+    'name' => 'parqueo_propiedad',
+    'id' => 'parqueo_propiedad_n',
+    'value' => 'no',
+    'checked' => false,
 );
 $parqueo_visitas_propiedad_select = array(
     'name' => 'parqueo_visitas_propiedad',
@@ -361,6 +372,7 @@ $gradas_propiedad_select = array(
     'required' => 'required'
 );
 $gradas_propiedad_options = array(
+    'no' => 'no',
     'madera' => 'madera',
     'piso' => 'piso',
     'cemento' => 'cemento',
@@ -496,7 +508,6 @@ $cable_internet_propiedad_n = array(
 <?php $this->stop() ?>
 
 <?php $this->start('page_content') ?>
-
 <div class="container">
     <?php if (isset($message)) { ?>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -547,7 +558,13 @@ $cable_internet_propiedad_n = array(
             </div>
             <div class="form-group col-md-4">
                 <label for="medida_construccion_propiedad">Medida Construccion</label>
-                <?php echo form_input($medida_construccion_propiedad_input); ?>
+                <div class="input-group mb-3">
+                    <?php echo form_input($medida_construccion_propiedad_input); ?>
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon2">Metros cuadrados</span>
+                    </div>
+                </div>
+
             </div>
             <div class="form-group col-md-4">
 
@@ -571,7 +588,7 @@ $cable_internet_propiedad_n = array(
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="habitaciones_propiedad">Balcon</label>
+                <label for="habitaciones_propiedad">Balcón</label>
                 <div class="form-check ">
                     <?php echo form_radio($balcon_propiedad_s); ?>
                     <label class="form-check-label" for="balcon_propiedad_s">Si</label>
@@ -643,10 +660,10 @@ $cable_internet_propiedad_n = array(
             <div class="form-group col-md-4">
                 <label for="baños_completos_propiedad">Cuarto de seguridad</label>
                 <div class="form-check ">
-                    <?php echo form_radio($cuarto_servicio_propiedad_s); ?>
+                    <?php echo form_radio($cuarto_seguridad_propiedad_s); ?>
                     <label class="form-check-label" for="cuarto_servicio_propiedad_s">Si</label>
 
-                    <?php echo form_radio($cuarto_servicio_propiedad_n); ?>
+                    <?php echo form_radio($cuarto_seguridad_propiedad_n); ?>
                     <label class="form-check-label" for="cuarto_servicio_propiedad_n">No</label>
                 </div>
             </div>
@@ -687,6 +704,15 @@ $cable_internet_propiedad_n = array(
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
+                <label for="cable_internet_propiedad">parqueo propiedad</label>
+                <div class="form-check ">
+                    <?php echo form_radio($parqueo_propiedad_s); ?>
+                    <label class="form-check-label" for="cable_internet_propiedad_s">Si</label>
+                    <?php echo form_radio($parqueo_propiedad_n  ); ?>
+                    <label class="form-check-label" for="cable_internet_propiedad_n">No</label>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
                 <label for="parqueo_visitas_propiedad">Parqueo visitas</label>
                 <?php echo form_dropdown($parqueo_visitas_propiedad_select, $parqueo_visitas_propiedad_options) ?>
             </div>
@@ -699,6 +725,8 @@ $cable_internet_propiedad_n = array(
                     <label class="form-check-label" for="seguridad_privada_propiedad_n">No</label>
                 </div>
             </div>
+        </div>
+        <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="garita_control_propiedad">Garita de control</label>
                 <div class="form-check ">
@@ -708,8 +736,15 @@ $cable_internet_propiedad_n = array(
                     <label class="form-check-label" for="garita_control_propiedad_n">No</label>
                 </div>
             </div>
-        </div>
-        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="sala_reuniones_propiedad">Sala</label>
+                <div class="form-check ">
+                    <?php echo form_radio($sala_propiedad_s); ?>
+                    <label class="form-check-label" for="sala_propiedad_s">Si</label>
+                    <?php echo form_radio($sala_propiedad_n); ?>
+                    <label class="form-check-label" for="sala_propiedad_n">No</label>
+                </div>
+            </div>
             <div class="form-group col-md-4">
                 <label for="sala_reuniones_propiedad">Sala de reuniones</label>
                 <div class="form-check ">
@@ -719,6 +754,8 @@ $cable_internet_propiedad_n = array(
                     <label class="form-check-label" for="sala_reuniones_propiedad_n">No</label>
                 </div>
             </div>
+        </div>
+        <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="comedor_propiedad">Comedor</label>
                 <div class="form-check ">
@@ -732,8 +769,6 @@ $cable_internet_propiedad_n = array(
                 <label for="gradas_propiedad">Gradas</label>
                 <?php echo form_dropdown($gradas_propiedad_select, $gradas_propiedad_options) ?>
             </div>
-        </div>
-        <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="bodega_interior_propiedad">Bodega interior</label>
                 <div class="form-check ">
@@ -741,6 +776,17 @@ $cable_internet_propiedad_n = array(
                     <label class="form-check-label" for="bodega_interior_propiedad_s">Si</label>
                     <?php echo form_radio($bodega_interior_propiedad_n); ?>
                     <label class="form-check-label" for="bodega_interior_propiedad_n">No</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="sala_famiiar_propiedad">Pergola</label>
+                <div class="form-check ">
+                    <?php echo form_radio($pergola_propiedad_s); ?>
+                    <label class="form-check-label" for="pergola_propiedad_s">Si</label>
+                    <?php echo form_radio($pergola_propiedad_n); ?>
+                    <label class="form-check-label" for="$pergola_propiedad_n">No</label>
                 </div>
             </div>
             <div class="form-group col-md-4">
@@ -751,6 +797,7 @@ $cable_internet_propiedad_n = array(
                 <label for="nombre_condominio_propiedad">Nombre Condominio</label>
                 <?php echo form_input($nombre_condominio_propiedad_input); ?>
             </div>
+
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -809,6 +856,7 @@ $cable_internet_propiedad_n = array(
                     <label class="form-check-label" for="luz_propiedad_n">No</label>
                 </div>
             </div>
+
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -823,16 +871,12 @@ $cable_internet_propiedad_n = array(
             <div class="form-group col-md-4">
 
             </div>
-            <div class="form-group col-md-4">
-
-            </div>
         </div>
 
 
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
 </div>
-
 <?php $this->stop() ?>
 <?php $this->start('js_p') ?>
 <script>

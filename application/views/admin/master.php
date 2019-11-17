@@ -82,7 +82,7 @@ $CI =& get_instance();
                         <a class="nav-link active" href="<?php echo base_url()?>admin/subir_propiedad">Subir propiedad</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Propiedades Pendientes</a>
+                        <a class="nav-link" href="<?php echo base_url()?>admin/propiedades_pendientes">Propiedades Pendientes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Lista de usuarios</a>

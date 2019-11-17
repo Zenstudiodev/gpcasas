@@ -22,5 +22,13 @@ class User extends Base_Controller
         $data['departamentos'] = $this->Busqueda_model->get_departamentos();
         echo $this->templates->render('public/login', $data);
     }
+    public function register(){
+        if ($this->session->flashdata('message')) {
+            $data['message'] = $this->session->flashdata('message');
+        }
+
+        $data['departamentos'] = $this->Busqueda_model->get_departamentos();
+        echo $this->templates->render('public/register', $data);
+    }
 
 }

@@ -18,6 +18,7 @@ class Propiedad_model extends CI_Model
     {
         $fecha = New DateTime();
         $datos_propiedad = array(
+            'user_id_propiedad' => $data['user_id_propiedad'],
             'fecha_creacion_propiedad' => $fecha->format('Y-m-d'),
             'id_departamento' => $data['id_departamento'],
             'id_municipio' => $data['id_municipio'],
@@ -66,5 +67,18 @@ class Propiedad_model extends CI_Model
         $this->db->insert('propiedades', $datos_propiedad);
         $insert_id = $this->db->insert_id();
         return $insert_id;
+    }
+    public function  get_propiedades_pendientes(){
+        $this->db->where('estado_propiedad', 'pendiente');
+        $query = $this->db->get('propiedades');
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
+    public function get_propiedad_by_id($id){
+        $this->db->where('Id_propiedad', $id);
+        $this->db->from('propiedades');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) return $query;
+        else return false;
     }
 }

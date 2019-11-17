@@ -19,6 +19,25 @@ class Busqueda_model extends CI_Model
         if ($query->num_rows() > 0) return $query;
         else return false;
     }
+    public function get_departamento_by_id($departamento_id){
+        $this->db->where('id_departamento', $departamento_id);
+        $this->db->from('departamentos');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
+    public function get_municipios(){
+        $query = $this->db->get('municipios');
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
+    public function get_municipios_by_id($id_municipio){
+        $this->db->where('id_municipio', $id_municipio);
+        $this->db->from('municipios');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
     public function get_municipios_departamento($departamento_id){
         $this->db->where('id_departamento', $departamento_id);
         $this->db->from('municipios');
