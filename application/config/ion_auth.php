@@ -93,14 +93,14 @@ $config['salt_prefix']    = version_compare(PHP_VERSION, '5.3.7', '<') ? '$2a$' 
  | The controller should check this function and act
  | appropriately. If this variable set to 0, there is no maximum.
  */
-$config['site_title']                 = "Gp Autos";       // Site Title, example.com
-$config['admin_email']                = "info@gpautos.net"; // Admin Email, admin@example.com
+$config['site_title']                 = "Gp Casas";       // Site Title, example.com
+$config['admin_email']                = "info@casas.net"; // Admin Email, admin@example.com
 $config['default_group']              = 'members';           // Default group, use name
 $config['admin_group']                = 'admin';             // Default administrators group, use name
 $config['identity']                   = 'email';             // You can use any unique column in your table as identity column. The values in this column, alongside password, will be used for login purposes
 $config['min_password_length']        = 8;                   // Minimum Required Length of Password
 $config['max_password_length']        = 20;                  // Maximum Allowed Length of Password
-$config['email_activation']           = TRUE;               // Email Activation for registration
+$config['email_activation']           = false;               // Email Activation for registration
 $config['manual_activation']          = FALSE;               // Manual Activation for registration
 $config['remember_users']             = TRUE;                // Allow users to be remembered and enable auto-login
 $config['user_expire']                = 86500;               // How long to remember the user (seconds). Set to zero for no expiration
@@ -133,14 +133,14 @@ $config['identity_cookie_name'] = 'identity';
  | 	  'file' = Use the default CI config or use from a config file
  | 	  array  = Manually set your email config settings
  */
-$config['use_ci_email'] = true; // Send Email using the builtin CI email class, if false it will return the code and the identity
+$config['use_ci_email'] = false; // Send Email using the builtin CI email class, if false it will return the code and the identity
 $config['email_config'] = array(
 	'mailtype' => 'html',
     'protocol' => 'smtp',
-    'smtp_host' => 'ssl://smtp.gmail.com',
+    'smtp_host' => 'mail.gpcasas.net',
     'smtp_port' => 465,
-    'smtp_user' => 'info@gpautos.net',
-    'smtp_pass' => 'JdGg2005gp',
+    'smtp_user' => 'info@gpcasas.net',
+    'smtp_pass' => 'GPinfo2019',
     'charset' => 'utf-8',
     'newline' => "\r\n"
 );

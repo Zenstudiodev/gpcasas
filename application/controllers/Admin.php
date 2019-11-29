@@ -22,6 +22,10 @@ class Admin extends Base_Controller
             // redirect them to the login page
             redirect(base_url() . 'User/login');
         }
+        if (!$this->ion_auth->is_admin()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/perfil');
+        }
         echo $this->templates->render('admin/home');
     }
     public function subir_propiedad()
@@ -30,6 +34,11 @@ class Admin extends Base_Controller
             // redirect them to the login page
             redirect(base_url() . 'User/login');
         }
+        if (!$this->ion_auth->is_admin()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/perfil');
+        }
+
         $data['departamentos'] = $this->Busqueda_model->get_departamentos();
         echo $this->templates->render('admin/subir_propiedad', $data);
     }
@@ -129,6 +138,11 @@ class Admin extends Base_Controller
             // redirect them to the login page
             redirect(base_url() . 'User/login');
         }
+        if (!$this->ion_auth->is_admin()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/perfil');
+        }
+
         $data['propiedades_pendientes'] = $this->Propiedad_model->get_propiedades_pendientes();
         echo $this->templates->render('admin/lista_propiedades_pendientes', $data);
     }
@@ -136,6 +150,10 @@ class Admin extends Base_Controller
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
             redirect(base_url() . 'User/login');
+        }
+        if (!$this->ion_auth->is_admin()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/perfil');
         }
         if(!$this->uri->segment(3)){
             redirect(base_url().'admin/propiedades_pendientes');

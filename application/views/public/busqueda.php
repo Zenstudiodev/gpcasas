@@ -11,44 +11,53 @@ $this->layout('public/public_master');
 
 
 //ubicacion
-$departamentos_select         = array(
-    'name'     => 'departamentos',
-    'id'       => 'departamentos',
-    'class'    => ' browser-default form-control',
+$departamentos_select = array(
+    'name' => 'departamentos',
+    'id' => 'departamentos',
+    'class' => ' browser-default form-control',
     'required' => 'required'
 );
 $departamentos_select_options = array();
-foreach ($departamentos->result() as $departamento)
-{
-    $departamentos_select_options[$departamento->id_departamento] = $departamento->nombre_departamento ;
+foreach ($departamentos->result() as $departamento) {
+    $departamentos_select_options[$departamento->id_departamento] = $departamento->nombre_departamento;
 }
 
 
-$municipios_select         = array(
-    'name'     => 'municipios',
-    'id'       => 'municipios',
-    'class'    => ' browser-default form-control',
+$municipios_select = array(
+    'name' => 'municipios',
+    'id' => 'municipios',
+    'class' => ' browser-default form-control',
     'required' => 'required'
 );
 
-$zonas_select         = array(
-    'name'     => 'zona',
-    'id'       => 'zona',
-    'class'    => ' browser-default form-control',
+$zonas_select = array(
+    'name' => 'zona',
+    'id' => 'zona',
+    'class' => ' browser-default form-control',
     'required' => 'required'
 );
 $zonas_select_options = array(
-        'TODOS'=>'TODOS'
+    'TODOS' => 'TODOS'
 );
 
 
+$modo_select = array(
+    'name' => 'modo',
+    'id' => 'modo',
+    'class' => ' browser-default form-control',
+    'required' => 'required'
+);
+$modo_select_options = array(
+    'renta' => 'Renta',
+    'venta' => 'Venta'
+);
 
 
 //tipo de propiedad
-$tipo_propiedad_select         = array(
-    'name'     => 'tipo_propiedad_select',
-    'id'       => 'tipo_propiedad_select',
-    'class'    => 'custom-select',
+$tipo_propiedad_select = array(
+    'name' => 'tipo_propiedad_select',
+    'id' => 'tipo_propiedad_select',
+    'class' => 'custom-select',
     'required' => 'required'
 );
 $tipo_carro_select_options = array();
@@ -86,10 +95,6 @@ foreach ($tipos->result() as $tipo_carro)
                 <h2>Encuentra tu propiedad</h2>
             </div>
 
-            <div class="col-2">
-                <a>Renta</a>
-                <a>Venta</a>
-            </div>
         </div>
         <div class="row">
             <div class="col-4">
@@ -112,34 +117,27 @@ foreach ($tipos->result() as $tipo_carro)
                 </div>
             </div>
             <div class="col-2">
-                <select class="form-control">
-                    <option></option>
-                </select>
+                <div class="form-group">
+                    <label for="modo">Modo</label>
+                    <?php echo form_dropdown($modo_select, $modo_select_options, 'renta') ?>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-3">
-                <select class="form-control">
-                    <option></option>
-                </select>
+
             </div>
             <div class="col-3">
-                <select class="form-control">
-                    <option></option>
-                </select>
+
             </div>
             <div class="col-2">
-                <select class="form-control">
-                    <option></option>
-                </select>
+
             </div>
             <div class="col-2">
-                <select class="form-control">
-                    <option></option>
-                </select>
+
             </div>
             <div class="col-2">
-                <a class="btn btn-success btn-lg">Buscar</a>
+                <a class="btn btn-success btn-lg" id="busaqueda_boton">Buscar</a>
             </div>
         </div>
     </section>
@@ -149,6 +147,13 @@ foreach ($tipos->result() as $tipo_carro)
 <?php $this->start('js_p') ?>
 
 <script>
+    var departamento;
+    var municipio;
+    var zona;
+    var modo;
+    var precio;
+    var filtros;
+
 
     $(document).ready(function () {
         $('#municipios option').remove();
@@ -158,7 +163,7 @@ foreach ($tipos->result() as $tipo_carro)
             dataType: 'json',
             url: '<?php echo base_url()?>/Busqueda/get_municipio_departamento/' + departamento,
             success: function (data) {
-                console.log(data);
+               // console.log(data);
                 $('#municipios').append('<option value="TODOS">TODOS</option>');
                 $.each(data, function (key, value) {
                     $('#municipios').append('<option value="' + value.id_municipio + '">' + value.nombre_municipio + '</option>');
@@ -167,8 +172,6 @@ foreach ($tipos->result() as $tipo_carro)
             }
         });
     });
-
-
     //Actualizar municipios
     $("#departamentos").change(function (e) {
 
@@ -210,6 +213,23 @@ foreach ($tipos->result() as $tipo_carro)
             }
         });
     });
+
+    //boton de busqueda
+    $("#busaqueda_boton").click(function () {
+        modo = $("#modo").val();
+        departamento = $("#departamentos").val();
+        municipio = $("#municipios").val();
+        zona = $("#zona").val();
+        console.log(departamento);
+        console.log(municipio);
+        console.log(zona);
+        console.log(modo);
+        filtros = '<?php echo base_url()?>' + 'Propiedades/filtro/' + modo + '/' + departamento + '/' + municipio + '/' + zona;
+        window.location.assign(filtros);
+    });
+
+
+
 </script>
 
 <?php $this->stop() ?>

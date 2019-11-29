@@ -81,4 +81,14 @@ class Propiedad_model extends CI_Model
         if ($query->num_rows() > 0) return $query;
         else return false;
     }
+    public function get_propiedaedes_by_user_id($user_id){
+        $this->db->where('user_id_propiedad', $user_id);
+        $this->db->from('propiedades');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
+    public function resultado_filtro($filtros){
+
+    }
 }

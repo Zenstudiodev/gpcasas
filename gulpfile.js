@@ -37,6 +37,6 @@ gulp.task("watch", function(){
     livereload.listen();
     gulp.watch("./ui/public/scss/**/*.scss", ["sass"])
 });
-gulp.task("default", ["sass",  "watch"], function(){
+gulp.task("default", gulp.parallel('sass'),  gulp.series('watch'), function(){
 
 });

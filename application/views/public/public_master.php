@@ -15,6 +15,7 @@ else{
    // echo'no logeado';
 }
 
+
 ?>
 <!doctype html>
 <html lang="es">
@@ -80,7 +81,7 @@ else{
                     <?php }
                     else{ ?>
                     <a class="top_boton"  href="<?php echo base_url()?>User/login">Ingresar <i class="fas fa-sign-in-alt"></i></a>
-                    <a class="top_boton">Registrarse <i class="fas fa-user-plus"></i></a>
+                    <a class="top_boton"  href="<?php echo base_url()?>User/registro">Registrarse <i class="fas fa-user-plus"></i></a>
                     <?php }?>
 
                 </div>
@@ -88,25 +89,30 @@ else{
         </div>
     </div>
 </header>
-<section id="menu_banner_top">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">
-                <ul id="top_menu">
-                    <li><a>Anuncia tu propiedad</a></li>
-                    <li><a>Anuncia tu accesorio</a></li>
-                    <li><a>Reglamento</a></li>
-                    <li><a>Contactanos</a></li>
-                </ul>
-            </div>
-            <div class="col-md-9">
-                <div id="banner_container">
-                    <img src="<?php echo base_url()?>ui/public/images/banner.jpg" class="img-fluid">
+<?php
+if(!isset($sin_banner)){?>
+    <section id="menu_banner_top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <ul id="top_menu">
+                        <li><a href="<?php echo base_url()?>user/subir_propiedad">Anuncia tu propiedad</a></li>
+                        <li><a>Anuncia tu accesorio</a></li>
+                        <li><a>Reglamento</a></li>
+                        <li><a href="<?php echo base_url()?>home/contacto">Contactanos</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    <div id="banner_container">
+                        <img src="<?php echo base_url()?>ui/public/images/banner.jpg" class="img-fluid">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+<?php } ?>
+
+
 <section id="main_content">
 
 </section>
@@ -127,7 +133,7 @@ else{
                     <li><a>Creditos Bancarios</a></li>
                     <li><a>Serguro para vivianda</a></li>
                     <li><a>Anunciate</a></li>
-                    <li><a>Contactenos</a></li>
+                    <li><a href="<?php echo base_url()?>home/contacto">Contactenos</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md-3">
@@ -154,6 +160,8 @@ else{
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/90b8541e9b.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6Le2pcMUAAAAAGezpReJseqnBAijwYanQXpmQoS7"></script>
+
 <?php echo $this->section('js_p') ?>
 
 <script>

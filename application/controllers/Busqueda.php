@@ -45,4 +45,5 @@ class Busqueda extends Base_Controller
             echo json_encode($departamentos->result_array());
         }
     }
+
 }
