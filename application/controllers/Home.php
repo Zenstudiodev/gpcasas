@@ -13,28 +13,51 @@ class Home extends Base_Controller
 	{
 		parent::__construct();
 		// Modelos
+        $this->load->model('User_model');
 	}
 	function index()
 	{
 		echo $this->templates->render('public/home');
 	}
 	function contacto(){
-        echo $this->templates->render('public/contacto');
+	    $data= array();
+        if ($this->session->flashdata('mensaje')) {
+            $data['mensaje'] = $this->session->flashdata('mensaje');
+        }
+        echo $this->templates->render('public/contacto', $data);
     }
     function enviar_correo_contacto(){
-	    print_contenido($_POST);
+	    $nombre = $this->input->post('nombre');
+	    $telefono = $this->input->post('telefono');
+	    $email = $this->input->post('email');
+	    $mensaje = $this->input->post('mensaje');
 
         $this->load->library('email');
+        //configuracion de correo
+        $config['mailtype'] = 'html';
+        $this->email->initialize($config);
+        $this->email->from('info@casas.net', 'GP CASAS');
+        $this->email->to($email);
+        $this->email->cc('info@casas.net');
+        $this->email->bcc('csamayoa@zenstudiogt.com');
+        $this->email->subject('Contacto página GP casas');
 
-        $this->email->from('your@example.com', 'Your Name');
-        $this->email->to('someone@example.com');
-        $this->email->cc('another@another-example.com');
-        $this->email->bcc('them@their-example.com');
-
-        $this->email->subject('Email Test');
-        $this->email->message('Testing the email class.');
-
+        //mensaje
+        $message = '<html><body>';
+        $message .= '<img src="'.base_url().'/ui/public/images/logo.png" alt="GP CASAS" />';
+        $message .= '<table rules="all" style="border-color: #666;" cellpadding="10">';
+        $message .= "<tr><td><strong>Nombre:</strong> </td><td>" . strip_tags($nombre) . "</td></tr>";
+        $message .= "<tr><td><strong>Teléfono:</strong> </td><td>" . strip_tags($telefono) . "</td></tr>";
+        $message .= "<tr><td><strong>Correo:</strong> </td><td>" . strip_tags($email) . "</td></tr>";
+        $message .= "<tr><td><strong>Mensaje</strong> </td><td>" . strip_tags($mensaje) . "</td></tr>";
+        $message .= '</table>';
+        $message .= '</body></html>';
+        $this->email->message($message);
+        //enviar correo
         $this->email->send();
-
+        // Will only print the email headers, excluding the message subject and body
+        $this->email->print_debugger(array('headers'));
+        $this->session->set_flashdata('mensaje', 'Gracias por escribirnos pronto nos pondermos en contacto');
+        redirect(base_url().'home/contacto');
     }
 }

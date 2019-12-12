@@ -19,7 +19,7 @@ $this->layout('public/public_master');
     <div class="container-fluid">
         <div class="row align-items-center justify-content-center">
             <div class="col-6 col-sm-6 col-md-2 aqua_bg home_tile  align-self-center">
-               <a href="<?php echo base_url()?>/Busqueda/">
+               <a href="<?php echo base_url()?>Busqueda/">
                    <span class="home_tile_icon"><i class="fas fa-truck-loading"></i></span>
                    <h2>Alquiler</h2>
                </a>

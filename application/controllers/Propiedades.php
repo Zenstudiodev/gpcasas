@@ -39,7 +39,6 @@ class Propiedades  extends Base_Controller
             $sesion_modo = $this->uri->segment(3);
         }
         $departamento = strtoupper($departamento);
-        echo $departamento;
 
         //departamento
         $departamento = $this->uri->segment(4);
@@ -51,7 +50,28 @@ class Propiedades  extends Base_Controller
             $sesion_departamento = $this->uri->segment(4);
         }
         $departamento = strtoupper($departamento);
-        echo $departamento;
+        //municipio
+        $municipio = $this->uri->segment(5);
+        if ($municipio == null) {
+            // echo 'no hay tipo';
+            $municipio = 'TODOS';
+            $sesion_municipio = 'TODOS';
+        } else {
+            $sesion_municipio = $this->uri->segment(5);
+        }
+        $municipio = strtoupper($municipio);
+
+        //zona
+        $zona = $this->uri->segment(6);
+        if ($zona == null) {
+            // echo 'no hay tipo';
+            $zona = 'TODOS';
+            $sesion_zona = 'TODOS';
+        } else {
+            $sesion_zona = $this->uri->segment(6);
+        }
+        $zona = strtoupper($zona);
+
 
         $filtros=array(
             'modo'=>$modo,
@@ -64,6 +84,16 @@ class Propiedades  extends Base_Controller
         $data['propiedades_filtro'] = $this->Propiedad_model->resultado_filtro($filtros);
 
         echo $this->templates->render('public/resultado_filtro', $data);
+
+    }
+    public function ver(){
+
+
+        $propiedad_id= $this->uri->segment(3);
+        $data['propiedad'] = $this->Propiedad_model->get_propiedad_by_id($propiedad_id);
+        $data['sin_banner'] = 1;
+        echo $this->templates->render('public/ver_propiedad',$data);
+
 
     }
 

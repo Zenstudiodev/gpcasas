@@ -56,6 +56,10 @@ $clave = array(
         </div>
         <button type="submit" class="btn btn-primary">Entrar</button>
     </form>
+    <hr>
+    <div class="alert alert-info" role="alert">
+        Si aun no tiene cuenta se puede registrar acá <a href="<?php echo base_url()?>User/registro" class="btn btn-info">Registrarse</a>
+    </div>
 </div>
 
 <?php $this->stop() ?>

@@ -6,6 +6,7 @@
  * Time: 06:18 PM
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 class Propiedad_model extends CI_Model
 {
     function __construct()
@@ -14,6 +15,7 @@ class Propiedad_model extends CI_Model
         $this->load->database();
     }
 
+    //admin
     public function guardar_propiedad($data)
     {
         $fecha = New DateTime();
@@ -68,27 +70,67 @@ class Propiedad_model extends CI_Model
         $insert_id = $this->db->insert_id();
         return $insert_id;
     }
-    public function  get_propiedades_pendientes(){
+    public function get_propiedades_pendientes()
+    {
         $this->db->where('estado_propiedad', 'pendiente');
         $query = $this->db->get('propiedades');
         if ($query->num_rows() > 0) return $query;
         else return false;
     }
-    public function get_propiedad_by_id($id){
+    public function numero_propiedades_activas()
+    {
+        $this->db->where('estado_propiedad', 'alta');
+        $query = $this->db->get('propiedades');
+        if ($query->num_rows() > 0) return $query->num_rows();
+        else return 0;
+    }
+    public function numero_propiedades_pendientes()
+    {
+        $this->db->where('estado_propiedad', 'pendiente');
+        $query = $this->db->get('propiedades');
+        if ($query->num_rows() > 0) return $query->num_rows();
+        else return 0;
+    }
+    public function aprobar_propiedad($propiedad_id){
+        $datos = array(
+            'estado_propiedad'          => 'alta',
+        );
+        $this->db->where('Id_propiedad', $propiedad_id);
+        $query = $this->db->update('propiedades', $datos);
+    }
+
+    public function get_propiedad_by_id($id)
+    {
         $this->db->where('Id_propiedad', $id);
         $this->db->from('propiedades');
         $query = $this->db->get();
         if ($query->num_rows() > 0) return $query;
         else return false;
     }
-    public function get_propiedaedes_by_user_id($user_id){
+    public function get_propiedaedes_by_user_id($user_id)
+    {
         $this->db->where('user_id_propiedad', $user_id);
         $this->db->from('propiedades');
         $query = $this->db->get();
         if ($query->num_rows() > 0) return $query;
         else return false;
     }
-    public function resultado_filtro($filtros){
+    public function resultado_filtro($filtros)
+    {
+        $this->db->where('modo_propiedad', $filtros['modo']);
+        $zona = $filtros['zona'];
 
+        if ($zona != 'TODOS') {
+            $this->db->where('id_zona', $filtros['zona']);
+        }
+
+
+        //propiedades activas
+        $this->db->where('estado_propiedad', 'alta');
+        $this->db->from('propiedades');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) return $query;
+        else return false;
     }
+
 }

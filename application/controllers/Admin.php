@@ -15,6 +15,7 @@ class Admin extends Base_Controller
         // Modelos
         $this->load->model('Busqueda_model');
         $this->load->model('Propiedad_model');
+        $this->load->model('User_model');
     }
     public function index()
     {
@@ -25,8 +26,11 @@ class Admin extends Base_Controller
         if (!$this->ion_auth->is_admin()) {
             // redirect them to the login page
             redirect(base_url() . 'User/perfil');
+
         }
-        echo $this->templates->render('admin/home');
+        $data['propiedades_activas']= $this->Propiedad_model->numero_propiedades_activas();
+        $data['propiedades_pendientes']= $this->Propiedad_model->numero_propiedades_pendientes();
+        echo $this->templates->render('admin/home', $data);
     }
     public function subir_propiedad()
     {
@@ -165,6 +169,10 @@ class Admin extends Base_Controller
         echo $this->templates->render('admin/revisar_propiedad', $data);
 
     }
-    public function aprobar_propiedad(){}
+    public function aprobar_propiedad(){
+        $propiedad_id = $this->uri->segment(3);
+        $this->Propiedad_model->aprobar_propiedad($propiedad_id);
+        redirect(base_url().'admin');
+    }
 
 }

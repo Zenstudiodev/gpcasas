@@ -37,7 +37,28 @@ $zonas_select = array(
     'required' => 'required'
 );
 $zonas_select_options = array(
-    'TODOS' => 'TODOS'
+    'TODOS' => 'TODOS',
+    '1' => '1',
+    '2' => '2',
+    '3' => '3',
+    '4' => '4',
+    '5' => '5',
+    '6' => '6',
+    '7' => '7',
+    '8' => '8',
+    '9' => '9',
+    '10' => '10',
+    '11' => '11',
+    '12' => '12',
+    '13' => '13',
+    '14' => '13',
+    '15' => '15',
+    '16' => '16',
+    '17' => '17',
+    '18' => '18',
+    '19' => '19',
+    '21' => '21',
+    '24' => '24',
 );
 
 
@@ -97,26 +118,26 @@ foreach ($tipos->result() as $tipo_carro)
 
         </div>
         <div class="row">
-            <div class="col-4">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="departamento">Departamento</label>
                     <?php echo form_dropdown($departamentos_select, $departamentos_select_options, '7') ?>
                 </div>
 
             </div>
-            <div class="col-4">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="municipio">Municipio</label>
                     <?php echo form_dropdown($municipios_select) ?>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="tipo_propiedad_select">Zona</label>
                     <?php echo form_dropdown($zonas_select, $zonas_select_options) ?>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="modo">Modo</label>
                     <?php echo form_dropdown($modo_select, $modo_select_options, 'renta') ?>
@@ -136,7 +157,7 @@ foreach ($tipos->result() as $tipo_carro)
             <div class="col-2">
 
             </div>
-            <div class="col-2">
+            <div class="col-md-2">
                 <a class="btn btn-success btn-lg" id="busaqueda_boton">Buscar</a>
             </div>
         </div>
@@ -188,26 +209,6 @@ foreach ($tipos->result() as $tipo_carro)
                 $('#municipios').append('<option value="TODOS">TODOS</option>');
                 $.each(data, function (key, value) {
                     $('#municipios').append('<option value="' + value.id_municipio + '">' + value.nombre_municipio + '</option>');
-                });
-                // $('select').material_select();
-            }
-        });
-    });
-    //Actualizar zonas
-    $("#municipios").change(function (e) {
-        $('#zona option').remove();
-        municipio = $("#municipios").val();
-
-        console.log(municipio);
-        $.ajax({
-            type: 'GET',
-            dataType: 'json',
-            url: '<?php echo base_url()?>/Busqueda/get_zonas_municipio/' + municipio,
-            success: function (data) {
-                console.log(data);
-                $('#zona').append('<option value="TODOS">TODOS</option>');
-                $.each(data, function (key, value) {
-                    $('#zona').append('<option value="' + value.id_zona + '">' + value.numero_zona + '</option>');
                 });
                 // $('select').material_select();
             }

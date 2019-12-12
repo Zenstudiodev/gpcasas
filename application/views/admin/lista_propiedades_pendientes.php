@@ -49,8 +49,8 @@ $this->layout('admin/master');
                   <td><?php echo $propiedad->fecha_creacion_propiedad; ?></td>
                   <td>
                       <div class="btn-group" role="group" aria-label="Basic example">
-                          <a type="button" class="btn btn-secondary" href="<?php echo base_url().'admin/revisar_propiedad/'.$propiedad->Id_propiedad?>">Revisar</a>
-                          <a type="button" class="btn btn-secondary" href="<?php echo base_url()?>/">Aprobar</a>
+                          <a type="button" class="btn btn-secondary" href="<?php echo base_url().'admin/revisar_propiedad/'.$propiedad->Id_propiedad; ?>">Revisar</a>
+                          <a type="button" class="btn btn-secondary" href="<?php echo base_url().'admin/aprobar_propiedad/'.$propiedad->Id_propiedad; ?>">Aprobar</a>
                       </div>
                   </td>
               </tr>

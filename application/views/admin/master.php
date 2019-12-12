@@ -6,6 +6,16 @@
  * Time: 02:23 PM
  */
 $CI =& get_instance();
+
+if ($CI->ion_auth->logged_in()) {
+    //echo'logeado';
+    $user_id = $CI->ion_auth->get_user_id();
+    $user_data = $CI->User_model->get_user_by_id($user_id);
+    $user_data = $user_data->row();
+}
+else{
+    // echo'no logeado';
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -61,11 +71,20 @@ $CI =& get_instance();
                 <div class="col-4 col-md-3">
                     <?php
                     if ($CI->ion_auth->logged_in()) { ?>
-                        <a class="top_boton" href="<?php echo base_url()?>User/perfil">Perfil <i class="fas fa-sign-in-alt"></i></a>
+                        <p>
+                            Bienvenido <?php echo $user_data->first_name; ?>
+                            <a class="top_boton" href="<?php echo base_url()?>User/perfil">Perfil <i class="fas fa-sign-in-alt"></i></a>
+                            <a class="top_boton" href="<?php echo base_url()?>auth/logout">Cerrar <i class="fas fa-sign-in-alt"></i></a>
+                        </p>
+                        <?php
+                        if ($CI->ion_auth->is_admin()) { ?>
+                            <a class="top_boton" href="<?php echo base_url()?>Admin">Admin panel <i class="fas fa-sign-in-alt"></i></a>
+                        <?php }?>
+
                     <?php }
                     else{ ?>
                         <a class="top_boton"  href="<?php echo base_url()?>User/login">Ingresar <i class="fas fa-sign-in-alt"></i></a>
-                        <a class="top_boton">Registrarse <i class="fas fa-user-plus"></i></a>
+                        <a class="top_boton"  href="<?php echo base_url()?>User/registro">Registrarse <i class="fas fa-user-plus"></i></a>
                     <?php }?>
 
                 </div>
@@ -85,7 +104,7 @@ $CI =& get_instance();
                         <a class="nav-link" href="<?php echo base_url()?>admin/propiedades_pendientes">Propiedades Pendientes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Lista de usuarios</a>
+                        <a class="nav-link" href="<?php echo base_url()?>admin/lista_usuarios">Lista de usuarios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Canners</a>

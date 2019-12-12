@@ -15,24 +15,28 @@ $nombre_input = array(
     'name' => 'nombre',
     'id' => 'nombre',
     'class' => ' browser-default form-control',
+    'required' => 'required',
 );
 $telefono_input = array(
     'type' => 'tel',
     'name' => 'telefono',
     'id' => 'telefono',
     'class' => ' browser-default form-control',
+    'required' => 'required',
 );
 $correo_input = array(
     'type' => 'email',
     'name' => 'email',
     'id' => 'email',
     'class' => ' browser-default form-control',
+    'required' => 'required',
 );
 $mensaje_input = array(
     'type' => 'text',
     'name' => 'mensaje',
     'id' => 'mensaje',
     'class' => ' browser-default form-control',
+    'required' => 'required',
 );
 
 ?>
@@ -42,10 +46,19 @@ $mensaje_input = array(
 <?php $this->stop() ?>
 
 <?php $this->start('page_content') ?>
+
     <div id="contacto_form">
         <div class="container">
             <div class="row justify-content-md-center">
-                <div class="col-8">
+                <div class="col-md-8">
+                    <?php if (isset($mensaje)) { ?>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <?php echo $mensaje ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php } ?>
                     <form action="<?php echo base_url() ?>home/enviar_correo_contacto" method="post">
                         <div class="form-group col-md-12">
                             <label for="nombre">Nombre</label>
@@ -71,7 +84,7 @@ $mensaje_input = array(
                                 <?php echo form_textarea($mensaje_input); ?>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>
                 </div>
             </div>
