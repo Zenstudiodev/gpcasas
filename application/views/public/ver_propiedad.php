@@ -41,7 +41,6 @@ if ($propiedad) {
             <div class="col-md-8">
                 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                     <div class="carousel-inner">
-
                         <?php
                         if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $propiedad->Id_propiedad . ' (1).jpg')) { ?>
                             <div class="carousel-item active">
