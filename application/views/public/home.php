@@ -29,8 +29,10 @@ $this->layout('public/public_master');
                 <h2>Compra</h2>
             </div>
             <div class="col-6 col-sm-6 col-md-2 azul_bg home_tile">
+                <a href="<?php echo base_url()?>home/credito/">
                 <span class="home_tile_icon"><i class="fas fa-hand-holding-usd"></i></span>
                 <h2>Crédito</h2>
+                </a>
             </div>
             <div class="col-6 col-sm-6 col-md-2 verde_bg home_tile">
                 <span class="home_tile_icon">

@@ -60,4 +60,11 @@ class Home extends Base_Controller
         $this->session->set_flashdata('mensaje', 'Gracias por escribirnos pronto nos pondermos en contacto');
         redirect(base_url().'home/contacto');
     }
+    function credito(){
+        $data= array();
+        if ($this->session->flashdata('mensaje')) {
+            $data['mensaje'] = $this->session->flashdata('mensaje');
+        }
+        echo $this->templates->render('public/credito', $data);
+    }
 }
