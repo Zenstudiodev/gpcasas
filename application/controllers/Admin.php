@@ -30,6 +30,7 @@ class Admin extends Base_Controller
         }
         $data['propiedades_activas']= $this->Propiedad_model->numero_propiedades_activas();
         $data['propiedades_pendientes']= $this->Propiedad_model->numero_propiedades_pendientes();
+        $data['menu']= 'si';
         echo $this->templates->render('admin/home', $data);
     }
     public function subir_propiedad()
@@ -56,6 +57,13 @@ class Admin extends Base_Controller
 
         $user_id = $this->ion_auth->get_user_id();
         $datos_propiedad = array(
+            'tipo_vendedor' => $this->input->post('tipo_vendedor'),
+            'telefono' => $this->input->post('telefono'),
+            'telefono_wp' => $this->input->post('telefono_wp'),
+            'telefono2' => $this->input->post('telefono2'),
+            'telefono2_wp' => $this->input->post('telefono2_wp'),
+            'correo_contacto' => $this->input->post('correo_contacto'),
+            'precio' => $this->input->post('precio'),
             'tipo_propiedad' => $this->input->post('tipo_propiedad'),
             'user_id_propiedad' => $user_id,
             'id_departamento' => $this->input->post('id_departamento'),
@@ -147,6 +155,7 @@ class Admin extends Base_Controller
             redirect(base_url() . 'User/perfil');
         }
 
+        $data['menu']= 'si';
         $data['propiedades_pendientes'] = $this->Propiedad_model->get_propiedades_pendientes();
         echo $this->templates->render('admin/lista_propiedades_pendientes', $data);
     }

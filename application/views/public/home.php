@@ -45,8 +45,10 @@ $this->layout('public/public_master');
                 <h2>Tienda</h2>
             </div>
             <div class="col-6 col-sm-6 col-md-2 negro_gb home_tile">
-                <span class="home_tile_icon"><i class="fas fa-shopping-cart"></i></span>
+                <a href="<?php echo base_url()?>user/subir_propiedad/">
+                <span class="home_tile_icon"><i class="fa fa-map-marker"></i></span>
                 <h2>Anunciate</h2>
+                </a>
             </div>
         </div>
     </div>

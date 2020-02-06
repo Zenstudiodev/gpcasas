@@ -37,6 +37,7 @@ if ($propiedad) {
                 Q.<?php echo $propiedad->precio_propiedad; ?>
             </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col-md-8">
                 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
@@ -88,7 +89,17 @@ if ($propiedad) {
 
         <div class="row">
             <div class="col">
-                <?php print_contenido($propiedad); ?>
+                <hr>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Datos de contacto</h5>
+                        <p>Correo de contacto: <?php echo $propiedad->correo_contacto; ?></p>
+                        <p>Teléfono: <?php echo $propiedad->telefono; ?></p>
+
+                    </div>
+                </div>
+
+                <?php //print_contenido($propiedad); ?>
             </div>
         </div>
     </div>

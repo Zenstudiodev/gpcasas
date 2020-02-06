@@ -31,7 +31,7 @@ $user =$user->row();
     <?php } ?>
     <div class="row">
         <div class="input-field col s12 center">
-            <h2 class="text-center">Perfil</h2>
+            <h2>Perfil</h2>
         </div>
     </div>
     <div class="row">
@@ -45,6 +45,12 @@ $user =$user->row();
             </div>
         </div>
         <div class="col-9">
+            <div class="row">
+                <div class="col-md-6">
+                    <a class="btn btn-primary" href="<?php echo base_url()?>user/subir_propiedad">Agregar una propiedad</a>
+                </div>
+            </div>
+            <hr>
             <h2>Propiedades</h2>
             <?php
             if($casa_propias){ ?>
@@ -64,7 +70,7 @@ $user =$user->row();
                                     Zona <?php echo $casa->id_zona; ?> | <?php echo id_departamento_a_nombre($casa->id_departamento); ?>
                             </div>
                         </div>
-                        <?php print_contenido($casa); ?>
+                        <?php //print_contenido($casa); ?>
                     </div>
 
 
@@ -75,7 +81,7 @@ $user =$user->row();
     </div>
 
 
-    <?php print_contenido($user)?>
+    <?php //print_contenido($user)?>
 </div>
 
 <?php $this->stop() ?>

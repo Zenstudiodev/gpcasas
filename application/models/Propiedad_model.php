@@ -21,6 +21,13 @@ class Propiedad_model extends CI_Model
         $fecha = New DateTime();
         $datos_propiedad = array(
             'user_id_propiedad' => $data['user_id_propiedad'],
+            'tipo_vendedor' => $data['tipo_vendedor'],
+            'telefono' => $data['telefono'],
+            'telefono_wp' => $data['telefono_wp'],
+            'telefono2' => $data['telefono2'],
+            'telefono2_wp' => $data['telefono2_wp'],
+            'correo_contacto' => $data['correo_contacto'],
+            'precio_propiedad' => $data['precio'],
             'fecha_creacion_propiedad' => $fecha->format('Y-m-d'),
             'id_departamento' => $data['id_departamento'],
             'id_municipio' => $data['id_municipio'],
@@ -70,6 +77,7 @@ class Propiedad_model extends CI_Model
         $insert_id = $this->db->insert_id();
         return $insert_id;
     }
+
     public function get_propiedades_pendientes()
     {
         $this->db->where('estado_propiedad', 'pendiente');
@@ -77,6 +85,7 @@ class Propiedad_model extends CI_Model
         if ($query->num_rows() > 0) return $query;
         else return false;
     }
+
     public function numero_propiedades_activas()
     {
         $this->db->where('estado_propiedad', 'alta');
@@ -84,6 +93,7 @@ class Propiedad_model extends CI_Model
         if ($query->num_rows() > 0) return $query->num_rows();
         else return 0;
     }
+
     public function numero_propiedades_pendientes()
     {
         $this->db->where('estado_propiedad', 'pendiente');
@@ -91,9 +101,11 @@ class Propiedad_model extends CI_Model
         if ($query->num_rows() > 0) return $query->num_rows();
         else return 0;
     }
-    public function aprobar_propiedad($propiedad_id){
+
+    public function aprobar_propiedad($propiedad_id)
+    {
         $datos = array(
-            'estado_propiedad'          => 'alta',
+            'estado_propiedad' => 'alta',
         );
         $this->db->where('Id_propiedad', $propiedad_id);
         $query = $this->db->update('propiedades', $datos);
@@ -107,6 +119,7 @@ class Propiedad_model extends CI_Model
         if ($query->num_rows() > 0) return $query;
         else return false;
     }
+
     public function get_propiedaedes_by_user_id($user_id)
     {
         $this->db->where('user_id_propiedad', $user_id);
@@ -115,6 +128,7 @@ class Propiedad_model extends CI_Model
         if ($query->num_rows() > 0) return $query;
         else return false;
     }
+
     public function resultado_filtro($filtros)
     {
         $this->db->where('modo_propiedad', $filtros['modo']);

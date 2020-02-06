@@ -73,13 +73,17 @@ else{
                     if ($CI->ion_auth->logged_in()) { ?>
                         <p>
                             Bienvenido <?php echo $user_data->first_name; ?>
+                        </p>
+                        <p>
                             <a class="top_boton" href="<?php echo base_url()?>User/perfil">Perfil <i class="fas fa-sign-in-alt"></i></a>
                             <a class="top_boton" href="<?php echo base_url()?>auth/logout">Cerrar <i class="fas fa-sign-in-alt"></i></a>
+
+                            <?php
+                            if ($CI->ion_auth->is_admin()) { ?>
+                                <a class="top_boton" href="<?php echo base_url()?>Admin">Admin panel <i class="fas fa-sign-in-alt"></i></a>
+                            <?php }?>
                         </p>
-                        <?php
-                        if ($CI->ion_auth->is_admin()) { ?>
-                            <a class="top_boton" href="<?php echo base_url()?>Admin">Admin panel <i class="fas fa-sign-in-alt"></i></a>
-                        <?php }?>
+
 
                     <?php }
                     else{ ?>
@@ -93,8 +97,10 @@ else{
     </div>
 </header>
 <section id="menu_banner_top">
+
     <div class="container-fluid">
         <div class="row">
+            <?php if ($menu =='si'){?>
             <div class="col-md-2">
                 <ul class="nav flex-column" id="top_menu">
                     <li class="nav-item">
@@ -121,6 +127,15 @@ else{
                     <!-- /.content-wrapper -->
                 </section>
             </div>
+            <?php }else{?>
+                <div class="col-md-12">
+                    <section id="main_content">
+                        <!-- Content Wrapper. Contains page content -->
+                        <?php echo $this->section('page_content') ?>
+                        <!-- /.content-wrapper -->
+                    </section>
+                </div>
+            <?php }?>
         </div>
     </div>
 </section>

@@ -185,6 +185,7 @@ class User extends Base_Controller
             redirect(base_url() . 'User/login');
         }
         $data['departamentos'] = $this->Busqueda_model->get_departamentos();
+        $data['menu']='no';
         echo $this->templates->render('admin/subir_propiedad', $data);
     }
 

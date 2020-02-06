@@ -1,11 +1,12 @@
 {
-  "name": "GP Casas",
-  "short_name": "GP Casas",
-  "theme_color": "#f19800",
-  "background_color": "#d2d2d2",
-  "display": "standalone",
+  "name": "GP CASAS",
+  "short_name": "gpcasas",
+  "theme_color": "#dcdcdc",
+  "background_color": "#f19800",
+  "display": "fullscreen",
+  "orientation": "portrait",
   "Scope": "/",
-  "start_url": "https://gpcasas.net",
+  "start_url": "https://gpcasas.net/",
   "icons": [
     {
       "src": "/ui/public/images/icons/icon-72x72.png",

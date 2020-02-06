@@ -14,6 +14,7 @@ class Busqueda extends Base_Controller
         parent::__construct();
         // Modelos
         $this->load->model('Busqueda_model');
+        $this->load->model('User_model');
     }
 
     function index()

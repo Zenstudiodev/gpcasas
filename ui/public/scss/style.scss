@@ -122,15 +122,19 @@ footer {
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) {
   header {
-    height: 12vh;
+    height: 21vh;
     #top_header {
+      padding-top: 2vh;
 
       .top_boton {
         padding: 3px;
         font-size: .75rem;
-        margin: 5px 0px;
+        margin: 5px 5px;
         height: 27px;
         display: block;
+        width: fit-content;
+        float: left;
+
       }
     }
   }

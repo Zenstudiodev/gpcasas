@@ -7,9 +7,74 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$this->layout('admin/master');
+$this->layout('admin/master',
+    array(
+        'menu' => $menu
+    ));
 $correo = '';
 
+$tipo_vendedor_select = array(
+    'name' => 'tipo_vendedor',
+    'id' => 'tipo_vendedor',
+    'class' => ' browser-default form-control',
+    'required' => 'required'
+);
+$tipo_vendedor_options = array(
+    'directo' => 'Directo',
+    'intermediario' => 'Intermediario',
+);
+$precio_input = array(
+    'type' => 'text',
+    'name' => 'precio',
+    'id' => 'precio',
+    'class' => ' browser-default form-control',
+    'required' => 'required'
+);
+$telefono_input = array(
+    'type' => 'text',
+    'name' => 'telefono',
+    'id' => 'telefono',
+    'class' => ' browser-default form-control',
+    'required' => 'required'
+);
+$telefono_wp_s = array(
+    'name' => 'telefono_wp',
+    'id' => 'telefono_wp_s',
+    'value' => 'si',
+    'checked' => false,
+);
+$telefono_wp_n = array(
+    'name' => 'telefono_wp',
+    'id' => 'telefono_wp_n',
+    'value' => 'no',
+    'checked' => false,
+);
+$telefono2_input = array(
+    'type' => 'text',
+    'name' => 'telefono2',
+    'id' => 'telefono2',
+    'class' => ' browser-default form-control',
+    'required' => 'required'
+);
+$telefono2_wp_s = array(
+    'name' => 'telefono2_wp',
+    'id' => 'telefono_2wp_s',
+    'value' => 'si',
+    'checked' => false,
+);
+$telefono2_wp_n = array(
+    'name' => 'telefono2_wp',
+    'id' => 'telefono2_wp_n',
+    'value' => 'no',
+    'checked' => false,
+);
+$correo_contacto_input = array(
+    'type' => 'text',
+    'name' => 'correo_contacto',
+    'id' => 'correo_contacto',
+    'class' => ' browser-default form-control',
+    'required' => 'required'
+);
 //Tipo de propiedad
 $tipo_propiedad_select = array(
     'name' => 'tipo_propiedad',
@@ -509,6 +574,7 @@ $cable_internet_propiedad_n = array(
 
 <?php $this->start('page_content') ?>
 <div class="container">
+
     <?php if (isset($message)) { ?>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong><?php echo $message; ?></strong>
@@ -520,6 +586,61 @@ $cable_internet_propiedad_n = array(
     <h2>Datos de propiedad</h2>
 
     <form action="<?php echo base_url() ?>admin/guardar_propiedad" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="departamento">Tipo de vendedor</label>
+                <?php echo form_dropdown($tipo_vendedor_select, $tipo_vendedor_options) ?>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="precio">Precio</label>
+                <?php echo form_input($precio_input); ?>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="identity">Telefono</label>
+                <div class="input-group">
+                    <?php echo form_input($telefono_input); ?>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            Whatsapp
+                            <div class="form-check ">
+                                <?php echo form_radio($telefono_wp_s); ?>
+                                <label class="form-check-label" for="telefono_wp_s">Si</label>
+
+                                <?php echo form_radio($telefono_wp_n); ?>
+                                <label class="form-check-label" for="telefono_wp_n">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="identity">Telefono 2</label>
+                <div class="input-group">
+                    <?php echo form_input($telefono2_input); ?>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            Whatsapp
+                            <div class="form-check ">
+                                <?php echo form_radio($telefono2_wp_s); ?>
+                                <label class="form-check-label" for="telefono2_wp_s">Si</label>
+
+                                <?php echo form_radio($telefono2_wp_n); ?>
+                                <label class="form-check-label" for="telefono2_wp_n">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+
+                <label for="correo_contacto">Correo contacto</label>
+                <?php echo form_input($correo_contacto_input); ?>
+            </div>
+
+        </div>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="identity">Tipo de propiedad</label>
@@ -673,7 +794,7 @@ $cable_internet_propiedad_n = array(
                     <?php echo form_radio($lavanderia_propiedad_s); ?>
                     <label class="form-check-label" for="lavanderia_propiedad_s">Si</label>
 
-                    <?php echo form_radio($lavanderia_propiedad_s); ?>
+                    <?php echo form_radio($lavanderia_propiedad_n); ?>
                     <label class="form-check-label" for="lavanderia_propiedad_n">No</label>
                 </div>
             </div>
@@ -708,7 +829,7 @@ $cable_internet_propiedad_n = array(
                 <div class="form-check ">
                     <?php echo form_radio($parqueo_propiedad_s); ?>
                     <label class="form-check-label" for="cable_internet_propiedad_s">Si</label>
-                    <?php echo form_radio($parqueo_propiedad_n  ); ?>
+                    <?php echo form_radio($parqueo_propiedad_n); ?>
                     <label class="form-check-label" for="cable_internet_propiedad_n">No</label>
                 </div>
             </div>
@@ -750,7 +871,7 @@ $cable_internet_propiedad_n = array(
                 <div class="form-check ">
                     <?php echo form_radio($sala_reuniones_propiedad_s); ?>
                     <label class="form-check-label" for="sala_reuniones_propiedad_s">Si</label>
-                    <?php echo form_radio($sala_reuniones_propiedad_s); ?>
+                    <?php echo form_radio($sala_reuniones_propiedad_n); ?>
                     <label class="form-check-label" for="sala_reuniones_propiedad_n">No</label>
                 </div>
             </div>
