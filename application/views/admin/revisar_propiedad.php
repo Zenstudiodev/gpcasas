@@ -7,7 +7,10 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$this->layout('admin/master');
+$this->layout('admin/master',
+    array(
+        'menu' => $menu
+    ));
 ?>
 <?php $this->start('css_p') ?>
 <?php $this->stop() ?>

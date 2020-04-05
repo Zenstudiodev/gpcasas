@@ -23,28 +23,32 @@ class Busqueda extends Base_Controller
         echo $this->templates->render('public/busqueda', $data);
     }
 
-    function get_municipio_departamento(){
+    function get_municipio_departamento()
+    {
         header("Access-Control-Allow-Origin: *");
 
         $departamento = $this->uri->segment(3);
         //pasamos variablea al modelo
         $departamentos = $this->Busqueda_model->get_municipios_departamento($departamento);
         //imprimimos en formato json el resultado
-        if($departamentos) {
+        if ($departamentos) {
             echo json_encode($departamentos->result_array());
         }
 
     }
-    function get_zonas_municipio(){
+
+    function get_zonas_municipio()
+    {
         header("Access-Control-Allow-Origin: *");
 
         $municipio = $this->uri->segment(3);
         //pasamos variablea al modelo
         $departamentos = $this->Busqueda_model->get_zonas_municipio($municipio);
         //imprimimos en formato json el resultado
-        if($departamentos) {
+        if ($departamentos) {
             echo json_encode($departamentos->result_array());
         }
     }
 
 }
+    
