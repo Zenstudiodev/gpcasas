@@ -24,22 +24,42 @@ if ($propiedad) {
         <div class="row">
             <div class="col-md-8">
                 <h2>
-                    <?php echo $propiedad->tipo_propiedad; ?>
-                    en
-                    <?php echo id_municipio_a_nombre($propiedad->id_municipio); ?>
-                    <?php echo id_departamento_a_nombre($propiedad->id_departamento); ?>
-                    Zona <?php echo $propiedad->id_zona;
-
-                    ?>
+                    <?php echo $propiedad->titulo_propiedad; ?>
                 </h2>
             </div>
             <div class="col">
-                Q.<?php echo $propiedad->precio_propiedad; ?>
+                <?php echo $propiedad->moneda_propiedad; ?> <?php echo $propiedad->precio_propiedad; ?>
             </div>
         </div>
         <hr>
         <div class="row">
             <div class="col-md-8">
+                <?php
+                $imagenes_propiedad = get_imgenes_propiedad_public($propiedad->Id_propiedad);
+                ?>
+                <?php if ($imagenes_propiedad) { ?>
+                    <?php
+                    $start_banner = 0;
+                    foreach ($imagenes_producto->result() as $imagen) { ?>
+                        <a href="<?php echo base_url() . '/web/propiedades_pic/' . $imagen->nombre_imagen; ?>"
+                           data-lightbox="<?php echo 'prod_' . $propiedad->Id_propiedad; ?>"
+                           data-title="<?php echo $propiedad->titulo_propiedad; ?>">
+                            <img class=" img_producto img-fluid <?php if ($start_banner >= 1) {
+                                echo 'thumb';
+                            } ?>"
+                                 src="<?php echo base_url() . 'uploads/imagenes_productos/' . $imagen->nombre_imagen; ?>"
+                                 alt="<?php echo $producto->nombre_producto; ?>">
+                        </a>
+                        <?php $start_banner++ ?>
+                    <?php } ?>
+
+                <?php } else { ?>
+                    <img class="card-img-top img-responsive" src="/ui/public/images/logo.png"
+                         alt="Card image cap">
+                <?php } ?>
+
+
+
                 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                     <div class="carousel-inner">
                         <?php
@@ -54,7 +74,7 @@ if ($propiedad) {
                         <?php } ?>
                         <?php
                         if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $propiedad->Id_propiedad . ' (2).jpg')) { ?>
-                            <div class="carousel-item active">
+                            <div class="carousel-item ">
                                 <img src="<?php echo base_url() . 'web/propiedades_pic/' . $propiedad->Id_propiedad . ' (2).jpg' ?>"
                                      id="img_1_placeholder" class="d-block w-100">
                             </div>
@@ -94,7 +114,7 @@ if ($propiedad) {
                     <div class="card-body">
                         <h5 class="card-title">Datos de contacto</h5>
                         <p>Correo de contacto: <?php echo $propiedad->correo_contacto; ?></p>
-                        <p>Teléfono: <?php echo $propiedad->telefono; ?></p>
+                        <p>Teléfono: <a href="tel:+50251677220">5167 7220</a> </p>
 
                     </div>
                 </div>

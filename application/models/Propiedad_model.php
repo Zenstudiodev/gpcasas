@@ -20,7 +20,9 @@ class Propiedad_model extends CI_Model
     {
         $fecha = New DateTime();
         $datos_propiedad = array(
+            'modo_propiedad' => $data['user_id_propiedad'],
             'user_id_propiedad' => $data['user_id_propiedad'],
+            'titulo_propiedad' => $data['titulo_propiedad'],
             'tipo_vendedor' => $data['tipo_vendedor'],
             'telefono' => $data['telefono'],
             'telefono_wp' => $data['telefono_wp'],
@@ -28,6 +30,7 @@ class Propiedad_model extends CI_Model
             'telefono2_wp' => $data['telefono2_wp'],
             'correo_contacto' => $data['correo_contacto'],
             'precio_propiedad' => $data['precio'],
+            'moneda_propiedad' => $data['moneda_propiedad'],
             'fecha_creacion_propiedad' => $fecha->format('Y-m-d'),
             'id_departamento' => $data['id_departamento'],
             'id_municipio' => $data['id_municipio'],
@@ -110,7 +113,13 @@ class Propiedad_model extends CI_Model
         $this->db->where('Id_propiedad', $propiedad_id);
         $query = $this->db->update('propiedades', $datos);
     }
-
+    public function baja_propiedad($propiedad_id){
+        $datos = array(
+            'estado_propiedad' => 'baja',
+        );
+        $this->db->where('Id_propiedad', $propiedad_id);
+        $query = $this->db->update('propiedades', $datos);
+    }
     public function get_propiedad_by_id($id)
     {
         $this->db->where('Id_propiedad', $id);
@@ -146,5 +155,40 @@ class Propiedad_model extends CI_Model
         if ($query->num_rows() > 0) return $query;
         else return false;
     }
+
+    //imagenes propiedad
+    public function get_fotos_de_propiedad_by_id($propiedad_id){
+        $this->db->where('propiedad_id', $propiedad_id);
+        $this->db->order_by('nombre_imagen', 'desc');
+        $query = $this->db->get('imagenes_propiedad');
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
+
+    function guardar_foto_tabla_fotos($datos_foto)
+    {
+        $datos_de_imagen = array(
+            'propiedad_id' => $datos_foto['propiedad_id'],
+            'extencion' => 'jpg',
+            'nombre_imagen' => $datos_foto['nombre_imagen']
+        );
+        // insertamon en la base de datos
+        $this->db->insert('imagenes_propiedad', $datos_de_imagen);
+    }
+
+    function get_datos_imagen($imagen_id)
+    {
+        $this->db->where('imagen_id', $imagen_id);
+        $query = $this->db->get('imagenes_propiedad');
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
+
+    function borrar_registro_imagen($imagen_id)
+    {
+        $this->db->where('imagen_id', $imagen_id);
+        $this->db->delete('imagenes_propiedad');
+    }
+
 
 }

@@ -17,6 +17,7 @@ $this->layout('admin/master',
 
 <?php $this->start('page_content') ?>
 <div id="admin_home">
+    <hr>
     <div class="container">
         <div class="row">
             <div class="col-md-4">

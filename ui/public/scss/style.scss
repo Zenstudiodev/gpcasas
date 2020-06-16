@@ -85,6 +85,10 @@ header {
   padding: 2rem;
 }
 
+.filtro_card{
+  padding: 15px;
+}
+
 .naranja_bg {
   background: $naranja;
 }
@@ -122,7 +126,7 @@ footer {
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) {
   header {
-    height: 21vh;
+    height: 25vh;
     #top_header {
       padding-top: 2vh;
 

@@ -215,116 +215,37 @@ $this->layout('admin/master',
                 </table>
             </div>
             <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-6">
-                        <?php
-                        if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $propiedad->Id_propiedad . ' (1).jpg')) { ?>
-                            <img src="<?php echo base_url() . 'web/propiedades_pic/' . $propiedad->Id_propiedad . ' (1).jpg' ?>"
-                                 id="img_1_placeholder" class="img-fluid">
-                        <?php } else { ?>
-                            <img src="<?php echo base_url(); ?>ui/public/images/upl_assets/1.jpg"
-                                 id="img_1_placeholder">
+
+                <?php
+                if ($fotos_propiedad) {
+                    ?>
+                    <div class="row">
+                        <?php foreach ($fotos_propiedad->result() as $imagen) { ?>
+                            <div class="col-md-4">
+                                <div class="box box-default">
+                                    <div class="box-header with-border">
+                                        <i class="fas fa-file-image"></i>
+
+                                        <h3 class="box-title"><?php echo $imagen->nombre_imagen ?></h3>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <img class="img-fluid pad img_subida"
+                                             src="<?php echo base_url() . '/web/propiedades_pic/' . $imagen->nombre_imagen; ?>"
+                                             alt="Photo">
+                                        <a href="<?php echo base_url() . 'admin/borrar_imagen/' . $imagen->imagen_id . '/' . $propiedad->Id_propiedad; ?>"
+                                           class="btn btn-danger btn-xs">
+                                            <i class="fa fa-trash" aria-hidden="true"></i> Borrar
+                                        </a>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
                         <?php } ?>
                     </div>
-                    <div class="col-md-6">
-                        <?php
-                        if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $propiedad->Id_propiedad . ' (2).jpg')) { ?>
-                            <img src="<?php echo base_url() . 'web/propiedades_pic/' . $propiedad->Id_propiedad . ' (2).jpg' ?>"
-                                 id="img_1_placeholder" class="img-fluid">
-                        <?php } else { ?>
-                            <img src="<?php echo base_url(); ?>ui/public/images/upl_assets/2.jpg"
-                                 id="img_1_placeholder">
-                        <?php } ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <?php
-                        if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $propiedad->Id_propiedad . ' (3).jpg')) { ?>
-                            <img src="<?php echo base_url() . 'web/propiedades_pic/' . $propiedad->Id_propiedad . ' (3).jpg' ?>"
-                                 id="img_1_placeholder" class="img-fluid">
-                        <?php } else { ?>
-                            <img src="<?php echo base_url(); ?>ui/public/images/upl_assets/3.jpg"
-                                 id="img_1_placeholder">
-                        <?php } ?>
-                    </div>
-                    <div class="col-md-6">
-                        <?php
-                        if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $propiedad->Id_propiedad . ' (4).jpg')) { ?>
-                            <img src="<?php echo base_url() . 'web/propiedades_pic/' . $propiedad->Id_propiedad . ' (4).jpg' ?>"
-                                 id="img_1_placeholder" class="img-fluid">
-                        <?php } else { ?>
-                            <img src="<?php echo base_url(); ?>ui/public/images/upl_assets/4.jpg"
-                                 id="img_1_placeholder">
-                        <?php } ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <?php
-                        if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $propiedad->Id_propiedad . ' (5).jpg')) { ?>
-                            <img src="<?php echo base_url() . 'web/propiedades_pic/' . $propiedad->Id_propiedad . ' (5).jpg' ?>"
-                                 id="img_1_placeholder" class="img-fluid">
-                        <?php } else { ?>
-                            <img src="<?php echo base_url(); ?>ui/public/images/upl_assets/5.jpg"
-                                 id="img_1_placeholder">
-                        <?php } ?>
-                    </div>
-                    <div class="col-md-6">
-                        <?php
-                        if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $propiedad->Id_propiedad . ' (6).jpg')) { ?>
-                            <img src="<?php echo base_url() . 'web/propiedades_pic/' . $propiedad->Id_propiedad . ' (6).jpg' ?>"
-                                 id="img_1_placeholder" class="img-fluid">
-                        <?php } else { ?>
-                            <img src="<?php echo base_url(); ?>ui/public/images/upl_assets/6.jpg"
-                                 id="img_1_placeholder">
-                        <?php } ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <?php
-                        if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $propiedad->Id_propiedad . ' (7).jpg')) { ?>
-                            <img src="<?php echo base_url() . 'web/propiedades_pic/' . $propiedad->Id_propiedad . ' (7).jpg' ?>"
-                                 id="img_1_placeholder" class="img-fluid">
-                        <?php } else { ?>
-                            <img src="<?php echo base_url(); ?>ui/public/images/upl_assets/7.jpg"
-                                 id="img_1_placeholder">
-                        <?php } ?>
-                    </div>
-                    <div class="col-md-6">
-                        <?php
-                        if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $propiedad->Id_propiedad . ' (8).jpg')) { ?>
-                            <img src="<?php echo base_url() . 'web/propiedades_pic/' . $propiedad->Id_propiedad . ' (8).jpg' ?>"
-                                 id="img_1_placeholder" class="img-fluid">
-                        <?php } else { ?>
-                            <img src="<?php echo base_url(); ?>ui/public/images/upl_assets/8.jpg"
-                                 id="img_1_placeholder">
-                        <?php } ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <?php
-                        if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $propiedad->Id_propiedad . ' (9).jpg')) { ?>
-                            <img src="<?php echo base_url() . 'web/propiedades_pic/' . $propiedad->Id_propiedad . ' (9).jpg' ?>"
-                                 id="img_1_placeholder" class="img-fluid">
-                        <?php } else { ?>
-                            <img src="<?php echo base_url(); ?>ui/public/images/upl_assets/9.jpg"
-                                 id="img_1_placeholder">
-                        <?php } ?>
-                    </div>
-                    <div class="col-md-6">
-                        <?php
-                        if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $propiedad->Id_propiedad . ' (10).jpg')) { ?>
-                            <img src="<?php echo base_url() . 'web/propiedades_pic/' . $propiedad->Id_propiedad . ' (10).jpg' ?>"
-                                 id="img_1_placeholder" class="img-fluid">
-                        <?php } else { ?>
-                            <img src="<?php echo base_url(); ?>ui/public/images/upl_assets/10.jpg"
-                                 id="img_1_placeholder">
-                        <?php } ?>
-                    </div>
-                </div>
+                <?php } else { ?>
+                <?php } ?>
+
             </div>
         </div>
         <div class="row">

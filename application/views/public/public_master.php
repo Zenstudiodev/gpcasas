@@ -13,9 +13,8 @@ if ($CI->ion_auth->logged_in()) {
     $user_id = $CI->ion_auth->get_user_id();
     $user_data = $CI->User_model->get_user_by_id($user_id);
     $user_data = $user_data->row();
-}
-else{
-   // echo'no logeado';
+} else {
+    // echo'no logeado';
 }
 
 
@@ -27,16 +26,17 @@ else{
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#dcdcdc">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/manifest.webmanifest">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?php echo base_url()?>ui/public/css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url() ?>ui/public/css/style.css">
     <?php echo $this->section('css_p') ?>
     <title>GP CASAS</title>
 </head>
 <body>
 <header>
+    <button class="add-button">Instalar app</button>
     <div id="top_header">
         <div class="container-fluid">
             <div class="row align-items-center">
@@ -50,31 +50,38 @@ else{
                 </div>
 
                 <div class="col-8 col-md-2">
-                   <a href="<?php echo base_url()?>">
-                       <img src="<?php echo base_url()?>ui/public/images/logo.png" class="img-fluid">
-                   </a>
+                    <a href="<?php echo base_url() ?>">
+                        <img src="<?php echo base_url() ?>ui/public/images/logo.png" class="img-fluid">
+                    </a>
                 </div>
                 <div class="d-none d-sm-block col-md-7 text-center">
-                    <span id="top_titulo" >www.gpcasas.net</span>
+                    <span id="top_titulo">www.gpcasas.net</span>
                 </div>
                 <div class="col-12 col-md-3">
                     <?php
                     if ($CI->ion_auth->logged_in()) { ?>
                         <p>
                             Bienvenido <?php echo $user_data->first_name; ?>
-                            <a class="top_boton" href="<?php echo base_url()?>User/perfil">Perfil <i class="fas fa-sign-in-alt"></i></a>
-                            <a class="top_boton" href="<?php echo base_url()?>auth/logout">Cerrar <i class="fas fa-sign-in-alt"></i></a>
                         </p>
-                    <?php
-                    if ($CI->ion_auth->is_admin()) { ?>
-                        <a class="top_boton" href="<?php echo base_url()?>Admin">Admin panel <i class="fas fa-sign-in-alt"></i></a>
-                    <?php }?>
+                        <p>
+                            <a class="top_boton" href="<?php echo base_url() ?>User/perfil">Perfil <i
+                                        class="fas fa-sign-in-alt"></i></a>
+                            <a class="top_boton" href="<?php echo base_url() ?>auth/logout">Cerrar <i
+                                        class="fas fa-sign-in-alt"></i></a>
+                            <?php
+                            if ($CI->ion_auth->is_admin()) { ?>
+                                <a class="top_boton" href="<?php echo base_url() ?>Admin">Admin panel <i
+                                            class="fas fa-sign-in-alt"></i></a>
+                            <?php } ?>
+                        </p>
 
-                    <?php }
-                    else{ ?>
-                    <a class="top_boton"  href="<?php echo base_url()?>User/login">Ingresar <i class="fas fa-sign-in-alt"></i></a>
-                    <a class="top_boton"  href="<?php echo base_url()?>User/registro">Registrarse <i class="fas fa-user-plus"></i></a>
-                    <?php }?>
+
+                    <?php } else { ?>
+                        <a class="top_boton" href="<?php echo base_url() ?>User/login">Ingresar <i
+                                    class="fas fa-sign-in-alt"></i></a>
+                        <a class="top_boton" href="<?php echo base_url() ?>User/registro">Registrarse <i
+                                    class="fas fa-user-plus"></i></a>
+                    <?php } ?>
 
                 </div>
             </div>
@@ -82,21 +89,22 @@ else{
     </div>
 </header>
 <?php
-if(!isset($sin_banner)){?>
+if (!isset($sin_banner)) {
+    ?>
     <section id="menu_banner_top">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3">
                     <ul id="top_menu">
-                        <li><a href="<?php echo base_url()?>user/subir_propiedad">Anuncia tu propiedad</a></li>
+                        <li><a href="<?php echo base_url() ?>user/subir_propiedad">Anuncia tu propiedad</a></li>
                         <li><a>Anuncia tu accesorio</a></li>
                         <li><a>Reglamento</a></li>
-                        <li><a href="<?php echo base_url()?>home/contacto">Contactanos</a></li>
+                        <li><a href="<?php echo base_url() ?>home/contacto">Contactanos</a></li>
                     </ul>
                 </div>
                 <div class="col-md-9">
                     <div id="banner_container">
-                        <img src="<?php echo base_url()?>ui/public/images/banner.jpg" class="img-fluid">
+                        <img src="<?php echo base_url() ?>ui/public/images/banner.jpg" class="img-fluid">
                     </div>
                 </div>
             </div>
@@ -116,7 +124,7 @@ if(!isset($sin_banner)){?>
     <div class="container">
         <div class="row justify-content-center">
             <div class=" col-6 col-md-2">
-                <img src="<?php echo base_url()?>ui/public/images/logo.png" class="img-fluid">
+                <img src="<?php echo base_url() ?>ui/public/images/logo.png" class="img-fluid">
             </div>
             <div class=" col-md-2"></div>
             <div class="col-6 col-md-5">
@@ -125,7 +133,7 @@ if(!isset($sin_banner)){?>
                     <li><a>Creditos Bancarios</a></li>
                     <li><a>Serguro para vivianda</a></li>
                     <li><a>Anunciate</a></li>
-                    <li><a href="<?php echo base_url()?>home/contacto">Contactenos</a></li>
+                    <li><a href="<?php echo base_url() ?>home/contacto">Contactenos</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md-3">
@@ -180,6 +188,46 @@ if(!isset($sin_banner)){?>
         $("#movil_menu_close").removeClass('movil_menu_close_display');
         $("#movil_menu_open").removeClass('movil_menu_open_hide');
     });
+</script>
+<script>
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/gpcasas_sw.js');
+        });
+    }
+
+
+    let deferredPrompt;
+    const addBtn = document.querySelector('.add-button');
+    addBtn.style.display = 'none';
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        deferredPrompt = e;
+        // Update UI to notify the user they can add to home screen
+        addBtn.style.display = 'block';
+
+        addBtn.addEventListener('click', (e) => {
+            // hide our user interface that shows our A2HS button
+            addBtn.style.display = 'none';
+            // Show the prompt
+            deferredPrompt.prompt();
+            // Wait for the user to respond to the prompt
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the A2HS prompt');
+                } else {
+                    console.log('User dismissed the A2HS prompt');
+                }
+                deferredPrompt = null;
+            });
+        });
+    });
+
 </script>
 </body>
 </html>

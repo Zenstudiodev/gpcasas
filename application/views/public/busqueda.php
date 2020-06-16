@@ -140,7 +140,7 @@ foreach ($tipos->result() as $tipo_carro)
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="modo">Modo</label>
-                    <?php echo form_dropdown($modo_select, $modo_select_options, 'renta') ?>
+                    <?php echo form_dropdown($modo_select, $modo_select_options, $tipo_busqueda) ?>
                 </div>
             </div>
         </div>

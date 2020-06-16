@@ -13,6 +13,25 @@ $this->layout('admin/master',
     ));
 $correo = '';
 
+//Modo de propiedad
+$modo_propiedad_select = array(
+    'name' => 'modo_propiedad',
+    'id' => 'modo_propiedad',
+    'class' => ' browser-default form-control',
+    'required' => 'required'
+);
+$modo_propiedad_options = array(
+    'renta' => 'renta',
+    'venta' => 'venta',
+);
+
+$titulo_propiedad = array(
+    'name' => 'titulo_propiedad',
+    'id' => 'titulo_propiedad',
+    'class' => ' browser-default form-control',
+    'required' => 'required'
+);
+
 $tipo_vendedor_select = array(
     'name' => 'tipo_vendedor',
     'id' => 'tipo_vendedor',
@@ -29,6 +48,17 @@ $precio_input = array(
     'id' => 'precio',
     'class' => ' browser-default form-control',
     'required' => 'required'
+);
+//Moneda de propiedad
+$moneda_propiedad_select = array(
+    'name' => 'moneda_propiedad',
+    'id' => 'moneda_propiedad',
+    'class' => ' browser-default  custom-select',
+    'required' => 'required'
+);
+$moneda_propiedad_options = array(
+    'Q' => 'Q',
+    '$' => '$',
 );
 $telefono_input = array(
     'type' => 'text',
@@ -116,11 +146,9 @@ $municipios_select = array(
 );
 
 $zonas_input = array(
-    'type' => 'number',
+    'type' => 'text',
     'name' => 'id_zona',
     'id' => 'id_zona',
-    'min' => '1',
-    'max' => '25',
     'class' => ' browser-default form-control',
     'required' => 'required'
 );
@@ -136,7 +164,6 @@ $tamaño_terreno_propiedad_input = array(
     'name' => 'tamaño_terreno_propiedad',
     'id' => 'tamaño_terreno_propiedad',
     'class' => ' browser-default form-control',
-    'required' => 'required'
 );
 
 $tipo_medida_propiedad_select = array(
@@ -586,15 +613,34 @@ $cable_internet_propiedad_n = array(
     <h2>Datos de propiedad</h2>
 
     <form action="<?php echo base_url() ?>admin/guardar_propiedad" method="post">
+
         <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="identity">Modo propiedad</label>
+                <?php echo form_dropdown($modo_propiedad_select, $modo_propiedad_options) ?>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="precio">Titulo propiedad</label>
+                <?php echo form_input($titulo_propiedad); ?>
+            </div>
             <div class="form-group col-md-4">
                 <label for="departamento">Tipo de vendedor</label>
                 <?php echo form_dropdown($tipo_vendedor_select, $tipo_vendedor_options) ?>
             </div>
             <div class="form-group col-md-4">
                 <label for="precio">Precio</label>
-                <?php echo form_input($precio_input); ?>
+                <div class="input-group">
+                    <?php echo form_input($precio_input); ?>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <?php echo form_dropdown($moneda_propiedad_select, $moneda_propiedad_options) ?>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
 
         <div class="form-row">

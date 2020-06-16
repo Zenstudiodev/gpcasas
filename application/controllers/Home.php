@@ -67,4 +67,11 @@ class Home extends Base_Controller
         }
         echo $this->templates->render('public/credito', $data);
     }
+    function offline(){
+        $data= array();
+        if ($this->session->flashdata('mensaje')) {
+            $data['mensaje'] = $this->session->flashdata('mensaje');
+        }
+        echo $this->templates->render('public/offline', $data);
+    }
 }

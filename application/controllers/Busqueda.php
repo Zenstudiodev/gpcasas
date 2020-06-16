@@ -19,6 +19,8 @@ class Busqueda extends Base_Controller
 
     function index()
     {
+        $tipo_busqueda = $this->uri->segment(3);
+        $data['tipo_busqueda'] = $tipo_busqueda;
         $data['departamentos'] = $this->Busqueda_model->get_departamentos();
         echo $this->templates->render('public/busqueda', $data);
     }
