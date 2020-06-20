@@ -15,6 +15,7 @@ class User extends Base_Controller
         // Modelos
         $this->load->model('Busqueda_model');
         $this->load->model('Propiedad_model');
+        $this->load->model('Banners_model');
         $this->load->model('User_model');
     }
     public function login()
@@ -23,7 +24,7 @@ class User extends Base_Controller
             $data['message'] = $this->session->flashdata('message');
         }
 
-        $data['departamentos'] = $this->Busqueda_model->get_departamentos();
+        $data['header_banners'] = $this->Banners_model->header_banners_activos();
         echo $this->templates->render('public/login', $data);
     }
     public function registro()

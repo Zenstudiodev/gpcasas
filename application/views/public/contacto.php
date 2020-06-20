@@ -8,7 +8,9 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$this->layout('public/public_master');
+$this->layout('public/public_master', array(
+    'header_banners' => $header_banners
+));
 
 $nombre_input = array(
     'type' => 'text',

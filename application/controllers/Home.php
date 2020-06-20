@@ -9,28 +9,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends Base_Controller
 {
-	function __construct()
-	{
-		parent::__construct();
-		// Modelos
+    function __construct()
+    {
+        parent::__construct();
+        // Modelos
         $this->load->model('User_model');
-	}
-	function index()
-	{
-		echo $this->templates->render('public/home');
-	}
-	function contacto(){
-	    $data= array();
+        $this->load->model('Banners_model');
+    }
+
+    function index()
+    {
+        $data['header_banners'] = $this->Banners_model->header_banners_activos();
+        echo $this->templates->render('public/home', $data);
+    }
+
+    function contacto()
+    {
+        $data = array();
         if ($this->session->flashdata('mensaje')) {
             $data['mensaje'] = $this->session->flashdata('mensaje');
         }
+        $data['header_banners'] = $this->Banners_model->header_banners_activos();
         echo $this->templates->render('public/contacto', $data);
     }
-    function enviar_correo_contacto(){
-	    $nombre = $this->input->post('nombre');
-	    $telefono = $this->input->post('telefono');
-	    $email = $this->input->post('email');
-	    $mensaje = $this->input->post('mensaje');
+
+    function enviar_correo_contacto()
+    {
+        $nombre = $this->input->post('nombre');
+        $telefono = $this->input->post('telefono');
+        $email = $this->input->post('email');
+        $mensaje = $this->input->post('mensaje');
 
         $this->load->library('email');
         //configuracion de correo
@@ -44,7 +52,7 @@ class Home extends Base_Controller
 
         //mensaje
         $message = '<html><body>';
-        $message .= '<img src="'.base_url().'/ui/public/images/logo.png" alt="GP CASAS" />';
+        $message .= '<img src="' . base_url() . '/ui/public/images/logo.png" alt="GP CASAS" />';
         $message .= '<table rules="all" style="border-color: #666;" cellpadding="10">';
         $message .= "<tr><td><strong>Nombre:</strong> </td><td>" . strip_tags($nombre) . "</td></tr>";
         $message .= "<tr><td><strong>Teléfono:</strong> </td><td>" . strip_tags($telefono) . "</td></tr>";
@@ -58,17 +66,21 @@ class Home extends Base_Controller
         // Will only print the email headers, excluding the message subject and body
         $this->email->print_debugger(array('headers'));
         $this->session->set_flashdata('mensaje', 'Gracias por escribirnos pronto nos pondermos en contacto');
-        redirect(base_url().'home/contacto');
+        redirect(base_url() . 'home/contacto');
     }
-    function credito(){
-        $data= array();
+
+    function credito()
+    {
+        $data = array();
         if ($this->session->flashdata('mensaje')) {
             $data['mensaje'] = $this->session->flashdata('mensaje');
         }
         echo $this->templates->render('public/credito', $data);
     }
-    function offline(){
-        $data= array();
+
+    function offline()
+    {
+        $data = array();
         if ($this->session->flashdata('mensaje')) {
             $data['mensaje'] = $this->session->flashdata('mensaje');
         }

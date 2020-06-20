@@ -14,6 +14,7 @@ class Busqueda extends Base_Controller
         parent::__construct();
         // Modelos
         $this->load->model('Busqueda_model');
+        $this->load->model('Banners_model');
         $this->load->model('User_model');
     }
 
@@ -22,6 +23,7 @@ class Busqueda extends Base_Controller
         $tipo_busqueda = $this->uri->segment(3);
         $data['tipo_busqueda'] = $tipo_busqueda;
         $data['departamentos'] = $this->Busqueda_model->get_departamentos();
+        $data['header_banners'] = $this->Banners_model->header_banners_activos();
         echo $this->templates->render('public/busqueda', $data);
     }
 

@@ -41,16 +41,29 @@ if ($propiedad) {
                 <?php if ($imagenes_propiedad) { ?>
                     <?php
                     $start_banner = 0;
-                    foreach ($imagenes_propiedad->result() as $imagen) { ?>
-                        <a href="<?php echo base_url() . '/web/propiedades_pic/' . $imagen->nombre_imagen; ?>"
-                           data-lightbox="<?php echo 'prod_' . $propiedad->Id_propiedad; ?>"
-                           data-title="<?php echo $propiedad->titulo_propiedad; ?>">
-                            <img class=" img_producto img-fluid <?php if ($start_banner >= 1) {
-                                echo 'thumb';
-                            } ?>"
-                                 src="<?php echo base_url() . '/web/propiedades_pic/' . $imagen->nombre_imagen; ?>"
-                                 alt="<?php echo $propiedad->titulo_propiedad; ?>">
-                        </a>
+                    foreach ($imagenes_propiedad->result() as $imagen) {
+
+                        $wrapper_class ="img_wreapper";
+                        $img_class = "";
+                        if ($start_banner >= 1) {
+                            $img_class = 'thumb';
+                            $wrapper_class ="thumb_img_wreapper";
+                        }
+
+
+                        ?>
+
+
+                        <div class=" <?php echo $wrapper_class; ?>">
+                            <a href="<?php echo base_url() . '/web/propiedades_pic/' . $imagen->nombre_imagen; ?>"
+                               data-lightbox="<?php echo 'prod_' . $propiedad->Id_propiedad; ?>"
+                               data-title="<?php echo $propiedad->titulo_propiedad; ?>">
+                                <img class=" img_producto img-fluid <?php echo $img_class; ?>"
+                                     src="<?php echo base_url() . '/web/propiedades_pic/' . $imagen->nombre_imagen; ?>"
+                                     alt="<?php echo $propiedad->titulo_propiedad; ?>">
+                            </a>
+                        </div>
+
                         <?php $start_banner++ ?>
                     <?php } ?>
 

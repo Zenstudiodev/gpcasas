@@ -105,7 +105,46 @@ if (!isset($sin_banner)) {
                 </div>
                 <div class="col-md-9">
                     <div id="banner_container">
-                        <img src="<?php echo base_url() ?>ui/public/images/banner.jpg" class="img-fluid">
+                        <?php if (isset($header_banners)) { ?>
+                            <div id="header_banners" class="carousel slide" data-ride="carousel">
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" role="listbox">
+
+                                    <?php
+                                    $start_banner = 0;
+                                    foreach ($header_banners->result() as $banner) { ?>
+
+
+                                        <div class="item <?php if ($start_banner < 1) {
+                                            echo 'active';
+                                        } ?> ">
+                                            <a href="<?php echo $banner->link_bh ?>" target="_blank"
+                                               banner_id="<?php echo $banner->id_bh; ?>">
+                                                <img src="<?php echo base_url() .'ui/public/images/banners/'. $banner->imagen_bh.'.jpg'; ?>" class="img-fluid">
+                                            </a>
+                                        </div>
+
+                                        <?php $start_banner++ ?>
+
+
+                                    <?php } ?>
+                                </div>
+
+                                <!-- Controls -->
+                                <a class="left carousel-control" href="#header_banners" role="button"
+                                   data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#header_banners" role="button"
+                                   data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+
+
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -161,8 +200,8 @@ if (!isset($sin_banner)) {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/90b8541e9b.js"></script>
-<script src="https://www.google.com/recaptcha/api.js?render=6Le2pcMUAAAAAGezpReJseqnBAijwYanQXpmQoS7"></script>
+<script src="https://kit.fontawesome.com/90b8541e9b.js"  crossorigin="anonymous" ></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6Le2pcMUAAAAAGezpReJseqnBAijwYanQXpmQoS7" ></script>
 
 <?php echo $this->section('js_p') ?>
 
@@ -201,34 +240,7 @@ if (!isset($sin_banner)) {
     }
 
 
-    let deferredPrompt;
-    const addBtn = document.querySelector('.add-button');
-    addBtn.style.display = 'none';
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-        // Prevent Chrome 67 and earlier from automatically showing the prompt
-        e.preventDefault();
-        // Stash the event so it can be triggered later.
-        deferredPrompt = e;
-        // Update UI to notify the user they can add to home screen
-        addBtn.style.display = 'block';
-
-        addBtn.addEventListener('click', (e) => {
-            // hide our user interface that shows our A2HS button
-            addBtn.style.display = 'none';
-            // Show the prompt
-            deferredPrompt.prompt();
-            // Wait for the user to respond to the prompt
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted the A2HS prompt');
-                } else {
-                    console.log('User dismissed the A2HS prompt');
-                }
-                deferredPrompt = null;
-            });
-        });
-    });
 
 </script>
 </body>
