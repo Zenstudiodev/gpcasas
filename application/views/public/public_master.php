@@ -36,7 +36,7 @@ if ($CI->ion_auth->logged_in()) {
 </head>
 <body>
 <header>
-    <button class="add-button">Instalar app</button>
+
     <div id="top_header">
         <div class="container-fluid">
             <div class="row align-items-center">

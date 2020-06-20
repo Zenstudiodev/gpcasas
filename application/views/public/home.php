@@ -15,6 +15,14 @@ $this->layout('public/public_master');
 <?php $this->stop() ?>
 
 <?php $this->start('page_content') ?>
+<div class="container add-button">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col_add_btn">
+            <button class=" btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> Instalar app</button>
+        </div>
+    </div>
+
+</div>
 <div id="home_tiles">
     <div class="container-fluid">
         <div class="row align-items-center justify-content-center">
