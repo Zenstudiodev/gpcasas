@@ -30,12 +30,18 @@ $user =$user->row();
         </div>
     <?php } ?>
     <div class="row">
-        <div class="input-field col s12 center">
+        <div class="input-field col  center">
             <h2>Perfil</h2>
         </div>
     </div>
     <div class="row">
-        <div class="col-3">
+        <div class="col-md-6">
+            <a class="btn btn-primary" href="<?php echo base_url()?>user/subir_propiedad">Agregar una propiedad</a>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12 col-md-3">
             <div class="card">
                 <img src="<?php echo base_url()?>/ui/public/images/user.png" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -43,22 +49,61 @@ $user =$user->row();
 
                 </div>
             </div>
-        </div>
-        <div class="col-9">
-            <div class="row">
-                <div class="col-md-6">
-                    <a class="btn btn-primary" href="<?php echo base_url()?>user/subir_propiedad">Agregar una propiedad</a>
-                </div>
-            </div>
             <hr>
+        </div>
+        <div class="col-12 col-md-9 ">
+
             <h2>Propiedades</h2>
             <?php
             if($casa_propias){ ?>
                 <div class="row">
-                <?php  foreach ($casa_propias->result() as $casa) {  ?>
-                    <div class="col-md-4">
+                <?php  foreach ($casa_propias->result() as $casa) {
+                    //obtenemos imagenes de la propiedad
+                    $imagenes_propiedad = get_imgenes_propiedad_public($casa->Id_propiedad);
+                    ?>
+
+
+                    <div class="col-md-4 filtro_card">
                         <div class="card">
-                            <img src="<?php echo base_url().'web/propiedades_pic/' . $casa->Id_propiedad . ' (1).jpg' ?>" class="card-img-top" alt="...">
+                            <?php if ($imagenes_propiedad) { ?>
+                                <div class="card animated  zoomIn ">
+
+
+                                    <div id="carrusel_producto_<?php echo $casa->Id_propiedad; ?>"
+                                         class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <?php
+                                            $start_banner = 0;
+                                            foreach ($imagenes_propiedad->result() as $imagen) { ?>
+                                                <div class="carousel-item <?php if ($start_banner < 1) {
+                                                    echo 'active';
+                                                } ?>">
+                                                    <img class="card-img-top"
+                                                         src="<?php echo base_url() . 'web/propiedades_pic/' . $imagen->nombre_imagen; ?>"
+                                                         alt="<?php echo $casa->Id_propiedad; ?>">
+                                                </div>
+                                                <?php $start_banner++ ?>
+                                            <?php } ?>
+                                        </div>
+                                        <a class="carousel-control-prev"
+                                           href="#carrusel_producto_<?php echo $casa->Id_propiedad; ?>" role="button"
+                                           data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next"
+                                           href="#carrusel_producto_<?php echo $casa->Id_propiedad; ?>" role="button"
+                                           data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            <?php } else { ?>
+                                <img src="<?php echo base_url() ?>/ui/public/images/img-placeholder.png"
+                                     class="card-img-top" alt="...">
+                            <?php } ?>
                             <div class="card-body">
                                 <div class="modo_propiedad">
                                     <span class="badge badge-secondary"><?php echo $casa->modo_propiedad; ?></span>

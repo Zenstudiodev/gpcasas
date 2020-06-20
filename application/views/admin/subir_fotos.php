@@ -342,7 +342,7 @@ $this->layout('admin/master',
                 </div>
                 <div class="row">
                     <a class=" btn orange darken-1"
-                       href="<?php echo base_url() . 'admin/'?>">Regresar a panel</a>
+                       href="<?php echo base_url() . 'admin/'?>">Publicar anuncio</a>
                 </div>
 
                 <!--Materialize modal-->

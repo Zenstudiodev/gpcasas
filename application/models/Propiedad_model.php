@@ -20,7 +20,7 @@ class Propiedad_model extends CI_Model
     {
         $fecha = New DateTime();
         $datos_propiedad = array(
-            'modo_propiedad' => $data['user_id_propiedad'],
+            'modo_propiedad' => $data['modo_propiedad'],
             'user_id_propiedad' => $data['user_id_propiedad'],
             'titulo_propiedad' => $data['titulo_propiedad'],
             'tipo_vendedor' => $data['tipo_vendedor'],
@@ -73,7 +73,8 @@ class Propiedad_model extends CI_Model
             'piscina_propiedad' => $data['piscina_propiedad'],
             'agua_propiedad' => $data['agua_propiedad'],
             'luz_propiedad' => $data['luz_propiedad'],
-            'cable_internet_propiedad' => $data['cable_internet_propiedad']
+            'cable_internet_propiedad' => $data['cable_internet_propiedad'],
+            'comentario_propiedad' => $data['comentario_propiedad']
         );
 
         $this->db->insert('propiedades', $datos_propiedad);
@@ -84,6 +85,20 @@ class Propiedad_model extends CI_Model
     public function get_propiedades_pendientes()
     {
         $this->db->where('estado_propiedad', 'pendiente');
+        $query = $this->db->get('propiedades');
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
+    public function get_propiedades_de_baja()
+    {
+        $this->db->where('estado_propiedad', 'baja');
+        $query = $this->db->get('propiedades');
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
+    public function get_propiedades_activas()
+    {
+        $this->db->where('estado_propiedad', 'alta');
         $query = $this->db->get('propiedades');
         if ($query->num_rows() > 0) return $query;
         else return false;

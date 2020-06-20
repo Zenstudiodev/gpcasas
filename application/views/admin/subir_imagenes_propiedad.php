@@ -95,12 +95,16 @@ if ($propiedad) {
                 <button type="button" class="close" data-dismiss="alert"
                         aria-hidden="true">×
                 </button>
-                <h4><i class="fas fa-bell"></i> El producto que busca no existe</h4>
+                <h4><i class="fas fa-bell"></i> La propiedad que busca no existe</h4>
             </div>
         </div>
     <?php } ?>
 
-
+    <hr>
+    <div class="row">
+        <a class=" btn btn-success"
+           href="<?php echo base_url() . 'admin/'?>">Publicar anuncio</a>
+    </div>
 </div>
 <?php $this->stop() ?>
 <?php $this->start('js_p') ?>
@@ -126,7 +130,7 @@ if ($propiedad) {
                 url: "<?php echo base_url()?>Admin/guardar_imagen?pid=<?php echo $propiedad->Id_propiedad;?>",
                 paramName: "imagen_propiedad",
                 parallelUploads: 1,
-                maxFiles: 1,
+                maxFiles: 15,
                 acceptedFiles: ".jpg,.jpeg",
                 resizeWidth: '800',
                 //resizeMimeType: '.jpg',
@@ -153,9 +157,18 @@ if ($propiedad) {
             //console.log(file);
             console.log(data);
             window.navigator.vibrate(200);
-           location.reload();
+           //location.reload();
             /* Maybe display some more file information on your page */
         });
+
+        myDropzone.on("queuecomplete", function () {
+
+            location.reload();
+            /* Maybe display some more file information on your page */
+        });
+
+
+
 
     })
 

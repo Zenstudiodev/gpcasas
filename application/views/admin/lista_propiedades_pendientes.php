@@ -25,6 +25,17 @@ $this->layout('admin/master',
             </button>
         </div>
     <?php } ?>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="<?php echo base_url()?>admin/propiedades">Activas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url()?>admin/propiedades_pendientes">Pendientes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url()?>admin/propiedades_de_baja">De baja</a>
+        </li>
+    </ul>
     <h2>Propiedades pendientes</h2>
     <?php if($propiedades_pendientes){ ?>
     <div class="table-responsive">

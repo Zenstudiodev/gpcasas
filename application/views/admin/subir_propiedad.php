@@ -72,6 +72,7 @@ $telefono_wp_s = array(
     'id' => 'telefono_wp_s',
     'value' => 'si',
     'checked' => false,
+    'required' => 'required'
 );
 $telefono_wp_n = array(
     'name' => 'telefono_wp',
@@ -84,13 +85,13 @@ $telefono2_input = array(
     'name' => 'telefono2',
     'id' => 'telefono2',
     'class' => ' browser-default form-control',
-    'required' => 'required'
 );
 $telefono2_wp_s = array(
     'name' => 'telefono2_wp',
     'id' => 'telefono_2wp_s',
     'value' => 'si',
     'checked' => false,
+    'required' => 'required'
 );
 $telefono2_wp_n = array(
     'name' => 'telefono2_wp',
@@ -595,6 +596,12 @@ $cable_internet_propiedad_n = array(
     'value' => 'no',
     'checked' => false,
 );
+$comentario_propiedad = array(
+    'name' => 'comentario_propiedad',
+    'id' => 'comentario_propiedad',
+    'class' => ' browser-default form-control',
+    'rows' => ' 4',
+);
 ?>
 <?php $this->start('css_p') ?>
 <?php $this->stop() ?>
@@ -1039,6 +1046,11 @@ $cable_internet_propiedad_n = array(
 
             </div>
         </div>
+        <div class="form-group">
+            <label for="comentario_propiedad">Comentarios</label>
+            <?php echo form_textarea($comentario_propiedad); ?>
+        </div>
+
 
 
         <button type="submit" class="btn btn-primary">Guardar</button>

@@ -93,13 +93,13 @@ else{
                         <a class="nav-link active" href="<?php echo base_url()?>admin/subir_propiedad">Subir propiedad</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url()?>admin/propiedades_pendientes">Propiedades Pendientes</a>
+                        <a class="nav-link" href="<?php echo base_url()?>admin/propiedades">Propiedades</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url()?>admin/lista_usuarios">Lista de usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Banners</a>
+                        <a class="nav-link" href="<?php echo base_url()?>admin/banners_header">Banners</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -134,19 +134,19 @@ else{
             </div>
             <div class=" col-md-2"></div>
             <div class="col-6 col-md-5">
-                <ul>
+                <ul class="footer_list">
                     <li><a>Quienes somos</a></li>
                     <li><a>Creditos Bancarios</a></li>
-                    <li><a>Serguro para vivianda</a></li>
+                    <li><a>Serguro para vivienda</a></li>
                     <li><a>Anunciate</a></li>
                     <li><a>Contactenos</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md-3">
-                <ul>
+                <ul class="footer_list">
                     <li><i class="fab fa-facebook-square"></i> gpcasas_net</li>
                     <li><i class="fab fa-instagram"></i> gpcasas_net</li>
-                    <li><i class="fab fa-whatsapp"></i> 34045515</li>
+                    <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/50234045515">34045515 </a></li>
                     <li><i class="fas fa-envelope"></i> info@gpcasas.net</li>
                 </ul>
             </div>

@@ -91,6 +91,7 @@ if ($CI->ion_auth->logged_in()) {
 <?php
 if (!isset($sin_banner)) {
     ?>
+    <hr>    
     <section id="menu_banner_top">
         <div class="container-fluid">
             <div class="row">
@@ -128,7 +129,7 @@ if (!isset($sin_banner)) {
             </div>
             <div class=" col-md-2"></div>
             <div class="col-6 col-md-5">
-                <ul>
+                <ul class="footer_list">
                     <li><a>Quienes somos</a></li>
                     <li><a>Creditos Bancarios</a></li>
                     <li><a>Serguro para vivianda</a></li>
@@ -137,10 +138,11 @@ if (!isset($sin_banner)) {
                 </ul>
             </div>
             <div class="col-6 col-md-3">
-                <ul>
+                <ul class="footer_list">
                     <li><i class="fab fa-facebook-square"></i> gpcasas_net</li>
                     <li><i class="fab fa-instagram"></i> gpcasas_net</li>
-                    <li><i class="fab fa-whatsapp"></i> 34045515</li>
+                    <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/50234045515">3404-5515 </a></li>
+                    <li><i class="fa fa-phone-square"></i> <a href="tel:+50222945656">2294-5656 </a></li>
                     <li><i class="fas fa-envelope"></i> info@gpcasas.net</li>
                 </ul>
             </div>
