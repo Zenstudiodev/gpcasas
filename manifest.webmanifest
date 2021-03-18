@@ -3,7 +3,6 @@
   "short_name": "gp casas",
   "theme_color": "#dcdcdc",
   "background_color": "#f19800",
-  "orientation": "portrait",
   "start_url": "https://gpcasas.net/",
   "scope": "/",
   "display": "fullscreen",
@@ -47,22 +46,6 @@
       "src": "/ui/public/images/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Contacto",
-      "short_name": "Contacto",
-      "description": "Información de contacto",
-      "url": "/Empresa/contacto",
-      "icons": [{ "src": "/images/today.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "Nosotros",
-      "short_name": "Nosotros",
-      "description": "Nosotros",
-      "url": "/Empresa/nosotros",
-      "icons": [{ "src": "/images/tomorrow.png", "sizes": "192x192" }]
     }
   ],
   "splash_pages": null

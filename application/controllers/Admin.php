@@ -36,6 +36,7 @@ class Admin extends Base_Controller
         echo $this->templates->render('admin/home', $data);
     }
 
+   /** propiedades**/
     public function subir_propiedad()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -50,7 +51,6 @@ class Admin extends Base_Controller
         $data['departamentos'] = $this->Busqueda_model->get_departamentos();
         echo $this->templates->render('admin/subir_propiedad', $data);
     }
-
     public function guardar_propiedad()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -77,7 +77,7 @@ class Admin extends Base_Controller
             'id_municipio' => $this->input->post('id_municipio'),
             'id_zona' => $this->input->post('id_zona'),
             'direccion_propiedad' => $this->input->post('direccion_propiedad'),
-            'tamaño_terreno_propiedad' => $this->input->post('tamaño_terreno_propiedad'),
+            'tamano_terreno_propiedad' => $this->input->post('tamano_terreno_propiedad'),
             'tipo_medida_propiedad' => $this->input->post('tipo_medida_propiedad'),
             'medida_construccion_propiedad' => $this->input->post('medida_construccion_propiedad'),
             'medida_oficina_propiedad' => $this->input->post('medida_oficina_propiedad'),
@@ -124,7 +124,6 @@ class Admin extends Base_Controller
         }
         //redirect a lista de propiedades
     }
-
     public function subir_fotos()
     {
         //comprobar logeo
@@ -145,7 +144,6 @@ class Admin extends Base_Controller
         echo $this->templates->render('admin/subir_imagenes_propiedad', $data);
 
     }
-
     public function guardar_imagen()
     {
         // print_contenido($_FILES);
@@ -244,7 +242,6 @@ class Admin extends Base_Controller
 
         }
     }
-
     public function borrar_imagen()
     {
 
@@ -283,31 +280,6 @@ class Admin extends Base_Controller
 
         }
     }
-
-    /*public function borrar_imagen()
-    {
-
-        //Id de imagen desde segmento URL
-        $id_propiedad = $data['imagen_id'] = $this->uri->segment(3);
-        //Id de producto desde segmento URL
-        $numero_foto = $data['prducto_id'] = $this->uri->segment(4);
-        //borrado de imagen
-
-        if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $id_propiedad . ' (' . $numero_foto . ').jpg')) {
-            //echo 'imagen existe';
-            if (unlink('/home2/gpautos/gpcasas/web/propiedades_pic/' . $id_propiedad . ' (' . $numero_foto . ').jpg')) {
-                $this->session->set_flashdata('mensaje', 'se borro la imagen');
-                redirect(base_url() . '/admin/revisar_propiedad/' . $id_propiedad);
-            } else {
-                echo 'no se borro';
-            }
-        } else {
-
-            //echo 'la imagen no existe';
-        }
-
-    }
-    */
     public function procesar_foto()
     {
         /* echo '<pre>';
@@ -322,7 +294,6 @@ class Admin extends Base_Controller
 
         file_put_contents('/home2/gpautos/gpcasas/web/propiedades_pic/' . $id_propiedad . ' (' . $numero_foto . ').jpg', $image);
     }
-
     public function propiedades()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -338,7 +309,6 @@ class Admin extends Base_Controller
         $data['propiedades_pendientes'] = $this->Propiedad_model->get_propiedades_activas();
         echo $this->templates->render('admin/lista_propiedades', $data);
     }
-
     public function propiedades_pendientes()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -354,7 +324,6 @@ class Admin extends Base_Controller
         $data['propiedades_pendientes'] = $this->Propiedad_model->get_propiedades_pendientes();
         echo $this->templates->render('admin/lista_propiedades_pendientes', $data);
     }
-
     public function propiedades_de_baja()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -370,7 +339,6 @@ class Admin extends Base_Controller
         $data['propiedades_pendientes'] = $this->Propiedad_model->get_propiedades_de_baja();
         echo $this->templates->render('admin/lista_propiedades_de_baja', $data);
     }
-
     public function revisar_propiedad()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -392,20 +360,144 @@ class Admin extends Base_Controller
         echo $this->templates->render('admin/revisar_propiedad', $data);
 
     }
-
     public function aprobar_propiedad()
     {
         $propiedad_id = $this->uri->segment(3);
         $this->Propiedad_model->aprobar_propiedad($propiedad_id);
         redirect(base_url() . 'admin');
     }
-
     public function baja_propiedad()
     {
         $propiedad_id = $this->uri->segment(3);
         $this->Propiedad_model->baja_propiedad($propiedad_id);
         redirect(base_url() . 'admin/propiedades');
     }
+    public function editar_propiedad(){
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/login');
+        }
+        if (!$this->ion_auth->is_admin()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/perfil');
+        }
+        if (!$this->uri->segment(3)) {
+            redirect(base_url() . 'admin/propiedades_pendientes');
+        } else {
+
+        }
+        $data['menu'] = 'si';
+        $propiedad_id = $this->uri->segment(3);
+        $data['propiedad'] = $this->Propiedad_model->get_propiedad_by_id($propiedad_id);
+        $data['fotos_propiedad'] = $this->Propiedad_model->get_fotos_de_propiedad_by_id($propiedad_id);
+        $data['departamentos'] = $this->Busqueda_model->get_departamentos();
+        echo $this->templates->render('admin/editar_propiedad', $data);
+    }
+    public function actualizar_propiedad(){
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/login');
+        }
+        //print_contenido($_POST);
+
+        $user_id = $this->ion_auth->get_user_id();
+        $datos_propiedad = array(
+            'id_propiedad' => $this->input->post('id_propiedad'),
+            'modo_propiedad' => $this->input->post('modo_propiedad'),
+            'titulo_propiedad' => $this->input->post('titulo_propiedad'),
+            'tipo_vendedor' => $this->input->post('tipo_vendedor'),
+            'telefono' => $this->input->post('telefono'),
+            'telefono_wp' => $this->input->post('telefono_wp'),
+            'telefono2' => $this->input->post('telefono2'),
+            'telefono2_wp' => $this->input->post('telefono2_wp'),
+            'correo_contacto' => $this->input->post('correo_contacto'),
+            'precio' => $this->input->post('precio'),
+            'moneda_propiedad' => $this->input->post('moneda_propiedad'),
+            'tipo_propiedad' => $this->input->post('tipo_propiedad'),
+            'user_id_propiedad' => $user_id,
+            'id_departamento' => $this->input->post('id_departamento'),
+            'id_municipio' => $this->input->post('id_municipio'),
+            'id_zona' => $this->input->post('id_zona'),
+            'direccion_propiedad' => $this->input->post('direccion_propiedad'),
+            'tamaño_terreno_propiedad' => $this->input->post('tamaño_terreno_propiedad'),
+            'tipo_medida_propiedad' => $this->input->post('tipo_medida_propiedad'),
+            'medida_construccion_propiedad' => $this->input->post('medida_construccion_propiedad'),
+            'medida_oficina_propiedad' => $this->input->post('medida_oficina_propiedad'),
+            'habitaciones_propiedad' => $this->input->post('habitaciones_propiedad'),
+            'baños_completos_propiedad' => $this->input->post('baños_completos_propiedad'),
+            'baño_visita_propiedad' => $this->input->post('baño_visita_propiedad'),
+            'balcon_propiedad' => $this->input->post('balcon_propiedad'),
+            'niveles_porpiedad' => $this->input->post('niveles_porpiedad'),
+            'cocina_propiedad' => $this->input->post('cocina_propiedad'),
+            'desayunador_propiedad' => $this->input->post('desayunador_propiedad'),
+            'lineablanca_propiedad' => $this->input->post('lineablanca_propiedad'),
+            'amueblada_propiedad' => $this->input->post('amueblada_propiedad'),
+            'cuarto_servicio_propiedad' => $this->input->post('cuarto_servicio_propiedad'),
+            'cuarto_seguridad_propiedad' => $this->input->post('cuarto_seguridad_propiedad'),
+            'lavanderia_propiedad' => $this->input->post('lavanderia_propiedad'),
+            'gas_propano_propiedad' => $this->input->post('gas_propano_propiedad'),
+            'calentador_agua_propiedad' => $this->input->post('calentador_agua_propiedad'),
+            'garage_propiedad' => $this->input->post('garage_propiedad'),
+            'parqueo_propiedad' => $this->input->post('parqueo_propiedad'),
+            'parqueo_visitas_propiedad' => $this->input->post('parqueo_visitas_propiedad'),
+            'seguridad_privada_propiedad' => $this->input->post('seguridad_privada_propiedad'),
+            'garita_control_propiedad' => $this->input->post('garita_control_propiedad'),
+            'sala_propiedad' => $this->input->post('sala_propiedad'),
+            'sala_reuniones_propiedad' => $this->input->post('sala_reuniones_propiedad'),
+            'comedor_propiedad' => $this->input->post('comedor_propiedad'),
+            'gradas_propiedad' => $this->input->post('gradas_propiedad'),
+            'bodega_interior_propiedad' => $this->input->post('bodega_interior_propiedad'),
+            'pergola_propiedad' => $this->input->post('pergola_propiedad'),
+            'menaje_propiedad' => $this->input->post('menaje_propiedad'),
+            'nombre_condominio_propiedad' => $this->input->post('nombre_condominio_propiedad'),
+            'sala_famiiar_propiedad' => $this->input->post('sala_famiiar_propiedad'),
+            'sala_juegos_propiedad' => $this->input->post('sala_juegos_propiedad'),
+            'chimenea_propiedad' => $this->input->post('chimenea_propiedad'),
+            'piscina_propiedad' => $this->input->post('piscina_propiedad'),
+            'agua_propiedad' => $this->input->post('agua_propiedad'),
+            'luz_propiedad' => $this->input->post('luz_propiedad'),
+            'cable_internet_propiedad' => $this->input->post('cable_internet_propiedad'),
+            'comentario_propiedad' => $this->input->post('comentario_propiedad')
+        );
+        //actualizar propiedad
+        $this->Propiedad_model->actualizar_propiedad($datos_propiedad);
+        $propiedad_id = $datos_propiedad['id_propiedad'];
+
+
+        if ($this->ion_auth->is_admin()) {
+            // redirect them to the login page
+            redirect(base_url() . 'admin/editar_propiedad/' . $propiedad_id);
+        }
+        else{
+            redirect(base_url() . 'User/perfil');
+        }
+
+    }
+    /*public function borrar_imagen()
+    {
+        //Id de imagen desde segmento URL
+        $id_propiedad = $data['imagen_id'] = $this->uri->segment(3);
+        //Id de producto desde segmento URL
+        $numero_foto = $data['prducto_id'] = $this->uri->segment(4);
+        //borrado de imagen
+
+        if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $id_propiedad . ' (' . $numero_foto . ').jpg')) {
+            //echo 'imagen existe';
+            if (unlink('/home2/gpautos/gpcasas/web/propiedades_pic/' . $id_propiedad . ' (' . $numero_foto . ').jpg')) {
+                $this->session->set_flashdata('mensaje', 'se borro la imagen');
+                redirect(base_url() . '/admin/revisar_propiedad/' . $id_propiedad);
+            } else {
+                echo 'no se borro';
+            }
+        } else {
+
+            //echo 'la imagen no existe';
+        }
+    }
+    */
+
+
+
 
     //banners
     public function banners()
@@ -420,23 +512,18 @@ class Admin extends Base_Controller
         }
 
     }
-
     public function banners_inactivos()
     {
     }
-
     public function crear_banner()
     {
     }
-
     public function guardar_banner()
     {
     }
-
     public function desactivar_banner()
     {
     }
-
     public function crear_banner_header()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -455,7 +542,6 @@ class Admin extends Base_Controller
 
         echo $this->templates->render('admin/admin_crear_banner_header', $data);
     }
-
     public function guardar_banner_header()
     {
         // print_contenido($_POST);
@@ -496,7 +582,6 @@ class Admin extends Base_Controller
 
 
     }
-
     public function banners_header()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -510,7 +595,6 @@ class Admin extends Base_Controller
         $data['banners'] = $this->Banners_model->banners_header();
         echo $this->templates->render('admin/admin_banners_header', $data);
     }
-
     public function editar_banner_header()
     {
         //id banner
@@ -518,7 +602,6 @@ class Admin extends Base_Controller
         $data['banner_data'] = $this->Banners_model->banner_header_data($data['id_banner']);
         echo $this->templates->render('admin/admin_editar_banner_header', $data);
     }
-
     public function actualizar_banner_header()
     {
         /* echo '<pre>';
@@ -539,7 +622,6 @@ class Admin extends Base_Controller
         $this->Banners_model->actualizar_banners_header($post_data);
         redirect(base_url() . 'admin/banners_header/');
     }
-
     public function actualizar_banner()
     {
         $post_data = array(

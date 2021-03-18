@@ -35,4 +35,24 @@ function id_municipio_a_nombre($id){
     }
     return $nombre_municipio;
 }
+
+function radio_helper($valor, $valor_carro)
+{
+
+    if ($valor == 'si') {
+        if ($valor == $valor_carro) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    if ($valor == 'no') {
+        if ($valor == $valor_carro || $valor_carro == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
 ?>

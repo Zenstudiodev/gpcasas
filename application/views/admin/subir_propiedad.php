@@ -160,10 +160,10 @@ $direccion_propiedad_input = array(
     'class' => ' browser-default form-control',
     'required' => 'required'
 );
-$tamaño_terreno_propiedad_input = array(
+$tamano_terreno_propiedad_input = array(
     'type' => 'number',
-    'name' => 'tamaño_terreno_propiedad',
-    'id' => 'tamaño_terreno_propiedad',
+    'name' => 'tamano_terreno_propiedad',
+    'id' => 'tamano_terreno_propiedad',
     'class' => ' browser-default form-control',
 );
 
@@ -225,7 +225,7 @@ $baño_visita_propiedad_input = array(
 $balcon_propiedad_s = array(
     'name' => 'balcon_propiedad',
     'id' => 'balcon_propiedad_s',
-    'value' => 'sí',
+    'value' => 'si',
     'checked' => false,
     'required' => 'required'
 );
@@ -723,7 +723,7 @@ $comentario_propiedad = array(
             <div class="form-group col-md-4">
                 <label for="departamento">Tamaño del terreno</label>
                 <div class="input-group">
-                    <?php echo form_input($tamaño_terreno_propiedad_input); ?>
+                    <?php echo form_input($tamano_terreno_propiedad_input); ?>
                     <div class="input-group-append">
                         <?php echo form_dropdown($tipo_medida_propiedad_select, $tipo_medida_propiedad_options); ?>
                     </div>

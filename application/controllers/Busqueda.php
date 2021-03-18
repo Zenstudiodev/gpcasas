@@ -24,6 +24,7 @@ class Busqueda extends Base_Controller
         $data['tipo_busqueda'] = $tipo_busqueda;
         $data['departamentos'] = $this->Busqueda_model->get_departamentos();
         $data['header_banners'] = $this->Banners_model->header_banners_activos();
+        $data['tipo_propiedad'] = $this->Busqueda_model->get_tipos_propiedad();
         echo $this->templates->render('public/busqueda', $data);
     }
 

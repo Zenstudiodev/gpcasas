@@ -61,7 +61,9 @@ $mensaje_input = array(
                             </button>
                         </div>
                     <?php } ?>
-                    <form action="<?php echo base_url() ?>home/enviar_correo_contacto" method="post">
+                    <!--<form action="<?php /*echo base_url(); */?>home/enviar_correo_contacto" method="post" id="contacto_gpcasas">-->
+                    <form >
+
                         <div class="form-group col-md-12">
                             <label for="nombre">Nombre</label>
                             <div class="input-group mb-3">
@@ -86,7 +88,8 @@ $mensaje_input = array(
                                 <?php echo form_textarea($mensaje_input); ?>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button class="g-recaptcha btn btn-primary" data-sitekey="6LcOY7oZAAAAANte-P3QnzvXfQ3T3PpJTKrqIwVJ" data-callback='onSubmit' >Enviar</button>
+
                     </form>
                 </div>
             </div>
@@ -94,4 +97,20 @@ $mensaje_input = array(
     </div>
 <?php $this->stop() ?>
 <?php $this->start('js_p') ?>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        function onSubmit(token) {
+
+            var forms = document.getElementById('contacto_gpcasas');
+            //forms.action = action;
+            if(forms.checkValidity()){
+                forms.submit();
+            }
+            else{
+                alert("Por favor llene todos los campos");
+            }
+
+        }
+    </script>
 <?php $this->stop() ?>

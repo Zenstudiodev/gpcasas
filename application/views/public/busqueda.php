@@ -83,19 +83,40 @@ $tipo_propiedad_select = array(
     'class' => 'custom-select',
     'required' => 'required'
 );
-$tipo_carro_select_options = array();
-/*
-foreach ($tipos->result() as $tipo_carro)
+$tipo_propìedad_select_options = array(
+        'TODOS'=>'TODOS',
+);
+
+foreach ($tipo_propiedad->result() as $tipo_propiedad)
 {
-    $tipo_carro_select_options[$tipo_carro->id_tipo_carro] = $tipo_carro->id_tipo_carro;
-}*/
+    $tipo_propìedad_select_options[$tipo_propiedad->tipo_propiedad] = $tipo_propiedad->tipo_propiedad;
+}
 
 //No habitaciones
 
 //No baños
 
-//precio min
+//presupuesto
+$presupuesto = array(
+    'type' => 'number',
+    'name' => 'presupuesto',
+    'id' => 'presupuesto',
+    'value' => '0',
+    'class' => ' browser-default form-control',
 
+);
+
+//moneda
+$moneda_select = array(
+    'name' => 'moneda',
+    'id' => 'moneda',
+    'class' => ' browser-default form-control',
+    'required' => 'required'
+);
+$moneda_select_options = array(
+    'Q' => 'Q',
+    'd' => '$',
+);
 //precio max
 
 //min area
@@ -122,6 +143,37 @@ foreach ($tipos->result() as $tipo_carro)
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
+                    <label for="departamento">Tipo de propiedad</label>
+                    <?php echo form_dropdown($tipo_propiedad_select, $tipo_propìedad_select_options, 'TODOS'); ?>
+                </div>
+
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="municipio">Moneda</label>
+                    <?php echo form_dropdown($moneda_select, $moneda_select_options, 'Q') ?>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="municipio">presupuesto</label>
+                    <?php echo form_input($presupuesto); ?>
+                    <small id="emailHelp" class="form-text text-muted">Tasa de cambio: Q.8.00 = $1</small>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="modo">Modo</label>
+                    <?php echo form_dropdown($modo_select, $modo_select_options, $tipo_busqueda) ?>
+                </div>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
                     <label for="departamento">Departamento</label>
                     <?php echo form_dropdown($departamentos_select, $departamentos_select_options, '7') ?>
                 </div>
@@ -140,10 +192,7 @@ foreach ($tipos->result() as $tipo_carro)
                 </div>
             </div>
             <div class="col-md-2">
-                <div class="form-group">
-                    <label for="modo">Modo</label>
-                    <?php echo form_dropdown($modo_select, $modo_select_options, $tipo_busqueda) ?>
-                </div>
+
             </div>
         </div>
         <div class="row">
@@ -170,11 +219,13 @@ foreach ($tipos->result() as $tipo_carro)
 <?php $this->start('js_p') ?>
 
 <script>
+    var tipo;
     var departamento;
     var municipio;
     var zona;
     var modo;
-    var precio;
+    var presupuesto;
+    var moneda;
     var filtros;
 
 
@@ -219,6 +270,9 @@ foreach ($tipos->result() as $tipo_carro)
 
     //boton de busqueda
     $("#busaqueda_boton").click(function () {
+        tipo = $("#tipo_propiedad_select").val();
+        moneda = $("#moneda").val();
+        presupuesto = $("#presupuesto").val();
         modo = $("#modo").val();
         departamento = $("#departamentos").val();
         municipio = $("#municipios").val();
@@ -227,7 +281,7 @@ foreach ($tipos->result() as $tipo_carro)
         console.log(municipio);
         console.log(zona);
         console.log(modo);
-        filtros = '<?php echo base_url()?>' + 'Propiedades/filtro/' + modo + '/' + departamento + '/' + municipio + '/' + zona;
+        filtros = '<?php echo base_url()?>' + 'Propiedades/filtro/' + tipo + '/' + modo + '/' + moneda + '/' + presupuesto + '/' + departamento + '/' + municipio + '/' + zona;
         window.location.assign(filtros);
     });
 

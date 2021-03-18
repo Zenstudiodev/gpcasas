@@ -45,7 +45,7 @@ $CI =& get_instance();
                                         <?php
                                         $start_banner = 0;
                                         foreach ($imagenes_propiedad->result() as $imagen) { ?>
-                                            <div class="carousel-item <?php if ($start_banner < 1) {
+                                            <div class="carousel-item item_list_r_filtro <?php if ($start_banner < 1) {
                                                 echo 'active';
                                             } ?>">
                                                 <img class="card-img-top"

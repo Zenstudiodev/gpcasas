@@ -19,7 +19,8 @@
   "dependencies": {
     "animate.css": "^3.7.0",
     "event-stream": "^4.0.1",
-    "lightbox2": "^2.10.0"
+    "lightbox2": "^2.10.0",
+    "numeral": "^2.0.6"
   },
   "devDependencies": {
     "ajv": "^6.12.2",

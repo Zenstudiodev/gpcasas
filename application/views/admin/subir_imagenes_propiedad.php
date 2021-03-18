@@ -13,7 +13,6 @@ $this->layout('admin/master',
         'menu' => $menu
     ));
 
-
 if ($propiedad) {
     $propiedad = $propiedad->row();
 }
@@ -113,15 +112,12 @@ if ($propiedad) {
 <!-- page script -->
 <script>
     //variables
-
     // This example uses jQuery so it creates the Dropzone, only when the DOM has
     // loaded.
-
     // Disabling autoDiscover, otherwise Dropzone will try to attach twice.
     Dropzone.autoDiscover = false;
     // or disable for specific dropzone:
     // Dropzone.options.myDropzone = false;
-
     $(function () {
         // Now that the DOM is fully loaded, create the dropzone, and setup the
         // event listeners
@@ -132,7 +128,7 @@ if ($propiedad) {
                 parallelUploads: 1,
                 maxFiles: 15,
                 acceptedFiles: ".jpg,.jpeg",
-                resizeWidth: '800',
+                resizeWidth: '1920',
                 //resizeMimeType: '.jpg',
                 //uploadMultiple: true,
                 //chunking: true,
@@ -162,7 +158,6 @@ if ($propiedad) {
         });
 
         myDropzone.on("queuecomplete", function () {
-
             location.reload();
             /* Maybe display some more file information on your page */
         });
@@ -171,7 +166,6 @@ if ($propiedad) {
 
 
     })
-
 
 </script>
 <?php $this->stop() ?>

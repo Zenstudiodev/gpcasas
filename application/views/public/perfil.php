@@ -114,6 +114,9 @@ $user =$user->row();
                                 </div>
                                     Zona <?php echo $casa->id_zona; ?> | <?php echo id_departamento_a_nombre($casa->id_departamento); ?>
                             </div>
+                            <div class="card-footer">
+                                <a class="btn btn-success" href="<?php echo base_url().'admin/editar_propiedad/'.$casa->Id_propiedad?>">Editar</a>
+                            </div>
                         </div>
                         <?php //print_contenido($casa); ?>
                     </div>

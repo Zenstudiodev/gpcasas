@@ -49,6 +49,8 @@ $this->layout('admin/master',
                     <th>Departamento</th>
                     <th>Municipio</th>
                     <th>Zona</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
                     <th>Fecha creación</th>
                     <th>Acciones</th>
                 </tr>
@@ -61,6 +63,8 @@ $this->layout('admin/master',
                         <td><?php echo id_departamento_a_nombre($propiedad->id_departamento); ?></td>
                         <td><?php echo id_municipio_a_nombre($propiedad->id_municipio); ?></td>
                         <td><?php echo $propiedad->id_zona; ?></td>
+                        <td><?php echo $propiedad->correo_contacto; ?></td>
+                        <td><?php echo $propiedad->telefono; ?></td>
                         <td><?php echo $propiedad->fecha_creacion_propiedad; ?></td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">

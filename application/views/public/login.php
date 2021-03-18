@@ -8,7 +8,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $this->layout('public/public_master', array(
-    'header_banners' => $header_banners
+    'header_banners' => $header_banners,
+    'sin_banner' => $sin_banner,
 ));
 
 //correo
@@ -57,6 +58,7 @@ $clave = array(
             <?php echo form_input($clave); ?>
         </div>
         <button type="submit" class="btn btn-primary">Entrar</button>
+        <a class="btn btn-danger" href="<?php echo base_url()?>user/forgot_password">Olvide mi contraseña</a>
     </form>
     <hr>
     <div class="alert alert-info" role="alert">

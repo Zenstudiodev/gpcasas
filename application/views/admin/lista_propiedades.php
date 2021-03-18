@@ -49,6 +49,8 @@ $this->layout('admin/master',
                         <th>Departamento</th>
                         <th>Municipio</th>
                         <th>Zona</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
                         <th>Fecha creación</th>
                         <th>Acciones</th>
                     </tr>
@@ -61,9 +63,12 @@ $this->layout('admin/master',
                             <td><?php echo id_departamento_a_nombre($propiedad->id_departamento); ?></td>
                             <td><?php echo id_municipio_a_nombre($propiedad->id_municipio); ?></td>
                             <td><?php echo $propiedad->id_zona; ?></td>
+                            <td><?php echo $propiedad->correo_contacto; ?></td>
+                            <td><?php echo $propiedad->telefono; ?></td>
                             <td><?php echo $propiedad->fecha_creacion_propiedad; ?></td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a type="button" class="btn btn-success" href="<?php echo base_url().'admin/editar_propiedad/'.$propiedad->Id_propiedad; ?>">Editar</a>
                                     <a type="button" class="btn btn-primary" href="<?php echo base_url().'admin/revisar_propiedad/'.$propiedad->Id_propiedad; ?>">Revisar</a>
                                     <!--<a type="button" class="btn btn-success" href="<?php echo base_url().'admin/aprobar_propiedad/'.$propiedad->Id_propiedad; ?>">Aprobar</a>-->
                                     <a type="button" class="btn btn-danger" href="<?php echo base_url().'admin/baja_propiedad/'.$propiedad->Id_propiedad; ?>">Baja</a>

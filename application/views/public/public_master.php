@@ -201,7 +201,7 @@ if (!isset($sin_banner)) {
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/90b8541e9b.js"  crossorigin="anonymous" ></script>
-<script src="https://www.google.com/recaptcha/api.js?render=6Le2pcMUAAAAAGezpReJseqnBAijwYanQXpmQoS7" ></script>
+
 
 <?php echo $this->section('js_p') ?>
 
@@ -238,9 +238,6 @@ if (!isset($sin_banner)) {
             navigator.serviceWorker.register('/gpcasas_sw.js');
         });
     }
-
-
-
 
 </script>
 </body>

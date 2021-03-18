@@ -1,13 +1,7 @@
-<?php $this->layout('public/public_master_cliente', [
-    'header_banners' => $header_banners,
-    'predios' => $predios,
-    'tipos' => $tipos,
-    'ubicaciones' => $ubicaciones,
-    'marca' => $marca,
-    'linea' => $linea,
-    'transmisiones' => $transmisiones,
-    'combustibles' => $combustibles,
-]);
+<?php
+$this->layout('public/public_master', array(
+    'header_banners' => $header_banners
+));
 
 
 

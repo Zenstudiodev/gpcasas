@@ -52,4 +52,12 @@ class Busqueda_model extends CI_Model
         if ($query->num_rows() > 0) return $query;
         else return false;
     }
+    public function get_tipos_propiedad(){
+        $this->db->distinct('tipo_propiedad');
+        $this->db->select('tipo_propiedad');
+        $this->db->from('propiedades');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
 }
