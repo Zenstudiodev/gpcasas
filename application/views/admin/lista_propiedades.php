@@ -17,7 +17,7 @@ $this->layout('admin/master',
 <?php $this->stop() ?>
 
 <?php $this->start('page_content') ?>
-    <div class="container">
+    <div class="container-fluid">
         <?php if (isset($message)) { ?>
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <strong><?php echo $message; ?></strong>
@@ -43,6 +43,7 @@ $this->layout('admin/master',
                 <table class="table">
                     <thead>
                     <tr>
+                        <th>Acciones</th>
                         <th>Coódigo propiedad</th>
                         <th>Tipo</th>
                         <th>Estado</th>
@@ -52,11 +53,19 @@ $this->layout('admin/master',
                         <th>Correo</th>
                         <th>Teléfono</th>
                         <th>Fecha creación</th>
-                        <th>Acciones</th>
+
                     </tr>
                     </thead>
                     <?php foreach ($propiedades_pendientes->result() as $propiedad) {?>
                         <tr>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a type="button" class="btn btn-success" href="<?php echo base_url().'admin/editar_propiedad/'.$propiedad->Id_propiedad; ?>">Editar</a>
+                                    <a type="button" class="btn btn-primary" href="<?php echo base_url().'admin/revisar_propiedad/'.$propiedad->Id_propiedad; ?>">Revisar</a>
+                                    <!--<a type="button" class="btn btn-success" href="<?php echo base_url().'admin/aprobar_propiedad/'.$propiedad->Id_propiedad; ?>">Aprobar</a>-->
+                                    <a type="button" class="btn btn-danger" href="<?php echo base_url().'admin/baja_propiedad/'.$propiedad->Id_propiedad; ?>">Baja</a>
+                                </div>
+                            </td>
                             <td><?php echo $propiedad->Id_propiedad; ?></td>
                             <td><?php echo $propiedad->tipo_propiedad; ?></td>
                             <td><?php echo $propiedad->estado_propiedad; ?></td>
@@ -66,14 +75,7 @@ $this->layout('admin/master',
                             <td><?php echo $propiedad->correo_contacto; ?></td>
                             <td><?php echo $propiedad->telefono; ?></td>
                             <td><?php echo $propiedad->fecha_creacion_propiedad; ?></td>
-                            <td>
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a type="button" class="btn btn-success" href="<?php echo base_url().'admin/editar_propiedad/'.$propiedad->Id_propiedad; ?>">Editar</a>
-                                    <a type="button" class="btn btn-primary" href="<?php echo base_url().'admin/revisar_propiedad/'.$propiedad->Id_propiedad; ?>">Revisar</a>
-                                    <!--<a type="button" class="btn btn-success" href="<?php echo base_url().'admin/aprobar_propiedad/'.$propiedad->Id_propiedad; ?>">Aprobar</a>-->
-                                    <a type="button" class="btn btn-danger" href="<?php echo base_url().'admin/baja_propiedad/'.$propiedad->Id_propiedad; ?>">Baja</a>
-                                </div>
-                            </td>
+
                         </tr>
                     <?php }?>
                 </table>

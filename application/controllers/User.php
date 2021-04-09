@@ -176,6 +176,21 @@ class User extends Base_Controller
         echo $this->templates->render('admin/subir_propiedad', $data);
     }
 
+    public function subir_propiedad_t()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/login');
+        }
+        $data['departamentos'] = $this->Busqueda_model->get_departamentos();
+        $data['menu'] = 'no';
+        $propiedad_id = $this->uri->segment(3);
+        $data['propiedad_id'] = $propiedad_id;
+        //datos de la propiedad
+        $data['propiedad'] = $this->Propiedad_model->get_propiedad_by_id($propiedad_id);
+        $data['fotos_propiedad'] = $this->Propiedad_model->get_fotos_de_propiedad_by_id($propiedad_id);
+        echo $this->templates->render('admin/subir_propiedad-n', $data);
+    }
     public function forgot_password()
     {
         $this->data['header_banners'] = $this->Banners_model->header_banners_activos();

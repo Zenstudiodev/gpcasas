@@ -161,10 +161,6 @@ if ($propiedad) {
             location.reload();
             /* Maybe display some more file information on your page */
         });
-
-
-
-
     })
 
 </script>

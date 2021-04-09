@@ -39,9 +39,9 @@ $clave = array(
 <?php $this->start('page_content') ?>
 
 <div class="container">
-    <?php if(isset($message)){?>
+    <?php if (isset($message)) { ?>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong><?php echo $message;?></strong>
+            <strong><?php echo $message; ?></strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -51,70 +51,197 @@ $clave = array(
 
     <div class="row">
         <div class="col">
-            <h3 class="titulo_planes">
-                Anuncio<br>
-                <span class="subtitulo_planes">VIP</span>
-                <ul class="list_planes">
-                    <li>Duración de anuncio <br> <span class="subtitulo_lista_planes">Hasta que se venda</span></li>
-                    <li>Gpcasa realiza la venta</li>
-                    <li>Demostracion Bajo cita</li>
-                    <li>Asesores especializados</li>
-                    <li>Publicdad en redes sociales</li>
-                    <li>Rotulación en propiedad</li>
-                    <li>Mailing masivo</li>
-                    <li>Crédito hipotecario</li>
-                    <li>Comisión del 5.6% sobre venta</li>
-                    <li>Comisión de una renta de alquiler</li>
-                </ul>
+            <h2>Selecciona tu anuncio</h2>
+            <form name="seleccion_anuncio" id="seleccion_anuncio">
 
-            </h3>
-        </div>
-        <div class="col">
-            <h3 class="titulo_planes">
-                Anuncio<br>
-                <span class="subtitulo_planes">Individual</span>
-                <ul class="list_planes">
-                    <li>Duración de anuncio <br> <span class="subtitulo_lista_planes">1 mes</span></li>
-                    <li>Anunciante realiza la venta</li>
-                    <li>Anunciante realiza la demostración</li>
-                    <li>Publicdad en redes sociales <br> <span class="subtitulo_lista_planes">Adicional</span></li>
-                    <li>Mailing masivo</li>
-                    <li>Crédito hipotecario</li>
-                </ul>
-                <ul>
-                    <li>
-                        Recibe descuento en tu anuncio al solicitar mas meses en tu publicación
-                    </li>
-                </ul>
 
-            </h3>
-        </div>
-        <div class="col">
-            <h3 class="titulo_planes">
-                Anuncio<br>
-                <span class="subtitulo_planes">inmobilarias desarolladoras</span>
-                <ul class="list_planes">
-                    <li>Contrato de publicidad <br> <span class="subtitulo_lista_planes">Duración 6 meses minimo</span></li>
-                    <li>Anunciante realiza la venta</li>
-                    <li>Anunciante realiza la demostración</li>
-                    <li>Publicdad en redes sociales <br> <span class="subtitulo_lista_planes">Marca y propiedades</span></li>
-                    <li>Logo de empresa en la web</li>
-                    <li>Crédito hipotecario</li>
-                    <li>15 fotografías por propiedad</li>
-                    <li>Usuarios de administrador de propiedades dentro de gpcasas.net</li>
-                </ul>
-                <ul>
-                    <li>
-                        Recibe descuento en tu anuncio al solicitar mas meses en tu publicación
-                    </li>
-                </ul>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Característica</th>
+                            <th>Individuales</th>
+                            <th>Vip</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>CLIENTES DIRECTOS</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-times"></i></td>
+                        </tr>
+                        <tr>
+                            <td>ASESORES CAPACITADOS PARA VENTA</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>CRÉDITOS HIPOTECARIOS</td>
+                            <td>(COMISION 1.5% SOBRE SOLICITUD)</td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>DURACIÓN</td>
+                            <td>30 DÍAS</td>
+                            <td>HASTA QUE SE VENDA/RENTE</td>
+                        </tr>
+                        <tr>
+                            <td>FOTOS</td>
+                            <td>15</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>PAUTA EN REDES SOCIALES DE GPCASAS</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>PAUTA PAGADA EN REDES SOCIALES</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>MANTA PARA PROPIEDAD</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>COMISIÓN POR VENTA:</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td>5% SOBRE VALOR DE PROPIEDAD</td>
+                        </tr>
+                        <tr>
+                            <td>COMISIÓN POR RENTA</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td>1 RENTA</i></td>
+                        </tr>
+                        <tr class="table-warning">
+                            <td>10. PRIVACIDAD Y PROTECCIÓN A CONTACTO DIRECTO</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>PRECIO</td>
+                            <td>Q.100.00</td>
+                            <td>GRATIS</i></td>
+                        </tr>
+                        <tr>
+                            <td>SELECCIONE OPCIÓN</td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="plan_anuncio"
+                                           id="plan_anuncio_individual" value="individual">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="plan_anuncio"
+                                           id="plan_anuncio_vip"
+                                           value="vip">
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div class="table-responsive extras">
+                    <table class="table table-striped extras">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>EXTRAS</th>
+                            <th>TOTAL</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="150" id="check_manta">
+                                    <label class="form-check-label" for="check_manta">
+                                        MANTA PARA PROPIEDAD
+                                    </label>
+                                </div>
 
-            </h3>
+                            </td>
+                            <td>+ Q.150.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="100" id="check_pauta">
+                                    <label class="form-check-label" for="check_pauta">
+                                        PAUTA PAGADA REDES SOCIALES
+                                    </label>
+                                </div>
+                                </td>
+                            <td>+ Q.100.00</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div class="table-responsive ">
+                    <table class="table table-striped ">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th colspan="2" class="text-center">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Total a pagar:</td>
+                            <td><span id="total_a_pagar"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </form>
         </div>
     </div>
+
 </div>
 
 <?php $this->stop() ?>
 <?php $this->start('js_p') ?>
+<script>
+    var tipo_anuncio;
+    var precio_manta;
+    var precio_pauta_redes;
+    var total_precio ;
+    var precio_individual;
 
+    precio_individual =100;
+    precio_manta =150;
+    precio_pauta_redes = 100;
+    total_precio = 0;
+
+    $("#seleccion_anuncio").change(function () {
+        total_precio = 0;
+        tipo_anuncio = $("input[name='plan_anuncio']:checked").val();
+        console.log(tipo_anuncio);
+        total_precio = total_precio + precio_individual;
+
+        if (tipo_anuncio == 'individual') {
+            $(".extras").show();
+            if($('#check_manta').prop('checked')){
+                total_precio = total_precio + precio_manta;
+            }
+            if($('#check_pauta').prop('checked')){
+                total_precio = total_precio + precio_manta;
+            }
+        }
+        if (tipo_anuncio == 'vip') {
+            total_precio = 0;
+            $(".extras").hide('slow');
+        }
+
+        console.log(total_precio);
+        $("#total_a_pagar").html('Q.'+total_precio);
+
+
+    });
+</script>
 <?php $this->stop() ?>
