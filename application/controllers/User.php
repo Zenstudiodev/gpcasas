@@ -191,6 +191,75 @@ class User extends Base_Controller
         $data['fotos_propiedad'] = $this->Propiedad_model->get_fotos_de_propiedad_by_id($propiedad_id);
         echo $this->templates->render('admin/subir_propiedad-n', $data);
     }
+    public function guardar_propiedad()
+    {
+
+        print_contenido($_POST);
+
+        $datos_propiedad = array(
+            'id_propiedad' => $this->input->post('id_propiedad'),
+            'modo_propiedad' => $this->input->post('modo_propiedad'),
+            'titulo_propiedad' => $this->input->post('titulo_propiedad'),
+            'tipo_vendedor' => $this->input->post('tipo_vendedor'),
+            'telefono' => $this->input->post('telefono'),
+            'telefono_wp' => $this->input->post('telefono_wp'),
+            'telefono2' => $this->input->post('telefono2'),
+            'telefono2_wp' => $this->input->post('telefono2_wp'),
+            'correo_contacto' => $this->input->post('correo_contacto'),
+            'precio' => $this->input->post('precio_propiedad'),
+            'moneda_propiedad' => $this->input->post('moneda_propiedad'),
+            'tipo_propiedad' => $this->input->post('tipo_propiedad'),
+            'id_departamento' => $this->input->post('id_departamento'),
+            'id_municipio' => $this->input->post('id_municipio'),
+            'id_zona' => $this->input->post('id_zona'),
+            'direccion_propiedad' => $this->input->post('direccion_propiedad'),
+            'tamaño_terreno_propiedad' => $this->input->post('tamaño_terreno_propiedad'),
+            'tipo_medida_propiedad' => $this->input->post('tipo_medida_propiedad'),
+            'medida_construccion_propiedad' => $this->input->post('medida_construccion_propiedad'),
+            'medida_oficina_propiedad' => $this->input->post('medida_oficina_propiedad'),
+            'habitaciones_propiedad' => $this->input->post('habitaciones_propiedad'),
+            'baños_completos_propiedad' => $this->input->post('baños_completos_propiedad'),
+            'baño_visita_propiedad' => $this->input->post('baño_visita_propiedad'),
+            'balcon_propiedad' => $this->input->post('balcon_propiedad'),
+            'niveles_porpiedad' => $this->input->post('niveles_porpiedad'),
+            'cocina_propiedad' => $this->input->post('cocina_propiedad'),
+            'desayunador_propiedad' => $this->input->post('desayunador_propiedad'),
+            'lineablanca_propiedad' => $this->input->post('lineablanca_propiedad'),
+            'amueblada_propiedad' => $this->input->post('amueblada_propiedad'),
+            'cuarto_servicio_propiedad' => $this->input->post('cuarto_servicio_propiedad'),
+            'cuarto_seguridad_propiedad' => $this->input->post('cuarto_seguridad_propiedad'),
+            'lavanderia_propiedad' => $this->input->post('lavanderia_propiedad'),
+            'gas_propano_propiedad' => $this->input->post('gas_propano_propiedad'),
+            'calentador_agua_propiedad' => $this->input->post('calentador_agua_propiedad'),
+            'garage_propiedad' => $this->input->post('garage_propiedad'),
+            'parqueo_propiedad' => $this->input->post('parqueo_propiedad'),
+            'parqueo_visitas_propiedad' => $this->input->post('parqueo_visitas_propiedad'),
+            'seguridad_privada_propiedad' => $this->input->post('seguridad_privada_propiedad'),
+            'garita_control_propiedad' => $this->input->post('garita_control_propiedad'),
+            'sala_propiedad' => $this->input->post('sala_propiedad'),
+            'sala_reuniones_propiedad' => $this->input->post('sala_reuniones_propiedad'),
+            'comedor_propiedad' => $this->input->post('comedor_propiedad'),
+            'gradas_propiedad' => $this->input->post('gradas_propiedad'),
+            'bodega_interior_propiedad' => $this->input->post('bodega_interior_propiedad'),
+            'pergola_propiedad' => $this->input->post('pergola_propiedad'),
+            'menaje_propiedad' => $this->input->post('menaje_propiedad'),
+            'nombre_condominio_propiedad' => $this->input->post('nombre_condominio_propiedad'),
+            'sala_famiiar_propiedad' => $this->input->post('sala_famiiar_propiedad'),
+            'sala_juegos_propiedad' => $this->input->post('sala_juegos_propiedad'),
+            'chimenea_propiedad' => $this->input->post('chimenea_propiedad'),
+            'piscina_propiedad' => $this->input->post('piscina_propiedad'),
+            'agua_propiedad' => $this->input->post('agua_propiedad'),
+            'luz_propiedad' => $this->input->post('luz_propiedad'),
+            'cable_internet_propiedad' => $this->input->post('cable_internet_propiedad'),
+            'comentario_propiedad' => $this->input->post('comentario_propiedad')
+        );
+        //actualizar propiedad
+        $this->Propiedad_model->actualizar_propiedad($datos_propiedad);
+        /*if ($propiedad_id) {
+            redirect(base_url() . 'admin/subir_fotos/' . $propiedad_id);
+        }*/
+        //redirect a lista de propiedades
+    }
     public function forgot_password()
     {
         $this->data['header_banners'] = $this->Banners_model->header_banners_activos();
@@ -234,7 +303,7 @@ class User extends Base_Controller
                 }
 
                 $this->session->set_flashdata('message', $this->ion_auth->errors());
-                redirect("cliente/forgot_password", 'refresh');
+                redirect("user/forgot_password", 'refresh');
             }
 
             // run the forgotten password method to email an activation code to the user
@@ -243,21 +312,93 @@ class User extends Base_Controller
             if ($forgotten) {
                 // if there were no errors
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
-                redirect("cliente/login", 'refresh'); //we should display a confirmation page here instead of the login page
+                redirect("user/login", 'refresh'); //we should display a confirmation page here instead of the login page
             } else {
                 $this->session->set_flashdata('message', $this->ion_auth->errors());
-                redirect("cliente/forgot_password", 'refresh');
+                redirect("user/forgot_password", 'refresh');
             }
         }
     }
     public function seleccionar_plan(){
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/login');
+        }
         if ($this->session->flashdata('message')) {
             $data['message'] = $this->session->flashdata('message');
+        }
+        if ($this->session->flashdata('error')) {
+            $data['error'] = $this->session->flashdata('error');
         }
 
         $data['header_banners'] = $this->Banners_model->header_banners_activos();
         $data['sin_banner'] = 1;
         echo $this->templates->render('public/seleccion_plan', $data);
+    }
+    public function forma_pago(){
+
+        if($_POST){
+
+            print_contenido($_POST);
+
+            $datos_de_pago = array(
+                'monto_pago' => $this->input->post('monto_pago'),
+                'direccion_pago' => $this->input->post('direccion_pago'),
+                'fecha_de_pago' => $this->input->post('fecha_de_pago'),
+                'hora_pago' => $this->input->post('hora_pago'),
+                'pauta_fb_pago' =>$this->input->post('pauta_fb_pago'),
+                'manta_pago' => $this->input->post('manta_pago'),
+                'estado_pago' => $this->input->post('estado_pago'),
+            );
+
+            //$this->User_model->guardar_pago($datos_de_pago);
+
+            $data['plan_anuncio'] = $this->input->post('plan_anuncio');
+            $data['monto_pago'] = $this->input->post('monto_pago');
+            $data['pauta_fb_pago'] = $this->input->post('check_pauta');
+            $data['manta_pago'] = $this->input->post('check_manta');
+            $data['sin_banner'] = 1;
+            echo $this->templates->render('public/forma_pago', $data);
+        }else{
+            $this->session->set_flashdata('error', 'Seleccione plan por favor');
+            redirect(base_url().'user/seleccionar_plan');
+        }
+
+    }
+    public function guardar_forma_pago(){
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/login');
+        }
+
+        if($_POST){
+            //print_contenido($_POST);
+
+            $datos_de_pago = array(
+                'plan_anuncio' => $this->input->post('plan_anuncio'),
+                'monto_pago' => $this->input->post('monto_pago'),
+                'direccion_pago' => $this->input->post('direccion_pago'),
+                'fecha_de_pago' => $this->input->post('fecha_de_pago'),
+                'hora_pago' => $this->input->post('hora_de_pago'),
+                'pauta_fb_pago' =>$this->input->post('pauta_fb_pago'),
+                'manta_pago' => $this->input->post('manta_pago'),
+            );
+           // print_contenido($datos_de_pago);
+
+            $this->User_model->guardar_pago($datos_de_pago);
+
+            $datos_casa_draft = array(
+                'plan_propiedad' => $this->input->post('plan_anuncio'),
+                'user_id_propiedad' =>  $this->ion_auth->get_user_id(),
+            );
+            $porpiedad_id = $this->Propiedad_model->asignar_casa_dfraft($datos_casa_draft);
+            redirect(base_url().'user/subir_propiedad_t/'.$porpiedad_id);
+
+        }else{
+            $this->session->set_flashdata('error', 'Seleccione plan por favor');
+            redirect(base_url().'user/seleccionar_plan');
+        }
+
     }
 
 }

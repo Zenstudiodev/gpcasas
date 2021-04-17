@@ -89,7 +89,7 @@ class Propiedad_model extends CI_Model
         $propiedad_id = $data['id_propiedad'];
         $datos_propiedad = array(
             'modo_propiedad' => $data['modo_propiedad'],
-            'user_id_propiedad' => $data['user_id_propiedad'],
+            //'user_id_propiedad' => $data['user_id_propiedad'],
             'titulo_propiedad' => $data['titulo_propiedad'],
             'tipo_vendedor' => $data['tipo_vendedor'],
             'telefono' => $data['telefono'],
@@ -368,6 +368,19 @@ class Propiedad_model extends CI_Model
     {
         $this->db->where('imagen_id', $imagen_id);
         $this->db->delete('imagenes_propiedad');
+    }
+
+    function asignar_casa_dfraft($data){
+        $fecha = New DateTime();
+        $datos_propiedad = array(
+            'plan_propiedad' => $data['plan_propiedad'],
+            'user_id_propiedad' => $data['user_id_propiedad'],
+            'fecha_creacion_propiedad' => $fecha->format('Y-m-d')
+        );
+        $this->db->insert('propiedades', $datos_propiedad);
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
+
     }
 
 

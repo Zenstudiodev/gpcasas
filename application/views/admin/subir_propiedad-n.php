@@ -622,6 +622,7 @@ $comentario_propiedad = array(
     'id' => 'comentario_propiedad',
     'class' => ' browser-default form-control',
     'rows' => ' 4',
+    'value' => $propiedad->comentario_propiedad,
 );
 ?>
 <?php $this->start('css_p') ?>
@@ -660,7 +661,7 @@ $comentario_propiedad = array(
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="identity">Modo propiedad</label>
-                                        <?php echo form_dropdown($modo_propiedad_select, $modo_propiedad_options) ?>
+                                        <?php echo form_dropdown($modo_propiedad_select, $modo_propiedad_options, $propiedad->modo_propiedad) ?>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="identity">Tipo de propiedad</label>
@@ -682,13 +683,32 @@ $comentario_propiedad = array(
                                     </div>
                                 </div>
                                 <div class="form-row">
+
+                                    <div class="form-group col-md-8">
+                                        <label for="direccion_propiedad">Dirección</label>
+                                        <?php echo form_input($direccion_propiedad_input); ?>
+                                    </div>
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="precio">Titulo propiedad</label>
+                                        <?php echo form_input($titulo_propiedad); ?>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="departamento">Tipo de vendedor</label>
+                                        <?php echo form_dropdown($tipo_vendedor_select, $tipo_vendedor_options, $propiedad->tipo_vendedor) ?>
+                                    </div>
+
+                                </div>
+                                <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="precio">Precio</label>
                                         <div class="input-group">
                                             <?php echo form_input($precio_input); ?>
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
-                                                    <?php echo form_dropdown($moneda_propiedad_select, $moneda_propiedad_options) ?>
+                                                    <?php echo form_dropdown($moneda_propiedad_select, $moneda_propiedad_options,  $propiedad->moneda_propiedad) ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -709,26 +729,13 @@ $comentario_propiedad = array(
                                 <button class="btn btn-link btn-block text-left collapsed" type="button"
                                         data-toggle="collapse"
                                         data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Extras
+                                    Datos de contacto
                                 </button>
                             </h2>
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                              data-parent="#accordionExample">
                             <div class="card-body">
-
-
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label for="precio">Titulo propiedad</label>
-                                        <?php echo form_input($titulo_propiedad); ?>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="departamento">Tipo de vendedor</label>
-                                        <?php echo form_dropdown($tipo_vendedor_select, $tipo_vendedor_options) ?>
-                                    </div>
-
-                                </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="identity">Telefono</label>
@@ -773,14 +780,22 @@ $comentario_propiedad = array(
                                     </div>
 
                                 </div>
-                                <div class="form-row">
-
-                                    <div class="form-group col-md-8">
-                                        <label for="direccion_propiedad">Dirección</label>
-                                        <?php echo form_input($direccion_propiedad_input); ?>
-                                    </div>
-
-                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingthree">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                        data-toggle="collapse"
+                                        data-target="#collapsethree" aria-expanded="false" aria-controls="collapsethree">
+                                    Extras
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapsethree" class="collapse" aria-labelledby="headingthree"
+                             data-parent="#accordionExample">
+                            <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="departamento">Tamaño del terreno</label>
@@ -1110,7 +1125,6 @@ $comentario_propiedad = array(
 
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -1219,6 +1233,7 @@ $comentario_propiedad = array(
 
     //live edit
 
+    var id_propiedad = '<?php echo $propiedad->Id_propiedad;?>';
     var modo_propiedad;
     var moneda_propiedad;
     var titulo_propiedad;
@@ -1278,25 +1293,26 @@ $comentario_propiedad = array(
     var cable_internet_propiedad;
     var comentario_propiedad;
     $("#subir_casa_form").change(function () {
-        modo_propiedad =  $("#modo_propiedad option:selected").text();
+        modo_propiedad = $("#modo_propiedad option:selected").text();
         moneda_propiedad = $("#moneda_propiedad option:selected").text();
-        titulo_propiedad= $("#titulo_propiedad").val();
+        titulo_propiedad = $("#titulo_propiedad").val();
         tipo_vendedor = $("#tipo_vendedor option:selected").text();
         correo_contacto = $("#correo_contacto").val();
+        tipo_propiedad = $("#tipo_propiedad option:selected").text();
+        id_departamento = $("#id_departamento option:selected").val();
+        id_municipio = $("#id_municipio option:selected").val();
+        id_zona = $("#id_zona").val();
+        direccion_propiedad =$("#direccion_propiedad").val();
+        precio_propiedad = $("#precio").val();
+        comentario_propiedad = $("#precio").val();
         telefono;
         telefono_wp;
         telefono2;
         telefono2_wp;
         user_id_propiedad;
-        precio_propiedad;
-        tipo_propiedad;
         fecha_creacion_propiedad;
         fecha_aprovacion_propiedad;
         estado_propiedad;
-        id_departamento;
-        id_municipio;
-        id_zona;
-        direccion_propiedad;
         tamaño_terreno_propiedad;
         tipo_medida_propiedad;
         medida_construccion_propiedad;
@@ -1335,70 +1351,78 @@ $comentario_propiedad = array(
         agua_propiedad;
         luz_propiedad;
         cable_internet_propiedad;
-        comentario_propiedad;
 
         form_data = {
+            id_propiedad: id_propiedad,
             modo_propiedad: modo_propiedad,
-            moneda_propiedad:moneda_propiedad,
-            titulo_propiedad:titulo_propiedad,
-            tipo_vendedor:tipo_vendedor,
-            correo_contacto:correo_contacto,
-            telefono:telefono,
-            telefono_wp:telefono_wp,
-            telefono2:telefono2,
-            telefono2_wp:telefono2_wp,
-            user_id_propiedad:user_id_propiedad,
-            precio_propiedad:precio_propiedad,
-            tipo_propiedad:tipo_propiedad,
-            fecha_creacion_propiedad:fecha_creacion_propiedad,
-            fecha_aprovacion_propiedad:fecha_aprovacion_propiedad,
-            estado_propiedad:estado_propiedad,
-            id_departamento:id_departamento,
-            id_municipio:id_municipio,
-            id_zona:id_zona,
-            direccion_propiedad:direccion_propiedad,
-            tamaño_terreno_propiedad:tamaño_terreno_propiedad,
-            tipo_medida_propiedad:tipo_medida_propiedad,
-            medida_construccion_propiedad:medida_construccion_propiedad,
-            medida_oficina_propiedad:medida_oficina_propiedad,
-            habitaciones_propiedad:habitaciones_propiedad,
-            baños_completos_propiedad:baños_completos_propiedad,
-            baño_visita_propiedad:baño_visita_propiedad,
-            balcon_propiedad:balcon_propiedad,
-            niveles_porpiedad:niveles_porpiedad,
-            cocina_propiedad:cocina_propiedad,
-            desayunador_propiedad:desayunador_propiedad,
-            lineablanca_propiedad:lineablanca_propiedad,
-            amueblada_propiedad:amueblada_propiedad,
-            cuarto_servicio_propiedad:cuarto_servicio_propiedad,
-            cuarto_seguridad_propiedad:cuarto_seguridad_propiedad,
-            lavanderia_propiedad:lavanderia_propiedad,
-            gas_propano_propiedad:gas_propano_propiedad,
-            calentador_agua_propiedad:calentador_agua_propiedad,
-            garage_propiedad:garage_propiedad,
-            parqueo_propiedad:parqueo_propiedad,
-            parqueo_visitas_propiedad:parqueo_visitas_propiedad,
-            seguridad_privada_propiedad:seguridad_privada_propiedad,
-            garita_control_propiedad:garita_control_propiedad,
-            sala_propiedad:sala_propiedad,
-            sala_reuniones_propiedad:sala_reuniones_propiedad,
-            comedor_propiedad:comedor_propiedad,
-            gradas_propiedad:gradas_propiedad,
-            bodega_interior_propiedad:bodega_interior_propiedad,
-            pergola_propiedad:pergola_propiedad,
-            menaje_propiedad:menaje_propiedad,
-            nombre_condominio_propiedad:nombre_condominio_propiedad,
-            sala_famiiar_propiedad:sala_famiiar_propiedad,
-            sala_juegos_propiedad:sala_juegos_propiedad,
-            chimenea_propiedad:chimenea_propiedad,
-            piscina_propiedad:piscina_propiedad,
-            agua_propiedad:agua_propiedad,
-            luz_propiedad:luz_propiedad,
-            cable_internet_propiedad:cable_internet_propiedad,
-            comentario_propiedad:comentario_propiedad
+            moneda_propiedad: moneda_propiedad,
+            titulo_propiedad: titulo_propiedad,
+            tipo_vendedor: tipo_vendedor,
+            correo_contacto: correo_contacto,
+            telefono: telefono,
+            telefono_wp: telefono_wp,
+            telefono2: telefono2,
+            telefono2_wp: telefono2_wp,
+            user_id_propiedad: user_id_propiedad,
+            precio_propiedad: precio_propiedad,
+            tipo_propiedad: tipo_propiedad,
+            fecha_creacion_propiedad: fecha_creacion_propiedad,
+            fecha_aprovacion_propiedad: fecha_aprovacion_propiedad,
+            estado_propiedad: estado_propiedad,
+            id_departamento: id_departamento,
+            id_municipio: id_municipio,
+            id_zona: id_zona,
+            direccion_propiedad: direccion_propiedad,
+            tamaño_terreno_propiedad: tamaño_terreno_propiedad,
+            tipo_medida_propiedad: tipo_medida_propiedad,
+            medida_construccion_propiedad: medida_construccion_propiedad,
+            medida_oficina_propiedad: medida_oficina_propiedad,
+            habitaciones_propiedad: habitaciones_propiedad,
+            baños_completos_propiedad: baños_completos_propiedad,
+            baño_visita_propiedad: baño_visita_propiedad,
+            balcon_propiedad: balcon_propiedad,
+            niveles_porpiedad: niveles_porpiedad,
+            cocina_propiedad: cocina_propiedad,
+            desayunador_propiedad: desayunador_propiedad,
+            lineablanca_propiedad: lineablanca_propiedad,
+            amueblada_propiedad: amueblada_propiedad,
+            cuarto_servicio_propiedad: cuarto_servicio_propiedad,
+            cuarto_seguridad_propiedad: cuarto_seguridad_propiedad,
+            lavanderia_propiedad: lavanderia_propiedad,
+            gas_propano_propiedad: gas_propano_propiedad,
+            calentador_agua_propiedad: calentador_agua_propiedad,
+            garage_propiedad: garage_propiedad,
+            parqueo_propiedad: parqueo_propiedad,
+            parqueo_visitas_propiedad: parqueo_visitas_propiedad,
+            seguridad_privada_propiedad: seguridad_privada_propiedad,
+            garita_control_propiedad: garita_control_propiedad,
+            sala_propiedad: sala_propiedad,
+            sala_reuniones_propiedad: sala_reuniones_propiedad,
+            comedor_propiedad: comedor_propiedad,
+            gradas_propiedad: gradas_propiedad,
+            bodega_interior_propiedad: bodega_interior_propiedad,
+            pergola_propiedad: pergola_propiedad,
+            menaje_propiedad: menaje_propiedad,
+            nombre_condominio_propiedad: nombre_condominio_propiedad,
+            sala_famiiar_propiedad: sala_famiiar_propiedad,
+            sala_juegos_propiedad: sala_juegos_propiedad,
+            chimenea_propiedad: chimenea_propiedad,
+            piscina_propiedad: piscina_propiedad,
+            agua_propiedad: agua_propiedad,
+            luz_propiedad: luz_propiedad,
+            cable_internet_propiedad: cable_internet_propiedad,
+            comentario_propiedad: comentario_propiedad
         };
 
         console.log(form_data);
+        $.ajax({
+            method: "POST",
+            url: "<?php echo base_url()?>User/guardar_propiedad",
+            data: form_data
+        })
+            .done(function (msg) {
+                console.log("Data Saved: " + msg);
+            });
     });
 
 

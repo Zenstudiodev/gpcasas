@@ -39,9 +39,9 @@ $clave = array(
 <?php $this->start('page_content') ?>
 
 <div class="container">
-    <?php if (isset($message)) { ?>
+    <?php if (isset($error)) { ?>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong><?php echo $message; ?></strong>
+            <strong><?php echo $error; ?></strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -52,7 +52,7 @@ $clave = array(
     <div class="row">
         <div class="col">
             <h2>Selecciona tu anuncio</h2>
-            <form name="seleccion_anuncio" id="seleccion_anuncio">
+            <form name="seleccion_anuncio" id="seleccion_anuncio" method="post" action="<?php echo base_url().'user/forma_pago';?>">
 
 
                 <div class="table-responsive">
@@ -130,7 +130,7 @@ $clave = array(
                             <td>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="plan_anuncio"
-                                           id="plan_anuncio_individual" value="individual">
+                                           id="plan_anuncio_individual" value="individual" required>
                                 </div>
                             </td>
                             <td>
@@ -157,7 +157,7 @@ $clave = array(
                         <tr>
                             <td>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="150" id="check_manta">
+                                    <input class="form-check-input" type="checkbox" value="150" id="check_manta" name="check_manta">
                                     <label class="form-check-label" for="check_manta">
                                         MANTA PARA PROPIEDAD
                                     </label>
@@ -169,7 +169,7 @@ $clave = array(
                         <tr>
                             <td>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="100" id="check_pauta">
+                                    <input class="form-check-input" type="checkbox" value="100" id="check_pauta" name="check_pauta">
                                     <label class="form-check-label" for="check_pauta">
                                         PAUTA PAGADA REDES SOCIALES
                                     </label>
@@ -198,6 +198,9 @@ $clave = array(
                     </table>
                 </div>
 
+                <input type="hidden" name="monto_pago" id="monto_pago">
+                <button type="submit" class="btn btn-primary">Pago</button>
+
             </form>
         </div>
     </div>
@@ -207,6 +210,8 @@ $clave = array(
 <?php $this->stop() ?>
 <?php $this->start('js_p') ?>
 <script>
+    document.forms[0].reset();
+
     var tipo_anuncio;
     var precio_manta;
     var precio_pauta_redes;
@@ -240,6 +245,7 @@ $clave = array(
 
         console.log(total_precio);
         $("#total_a_pagar").html('Q.'+total_precio);
+        $("#monto_pago").val(total_precio);
 
 
     });
