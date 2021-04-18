@@ -76,14 +76,14 @@ $telefono_wp_s = array(
     'name' => 'telefono_wp',
     'id' => 'telefono_wp_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->telefono_wp),
     'required' => 'required'
 );
 $telefono_wp_n = array(
     'name' => 'telefono_wp',
     'id' => 'telefono_wp_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->telefono_wp),
 );
 $telefono2_input = array(
     'type' => 'text',
@@ -170,18 +170,13 @@ $zonas_input = array(
     'value' => $propiedad->id_zona,
     'required' => 'required'
 );
-$tamaño_terreno_propiedad_input = array(
-    'type' => 'number',
-    'name' => 'tamaño_terreno_propiedad',
-    'id' => 'tamaño_terreno_propiedad',
-    'value' => $propiedad->tamaño_terreno_propiedad,
-    'class' => ' browser-default form-control',
-);
+
 $tamano_terreno_propiedad_input = array(
     'type' => 'number',
     'name' => 'tamano_terreno_propiedad',
     'id' => 'tamano_terreno_propiedad',
     'class' => ' browser-default form-control',
+    'value' => $propiedad->tamano_terreno_propiedad,
 );
 
 $tipo_medida_propiedad_select = array(
@@ -395,13 +390,13 @@ $parqueo_propiedad_s = array(
     'name' => 'parqueo_propiedad',
     'id' => 'parqueo_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->parqueo_propiedad),
 );
 $parqueo_propiedad_n = array(
     'name' => 'parqueo_propiedad',
     'id' => 'parqueo_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->parqueo_propiedad),
 );
 $parqueo_visitas_propiedad_select = array(
     'name' => 'parqueo_visitas_propiedad',
@@ -422,61 +417,61 @@ $seguridad_privada_propiedad_s = array(
     'name' => 'seguridad_privada_propiedad',
     'id' => 'seguridad_privada_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->seguridad_privada_propiedad),
 );
 $seguridad_privada_propiedad_n = array(
     'name' => 'seguridad_privada_propiedad',
     'id' => 'seguridad_privada_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->seguridad_privada_propiedad),
 );
 $garita_control_propiedad_s = array(
     'name' => 'garita_control_propiedad',
     'id' => 'garita_control_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->garita_control_propiedad),
 );
 $garita_control_propiedad_n = array(
     'name' => 'garita_control_propiedad',
     'id' => 'garita_control_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->garita_control_propiedad),
 );
 $sala_propiedad_s = array(
     'name' => 'sala_propiedad',
     'id' => 'sala_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->sala_propiedad),
 );
 $sala_propiedad_n = array(
     'name' => 'sala_propiedad',
     'id' => 'sala_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->sala_propiedad),
 );
 $sala_reuniones_propiedad_s = array(
     'name' => 'sala_reuniones_propiedad',
     'id' => 'sala_reuniones_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->sala_reuniones_propiedad),
 );
 $sala_reuniones_propiedad_n = array(
     'name' => 'sala_reuniones_propiedad',
     'id' => 'sala_reuniones_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->sala_reuniones_propiedad),
 );
 $comedor_propiedad_s = array(
     'name' => 'comedor_propiedad',
     'id' => 'comedor_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->comedor_propiedad),
 );
 $comedor_propiedad_n = array(
     'name' => 'comedor_propiedad',
     'id' => 'comedor_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->comedor_propiedad),
 );
 
 $gradas_propiedad_select = array(
@@ -496,25 +491,25 @@ $bodega_interior_propiedad_s = array(
     'name' => 'bodega_interior_propiedad',
     'id' => 'bodega_interior_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->bodega_interior_propiedad),
 );
 $bodega_interior_propiedad_n = array(
     'name' => 'bodega_interior_propiedad',
     'id' => 'bodega_interior_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->bodega_interior_propiedad),
 );
 $pergola_propiedad_s = array(
     'name' => 'pergola_propiedad',
     'id' => 'pergola_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->pergola_propiedad),
 );
 $pergola_propiedad_n = array(
     'name' => 'pergola_propiedad',
     'id' => 'pergola_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->pergola_propiedad),
 );
 
 $menaje_propiedad_select = array(
@@ -532,90 +527,91 @@ $nombre_condominio_propiedad_input = array(
     'name' => 'nombre_condominio_propiedad',
     'id' => 'nombre_condominio_propiedad',
     'class' => ' browser-default form-control',
+    'value' => $propiedad->nombre_condominio_propiedad,
 );
 $sala_famiiar_propiedad_s = array(
     'name' => 'sala_famiiar_propiedad',
     'id' => 'sala_famiiar_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->sala_famiiar_propiedad),
 );
 $sala_famiiar_propiedad_n = array(
     'name' => 'sala_famiiar_propiedad',
     'id' => 'sala_famiiar_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->sala_famiiar_propiedad),
 );
 $sala_juegos_propiedad_s = array(
     'name' => 'sala_juegos_propiedad',
     'id' => 'sala_juegos_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->sala_juegos_propiedad),
 );
 $sala_juegos_propiedad_n = array(
     'name' => 'sala_juegos_propiedad',
     'id' => 'sala_juegos_propiedad_n',
-    'value' => 'si',
-    'checked' => false,
+    'value' => 'no',
+    'checked' => radio_helper('no', $propiedad->sala_juegos_propiedad),
 );
 $chimenea_propiedad_s = array(
     'name' => 'chimenea_propiedad',
     'id' => 'chimenea_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->chimenea_propiedad),
 );
 $chimenea_propiedad_n = array(
     'name' => 'chimenea_propiedad',
     'id' => 'chimenea_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->chimenea_propiedad),
 );
 $piscina_propiedad_s = array(
     'name' => 'piscina_propiedad',
     'id' => 'piscina_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->piscina_propiedad),
 );
 $piscina_propiedad_n = array(
     'name' => 'piscina_propiedad',
     'id' => 'piscina_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->piscina_propiedad),
 );
 $agua_propiedad_s = array(
     'name' => 'agua_propiedad',
     'id' => 'agua_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->agua_propiedad),
 );
 $agua_propiedad_n = array(
     'name' => 'agua_propiedad',
     'id' => 'agua_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->agua_propiedad),
 );
 $luz_propiedad_s = array(
     'name' => 'luz_propiedad',
     'id' => 'luz_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->luz_propiedad),
 );
 $luz_propiedad_n = array(
     'name' => 'luz_propiedad',
     'id' => 'luz_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->luz_propiedad),
 );
 $cable_internet_propiedad_s = array(
     'name' => 'cable_internet_propiedad',
     'id' => 'cable_internet_propiedad_s',
     'value' => 'si',
-    'checked' => false,
+    'checked' => radio_helper('si', $propiedad->cable_internet_propiedad),
 );
 $cable_internet_propiedad_n = array(
     'name' => 'cable_internet_propiedad',
     'id' => 'cable_internet_propiedad_n',
     'value' => 'no',
-    'checked' => false,
+    'checked' => radio_helper('no', $propiedad->cable_internet_propiedad),
 );
 $comentario_propiedad = array(
     'name' => 'comentario_propiedad',
@@ -802,7 +798,7 @@ $comentario_propiedad = array(
                                         <div class="input-group">
                                             <?php echo form_input($tamano_terreno_propiedad_input); ?>
                                             <div class="input-group-append">
-                                                <?php echo form_dropdown($tipo_medida_propiedad_select, $tipo_medida_propiedad_options); ?>
+                                                <?php echo form_dropdown($tipo_medida_propiedad_select, $tipo_medida_propiedad_options, $propiedad->tipo_medida_propiedad); ?>
                                             </div>
                                         </div>
 
@@ -950,7 +946,7 @@ $comentario_propiedad = array(
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="garage_propiedad">Garage</label>
-                                        <?php echo form_dropdown($garage_propiedad_select, $garage_propiedad_options) ?>
+                                        <?php echo form_dropdown($garage_propiedad_select, $garage_propiedad_options, $propiedad->garage_propiedad ) ?>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -965,7 +961,7 @@ $comentario_propiedad = array(
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="parqueo_visitas_propiedad">Parqueo visitas</label>
-                                        <?php echo form_dropdown($parqueo_visitas_propiedad_select, $parqueo_visitas_propiedad_options) ?>
+                                        <?php echo form_dropdown($parqueo_visitas_propiedad_select, $parqueo_visitas_propiedad_options,$propiedad->parqueo_visitas_propiedad ); ?>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="seguridad_privada_propiedad">Seguridad Privada</label>
@@ -1020,7 +1016,7 @@ $comentario_propiedad = array(
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="gradas_propiedad">Gradas</label>
-                                        <?php echo form_dropdown($gradas_propiedad_select, $gradas_propiedad_options) ?>
+                                        <?php echo form_dropdown($gradas_propiedad_select, $gradas_propiedad_options, $propiedad->gradas_propiedad) ?>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="bodega_interior_propiedad">Bodega interior</label>
@@ -1044,7 +1040,7 @@ $comentario_propiedad = array(
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="menaje_propiedad">Menaje</label>
-                                        <?php echo form_dropdown($menaje_propiedad_select, $menaje_propiedad_options) ?>
+                                        <?php echo form_dropdown($menaje_propiedad_select, $menaje_propiedad_options, $propiedad->menaje_propiedad) ?>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="nombre_condominio_propiedad">Nombre Condominio</label>
@@ -1130,7 +1126,7 @@ $comentario_propiedad = array(
                     </div>
                 </div>
                 <hr>
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a class="btn btn-success" href="<?php echo base_url()?>user/perfil">Terminar</a>
             </form>
 
         </div>
@@ -1213,11 +1209,7 @@ $comentario_propiedad = array(
                     </div>
                 <?php } ?>
 
-                <hr>
-                <div class="row">
-                    <a class=" btn btn-success"
-                       href="<?php echo base_url() . 'admin/' ?>">Publicar anuncio</a>
-                </div>
+
             </div>
         </div>
     </div>
@@ -1292,6 +1284,9 @@ $comentario_propiedad = array(
     var luz_propiedad;
     var cable_internet_propiedad;
     var comentario_propiedad;
+
+    //$("input[name='cerradura_c']:checked").val();
+
     $("#subir_casa_form").change(function () {
         modo_propiedad = $("#modo_propiedad option:selected").text();
         moneda_propiedad = $("#moneda_propiedad option:selected").text();
@@ -1305,52 +1300,48 @@ $comentario_propiedad = array(
         direccion_propiedad =$("#direccion_propiedad").val();
         precio_propiedad = $("#precio").val();
         comentario_propiedad = $("#precio").val();
-        telefono;
-        telefono_wp;
-        telefono2;
-        telefono2_wp;
-        user_id_propiedad;
-        fecha_creacion_propiedad;
-        fecha_aprovacion_propiedad;
-        estado_propiedad;
-        tamaño_terreno_propiedad;
-        tipo_medida_propiedad;
-        medida_construccion_propiedad;
-        medida_oficina_propiedad;
-        habitaciones_propiedad;
-        baños_completos_propiedad;
-        baño_visita_propiedad;
-        balcon_propiedad;
-        niveles_porpiedad;
-        cocina_propiedad;
-        desayunador_propiedad;
-        lineablanca_propiedad;
-        amueblada_propiedad;
-        cuarto_servicio_propiedad;
-        cuarto_seguridad_propiedad;
-        lavanderia_propiedad;
-        gas_propano_propiedad;
-        calentador_agua_propiedad;
-        garage_propiedad;
-        parqueo_propiedad;
-        parqueo_visitas_propiedad;
-        seguridad_privada_propiedad;
-        garita_control_propiedad;
-        sala_propiedad;
-        sala_reuniones_propiedad;
-        comedor_propiedad;
-        gradas_propiedad;
-        bodega_interior_propiedad;
-        pergola_propiedad;
-        menaje_propiedad;
-        nombre_condominio_propiedad;
-        sala_famiiar_propiedad;
-        sala_juegos_propiedad;
-        chimenea_propiedad;
-        piscina_propiedad;
-        agua_propiedad;
-        luz_propiedad;
-        cable_internet_propiedad;
+        telefono = $("#telefono").val();
+        telefono_wp  = $("input[name='telefono_wp']:checked").val();
+        telefono2 = $("#telefono2").val();
+        telefono2_wp = $("input[name='telefono2_wp']:checked").val();
+        tamaño_terreno_propiedad = $("#tamano_terreno_propiedad").val();
+        tipo_medida_propiedad = $("#tipo_medida_propiedad option:selected").val();
+        medida_construccion_propiedad   = $("#medida_construccion_propiedad").val();
+        medida_oficina_propiedad = $("#medida_oficina_propiedad").val();
+        habitaciones_propiedad = $("#habitaciones_propiedad").val();
+        baños_completos_propiedad = $("#baños_completos_propiedad").val();
+        baño_visita_propiedad = $("#baño_visita_propiedad").val();
+        balcon_propiedad = $("input[name='balcon_propiedad']:checked").val();
+        niveles_porpiedad = $("#niveles_porpiedad").val();
+        cocina_propiedad = $("input[name='cocina_propiedad']:checked").val();
+        desayunador_propiedad = $("input[name='desayunador_propiedad']:checked").val();
+        lineablanca_propiedad = $("input[name='lineablanca_propiedad']:checked").val();
+        amueblada_propiedad = $("input[name='amueblada_propiedad']:checked").val();
+        cuarto_servicio_propiedad = $("input[name='cuarto_servicio_propiedad']:checked").val();
+        cuarto_seguridad_propiedad = $("input[name='cuarto_seguridad_propiedad']:checked").val();
+        lavanderia_propiedad = $("input[name='lavanderia_propiedad']:checked").val();
+        gas_propano_propiedad = $("input[name='gas_propano_propiedad']:checked").val();
+        calentador_agua_propiedad = $("input[name='desayunador_propiedad']:checked").val();
+        garage_propiedad = $("#garage_propiedad option:selected").text();
+        parqueo_propiedad =  $("input[name='parqueo_propiedad']:checked").val();
+        parqueo_visitas_propiedad =$("#parqueo_visitas_propiedad option:selected").text();
+        seguridad_privada_propiedad = $("input[name='seguridad_privada_propiedad']:checked").val();
+        garita_control_propiedad = $("input[name='garita_control_propiedad']:checked").val();
+        sala_propiedad = $("input[name='sala_propiedad']:checked").val();
+        sala_reuniones_propiedad = $("input[name='sala_reuniones_propiedad']:checked").val();
+        comedor_propiedad = $("input[name='comedor_propiedad']:checked").val();
+        gradas_propiedad =$("#gradas_propiedad option:selected").text();
+        bodega_interior_propiedad = $("input[name='garita_control_propiedad']:checked").val();
+        pergola_propiedad = $("input[name='garita_control_propiedad']:checked").val();
+        menaje_propiedad=$("#menaje_propiedad option:selected").text();
+        nombre_condominio_propiedad = $("#nombre_condominio_propiedad").val();
+        sala_famiiar_propiedad = $("input[name='sala_famiiar_propiedad']:checked").val();
+        sala_juegos_propiedad = $("input[name='sala_juegos_propiedad']:checked").val();
+        chimenea_propiedad = $("input[name='chimenea_propiedad']:checked").val();
+        piscina_propiedad = $("input[name='piscina_propiedad']:checked").val();
+        agua_propiedad = $("input[name='agua_propiedad']:checked").val();
+        luz_propiedad = $("input[name='luz_propiedad']:checked").val();
+        cable_internet_propiedad = $("input[name='cable_internet_propiedad']:checked").val();
 
         form_data = {
             id_propiedad: id_propiedad,
@@ -1373,7 +1364,7 @@ $comentario_propiedad = array(
             id_municipio: id_municipio,
             id_zona: id_zona,
             direccion_propiedad: direccion_propiedad,
-            tamaño_terreno_propiedad: tamaño_terreno_propiedad,
+            tamano_terreno_propiedad: tamaño_terreno_propiedad,
             tipo_medida_propiedad: tipo_medida_propiedad,
             medida_construccion_propiedad: medida_construccion_propiedad,
             medida_oficina_propiedad: medida_oficina_propiedad,

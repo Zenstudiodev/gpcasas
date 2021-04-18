@@ -105,7 +105,7 @@ class Propiedad_model extends CI_Model
             'id_municipio' => $data['id_municipio'],
             'id_zona' => $data['id_zona'],
             'direccion_propiedad' => $data['direccion_propiedad'],
-            'tamaño_terreno_propiedad' => $data['tamaño_terreno_propiedad'],
+            'tamano_terreno_propiedad' => $data['tamano_terreno_propiedad'],
             'tipo_medida_propiedad' => $data['tipo_medida_propiedad'],
             'medida_construccion_propiedad' => $data['medida_construccion_propiedad'],
             'medida_oficina_propiedad' => $data['medida_oficina_propiedad'],
@@ -145,7 +145,7 @@ class Propiedad_model extends CI_Model
             'cable_internet_propiedad' => $data['cable_internet_propiedad'],
             'comentario_propiedad' => $data['comentario_propiedad']
         );
-
+        //print_contenido($datos_propiedad);
         $this->db->where('Id_propiedad', $propiedad_id);
         $query = $this->db->update('propiedades', $datos_propiedad);
 

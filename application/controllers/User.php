@@ -213,7 +213,7 @@ class User extends Base_Controller
             'id_municipio' => $this->input->post('id_municipio'),
             'id_zona' => $this->input->post('id_zona'),
             'direccion_propiedad' => $this->input->post('direccion_propiedad'),
-            'tamaño_terreno_propiedad' => $this->input->post('tamaño_terreno_propiedad'),
+            'tamano_terreno_propiedad' => $this->input->post('tamano_terreno_propiedad'),
             'tipo_medida_propiedad' => $this->input->post('tipo_medida_propiedad'),
             'medida_construccion_propiedad' => $this->input->post('medida_construccion_propiedad'),
             'medida_oficina_propiedad' => $this->input->post('medida_oficina_propiedad'),
@@ -339,26 +339,44 @@ class User extends Base_Controller
 
         if($_POST){
 
-            print_contenido($_POST);
+           // print_contenido($_POST);
 
-            $datos_de_pago = array(
-                'monto_pago' => $this->input->post('monto_pago'),
-                'direccion_pago' => $this->input->post('direccion_pago'),
-                'fecha_de_pago' => $this->input->post('fecha_de_pago'),
-                'hora_pago' => $this->input->post('hora_pago'),
-                'pauta_fb_pago' =>$this->input->post('pauta_fb_pago'),
-                'manta_pago' => $this->input->post('manta_pago'),
-                'estado_pago' => $this->input->post('estado_pago'),
-            );
+            $plan = $this->input->post('plan_anuncio');
+            if($plan =='vip'){
+                $datos_de_pago = array(
+                    'plan_anuncio' => $plan,
+                    'monto_pago' => '0',
+                    'direccion_pago' => '-',
+                    'fecha_de_pago' => '-',
+                    'hora_pago' => '-',
+                    'pauta_fb_pago' =>'-',
+                    'manta_pago' => '-',
+                );
+                // print_contenido($datos_de_pago);
 
-            //$this->User_model->guardar_pago($datos_de_pago);
+                $this->User_model->guardar_pago($datos_de_pago);
 
-            $data['plan_anuncio'] = $this->input->post('plan_anuncio');
-            $data['monto_pago'] = $this->input->post('monto_pago');
-            $data['pauta_fb_pago'] = $this->input->post('check_pauta');
-            $data['manta_pago'] = $this->input->post('check_manta');
-            $data['sin_banner'] = 1;
-            echo $this->templates->render('public/forma_pago', $data);
+                $datos_casa_draft = array(
+                    'plan_propiedad' => $plan,
+                    'user_id_propiedad' =>  $this->ion_auth->get_user_id(),
+                );
+                $porpiedad_id = $this->Propiedad_model->asignar_casa_dfraft($datos_casa_draft);
+                redirect(base_url().'user/subir_propiedad_t/'.$porpiedad_id);
+            }
+            if($plan =='individual'){
+                $data['plan_anuncio'] = $plan;
+                $data['monto_pago'] = $this->input->post('monto_pago');
+                $data['pauta_fb_pago'] = $this->input->post('check_pauta');
+                $data['manta_pago'] = $this->input->post('check_manta');
+                $data['sin_banner'] = 1;
+                echo $this->templates->render('public/forma_pago', $data);
+            }
+
+
+
+
+
+
         }else{
             $this->session->set_flashdata('error', 'Seleccione plan por favor');
             redirect(base_url().'user/seleccionar_plan');

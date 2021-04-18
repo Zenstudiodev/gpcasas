@@ -97,7 +97,7 @@ if (!isset($sin_banner)) {
             <div class="row">
                 <div class="col-md-3">
                     <ul id="top_menu">
-                        <li><a href="<?php echo base_url() ?>user/subir_propiedad">Anuncia tu propiedad</a></li>
+                        <li><a href="<?php echo base_url() ?>/user/seleccionar_plan">Anuncia tu propiedad</a></li>
                         <li><a>Anuncia tu accesorio</a></li>
                         <li><a>Reglamento</a></li>
                         <li><a href="<?php echo base_url() ?>home/contacto">Contactanos</a></li>
