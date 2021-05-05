@@ -23,6 +23,8 @@ class User_model extends CI_Model
     function guardar_pago($data){
         $hoy = new DateTime();
         $datos_de_pago = array(
+            'user_id' => $data['user_id'],
+            'propiedad_id' => $data['propiedad_id'],
             'tipo_anuncio_pago' => $data['plan_anuncio'],
             'monto_pago' => $data['monto_pago'],
             'fecha_pago' => $hoy->format('Y-m-d'),

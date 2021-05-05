@@ -170,17 +170,17 @@ if (!isset($sin_banner)) {
             <div class="col-6 col-md-5">
                 <ul class="footer_list">
                     <li><a>Quienes somos</a></li>
-                    <li><a>Creditos Bancarios</a></li>
-                    <li><a>Serguro para vivianda</a></li>
-                    <li><a>Anunciate</a></li>
+                    <li><a  href="<?php echo base_url() ?>home/credito">Creditos Bancarios</a></li>
+                    <li><a>Serguro para vivienda</a></li>
+                    <li><a  href="<?php echo base_url() ?>user/seleccionar_plan">Anunciate</a></li>
                     <li><a href="<?php echo base_url() ?>home/contacto">Contactenos</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md-3">
                 <ul class="footer_list">
-                    <li><i class="fab fa-facebook-square"></i> gpcasas_net</li>
-                    <li><i class="fab fa-instagram"></i> gpcasas_net</li>
-                    <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/50234045515">3404-5515 </a></li>
+                    <li><a href="https://www.facebook.com/gpcasas.net" target="_blank"><i class="fab fa-facebook-square"></i> gpcasas_net</a> </li>
+                    <li><a href="https://www.instagram.com/gpcasas_net/" target="_blank"><i class="fab fa-instagram"></i> gpcasas_net</a> </li>
+                    <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/50256496977">5649-6977 </a></li>
                     <li><i class="fa fa-phone-square"></i> <a href="tel:+50222945656">2294-5656 </a></li>
                     <li><i class="fas fa-envelope"></i> info@gpcasas.net</li>
                 </ul>

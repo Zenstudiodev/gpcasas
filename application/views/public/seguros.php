@@ -52,7 +52,7 @@ $precio_propiedad_input = array(
     <div id="contacto_form">
         <div class="container">
             <div class="row justify-content-md-center">
-                <h2>Solicitar crédito para propiedad</h2>
+                <h2>Solicitar seguro para propiedad</h2>
                 <div class="col-md-8">
                     <?php if (isset($mensaje)) { ?>
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -62,7 +62,7 @@ $precio_propiedad_input = array(
                             </button>
                         </div>
                     <?php } ?>
-                    <form action="<?php echo base_url() ?>home/enviar_correo_credito" method="post">
+                    <form action="<?php echo base_url() ?>home/enviar_correo_seguros" method="post">
                         <div class="form-group col-md-12">
                             <label for="nombre">Nombre</label>
                             <div class="input-group mb-3">

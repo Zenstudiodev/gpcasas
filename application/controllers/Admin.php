@@ -355,6 +355,7 @@ class Admin extends Base_Controller
 
         }
         $propiedad_id = $this->uri->segment(3);
+        $data['asesores'] = $this->ion_auth->users()->result();
         $data['propiedad'] = $this->Propiedad_model->get_propiedad_by_id($propiedad_id);
         $data['fotos_propiedad'] = $this->Propiedad_model->get_fotos_de_propiedad_by_id($propiedad_id);
         echo $this->templates->render('admin/revisar_propiedad', $data);
@@ -473,6 +474,16 @@ class Admin extends Base_Controller
         }
 
     }
+    public function asignar_asesor_propiedad(){
+        print_contenido($_POST);
+
+        $datos_propiedad = array(
+            'id_asesor' => $this->input->post('id_asesor'),
+            'id_propiedad' => $this->input->post('id_propiedad'),
+        );
+        //actualizar propiedad
+        $this->Propiedad_model->asignar_asesor($datos_propiedad);
+    }
     /*public function borrar_imagen()
     {
         //Id de imagen desde segmento URL
@@ -495,9 +506,6 @@ class Admin extends Base_Controller
         }
     }
     */
-
-
-
 
     //banners
     public function banners()

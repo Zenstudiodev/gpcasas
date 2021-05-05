@@ -56,7 +56,7 @@ $clave = array(
 
 
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped ">
                         <thead class="thead-dark">
                         <tr>
                             <th>Característica</th>
@@ -67,63 +67,63 @@ $clave = array(
                         <tbody>
                         <tr>
                             <td>CLIENTES DIRECTOS</td>
-                            <td><i class="fas fa-check"></i></td>
-                            <td><i class="fas fa-times"></i></td>
+                            <td class="text-center"><i class="fas fa-check"></i></td>
+                            <td class="text-center"><i class="fas fa-times"></i></td>
                         </tr>
                         <tr>
                             <td>ASESORES CAPACITADOS PARA VENTA</td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td><i class="fas fa-check"></i></td>
+                            <td class="text-center"><i class="fas fa-times"></i></td>
+                            <td class="text-center"><i class="fas fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>CRÉDITOS HIPOTECARIOS</td>
-                            <td>(COMISION 1.5% SOBRE SOLICITUD)</td>
-                            <td><i class="fas fa-check"></i></td>
+                            <td class="text-center">(COMISION 1.5% SOBRE SOLICITUD)</td>
+                            <td class="text-center"><i class="fas fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>DURACIÓN</td>
-                            <td>30 DÍAS</td>
-                            <td>HASTA QUE SE VENDA/RENTE</td>
+                            <td class="text-center">30 DÍAS</td>
+                            <td class="text-center">HASTA QUE SE VENDA/RENTE</td>
                         </tr>
                         <tr>
                             <td>FOTOS</td>
-                            <td>15</td>
-                            <td>15</td>
+                            <td class="text-center">15</td>
+                            <td class="text-center">15</td>
                         </tr>
                         <tr>
                             <td>PAUTA EN REDES SOCIALES DE GPCASAS</td>
-                            <td><i class="fas fa-check"></i></td>
-                            <td><i class="fas fa-check"></i></td>
+                            <td class="text-center"><i class="fas fa-check"></i></td>
+                            <td class="text-center"><i class="fas fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>PAUTA PAGADA EN REDES SOCIALES</td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td><i class="fas fa-check"></i></td>
+                            <td class="text-center"><i class="fas fa-times"></i></td>
+                            <td class="text-center"><i class="fas fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>MANTA PARA PROPIEDAD</td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td><i class="fas fa-check"></i></td>
+                            <td class="text-center"><i class="fas fa-times"></i></td>
+                            <td class="text-center"><i class="fas fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>COMISIÓN POR VENTA:</td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td>5% SOBRE VALOR DE PROPIEDAD</td>
+                            <td class="text-center"><i class="fas fa-times"></i></td>
+                            <td class="text-center">5% SOBRE VALOR DE PROPIEDAD</td>
                         </tr>
                         <tr>
                             <td>COMISIÓN POR RENTA</td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td>1 RENTA</i></td>
+                            <td class="text-center"><i class="fas fa-times"></i></td>
+                            <td class="text-center">1 RENTA</i></td>
                         </tr>
                         <tr class="table-warning">
                             <td>10. PRIVACIDAD Y PROTECCIÓN A CONTACTO DIRECTO</td>
-                            <td><i class="fas fa-times"></i></td>
-                            <td><i class="fas fa-check"></i></td>
+                            <td class="text-center"><i class="fas fa-times"></i></td>
+                            <td class="text-center"><i class="fas fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>PRECIO</td>
-                            <td>Q.100.00</td>
-                            <td>GRATIS</i></td>
+                            <td class="text-center">Q.100.00</td>
+                            <td class="text-center">GRATIS</i></td>
                         </tr>
                         <tr>
                             <td>SELECCIONE OPCIÓN</td>
@@ -146,7 +146,7 @@ $clave = array(
                 </div>
                 <hr>
                 <div class="table-responsive extras">
-                    <table class="table table-striped extras">
+                    <table class="table table-striped extras ">
                         <thead class="thead-light">
                         <tr>
                             <th>EXTRAS</th>

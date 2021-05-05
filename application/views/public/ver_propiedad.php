@@ -32,8 +32,10 @@ if ($propiedad) {
                     , <?php echo id_municipio_a_nombre($propiedad->id_municipio); ?>
                     , <?php echo id_departamento_a_nombre($propiedad->id_departamento); ?> </p>
                 <p>
+                    <?php if(isset($propiedad->tamaño_terreno_propiedad)){ ?>
                     <i class="fas fa-ruler-combined"></i> <span
                             class="badge badge-success"><?php echo $propiedad->tamaño_terreno_propiedad; ?> </span><?php echo $propiedad->tipo_medida_propiedad; ?>
+                    <?php } ?>
                     <i class="fas fa-bed"></i> Cuartos <span
                             class="badge badge-success"><?php echo $propiedad->habitaciones_propiedad; ?></span>
                     <i class="fas fa-parking"></i> Parqueo <span

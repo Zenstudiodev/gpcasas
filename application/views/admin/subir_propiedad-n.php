@@ -64,6 +64,16 @@ $moneda_propiedad_options = array(
     'Q' => 'Q',
     '$' => '$',
 );
+
+$nombre_contacto_propiedad = array(
+    'type' => 'text',
+    'name' => 'nombre_contacto_propiedad',
+    'id' => 'nombre_contacto_propiedad',
+    'class' => ' browser-default form-control',
+    'value' => $propiedad->telefono,
+    'required' => 'required',
+);
+
 $telefono_input = array(
     'type' => 'text',
     'name' => 'telefono',
@@ -104,6 +114,14 @@ $telefono2_wp_n = array(
     'id' => 'telefono2_wp_n',
     'value' => 'no',
     'checked' => radio_helper('no', $propiedad->telefono2_wp),
+);
+$nombre_contacto_input = array(
+    'type' => 'text',
+    'name' => 'nombre_contacto_propiedad',
+    'id' => 'nombre_contacto_propiedad',
+    'class' => ' browser-default form-control',
+    'value' => $propiedad->nombre_contacto_propiedad,
+    'required' => 'required',
 );
 $correo_contacto_input = array(
     'type' => 'text',
@@ -653,7 +671,6 @@ $comentario_propiedad = array(
 
                         <div id="collapseOne" class=" show">
                             <div class="card-body">
-
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="identity">Modo propiedad</label>
@@ -681,7 +698,7 @@ $comentario_propiedad = array(
                                 <div class="form-row">
 
                                     <div class="form-group col-md-8">
-                                        <label for="direccion_propiedad">Dirección</label>
+                                        <label for="direccion_propiedad">Dirección (opcional)</label>
                                         <?php echo form_input($direccion_propiedad_input); ?>
                                     </div>
 
@@ -712,7 +729,7 @@ $comentario_propiedad = array(
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="comentario_propiedad">Comentarios</label>
+                                    <label for="comentario_propiedad">Descripción</label>
                                     <?php echo form_textarea($comentario_propiedad); ?>
                                 </div>
 
@@ -729,9 +746,15 @@ $comentario_propiedad = array(
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
                              data-parent="#accordionExample">
                             <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="nombre_contacto_propiedad">Nombre contacto</label>
+                                        <?php echo form_input($nombre_contacto_input); ?>
+                                    </div>
+                                </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label for="identity">Telefono</label>
@@ -814,7 +837,6 @@ $comentario_propiedad = array(
 
                                     </div>
                                     <div class="form-group col-md-4">
-
                                         <label for="zona">Medida Oficina</label>
                                         <?php echo form_input($medida_oficina_propiedad_input); ?>
                                     </div>
@@ -1236,6 +1258,7 @@ $comentario_propiedad = array(
     var telefono2;
     var telefono2_wp;
     var user_id_propiedad;
+    var nombre_contacto_propiedad;
     var precio_propiedad;
     var tipo_propiedad;
     var fecha_creacion_propiedad;
@@ -1293,13 +1316,14 @@ $comentario_propiedad = array(
         titulo_propiedad = $("#titulo_propiedad").val();
         tipo_vendedor = $("#tipo_vendedor option:selected").text();
         correo_contacto = $("#correo_contacto").val();
+        nombre_contacto_propiedad = $("#nombre_contacto_propiedad").val();
         tipo_propiedad = $("#tipo_propiedad option:selected").text();
         id_departamento = $("#id_departamento option:selected").val();
         id_municipio = $("#id_municipio option:selected").val();
         id_zona = $("#id_zona").val();
         direccion_propiedad =$("#direccion_propiedad").val();
         precio_propiedad = $("#precio").val();
-        comentario_propiedad = $("#precio").val();
+        comentario_propiedad = $("#comentario_propiedad").val();
         telefono = $("#telefono").val();
         telefono_wp  = $("input[name='telefono_wp']:checked").val();
         telefono2 = $("#telefono2").val();
@@ -1350,6 +1374,7 @@ $comentario_propiedad = array(
             titulo_propiedad: titulo_propiedad,
             tipo_vendedor: tipo_vendedor,
             correo_contacto: correo_contacto,
+            nombre_contacto_propiedad: nombre_contacto_propiedad,
             telefono: telefono,
             telefono_wp: telefono_wp,
             telefono2: telefono2,

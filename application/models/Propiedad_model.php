@@ -97,6 +97,7 @@ class Propiedad_model extends CI_Model
             'telefono2' => $data['telefono2'],
             'telefono2_wp' => $data['telefono2_wp'],
             'correo_contacto' => $data['correo_contacto'],
+            'nombre_contacto_propiedad' => $data['nombre_contacto_propiedad'],
             'precio_propiedad' => $data['precio'],
             'moneda_propiedad' => $data['moneda_propiedad'],
             'tipo_propiedad' => $data['tipo_propiedad'],
@@ -143,7 +144,8 @@ class Propiedad_model extends CI_Model
             'agua_propiedad' => $data['agua_propiedad'],
             'luz_propiedad' => $data['luz_propiedad'],
             'cable_internet_propiedad' => $data['cable_internet_propiedad'],
-            'comentario_propiedad' => $data['comentario_propiedad']
+            'comentario_propiedad' => $data['comentario_propiedad'],
+            'estado_propiedad' => 'pendiente',
         );
         //print_contenido($datos_propiedad);
         $this->db->where('Id_propiedad', $propiedad_id);
@@ -333,6 +335,16 @@ class Propiedad_model extends CI_Model
 
         }
 
+    }
+    public function asignar_asesor($data){
+
+        $propiedad_id = $data['id_propiedad'];
+        $datos_propiedad = array(
+            'asesor_id_propiedad' => $data['id_asesor'],
+        );
+        //print_contenido($datos_propiedad);
+        $this->db->where('Id_propiedad', $data['id_propiedad']);
+        $query = $this->db->update('propiedades', $datos_propiedad);
     }
 
     //imagenes propiedad

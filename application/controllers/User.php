@@ -206,6 +206,7 @@ class User extends Base_Controller
             'telefono2' => $this->input->post('telefono2'),
             'telefono2_wp' => $this->input->post('telefono2_wp'),
             'correo_contacto' => $this->input->post('correo_contacto'),
+            'nombre_contacto_propiedad' => $this->input->post('nombre_contacto_propiedad'),
             'precio' => $this->input->post('precio_propiedad'),
             'moneda_propiedad' => $this->input->post('moneda_propiedad'),
             'tipo_propiedad' => $this->input->post('tipo_propiedad'),
@@ -343,7 +344,16 @@ class User extends Base_Controller
 
             $plan = $this->input->post('plan_anuncio');
             if($plan =='vip'){
+
+
+                $datos_casa_draft = array(
+                    'plan_propiedad' => $plan,
+                    'user_id_propiedad' =>  $this->ion_auth->get_user_id(),
+                );
+                $porpiedad_id = $this->Propiedad_model->asignar_casa_dfraft($datos_casa_draft);
                 $datos_de_pago = array(
+                    'user_id' => $this->ion_auth->get_user_id(),
+                    'propiedad_id' => $porpiedad_id,
                     'plan_anuncio' => $plan,
                     'monto_pago' => '0',
                     'direccion_pago' => '-',
@@ -356,11 +366,6 @@ class User extends Base_Controller
 
                 $this->User_model->guardar_pago($datos_de_pago);
 
-                $datos_casa_draft = array(
-                    'plan_propiedad' => $plan,
-                    'user_id_propiedad' =>  $this->ion_auth->get_user_id(),
-                );
-                $porpiedad_id = $this->Propiedad_model->asignar_casa_dfraft($datos_casa_draft);
                 redirect(base_url().'user/subir_propiedad_t/'.$porpiedad_id);
             }
             if($plan =='individual'){
@@ -392,7 +397,16 @@ class User extends Base_Controller
         if($_POST){
             //print_contenido($_POST);
 
+            $datos_casa_draft = array(
+                'plan_propiedad' => $this->input->post('plan_anuncio'),
+                'user_id_propiedad' =>  $this->ion_auth->get_user_id(),
+            );
+
+            $porpiedad_id = $this->Propiedad_model->asignar_casa_dfraft($datos_casa_draft);
+
             $datos_de_pago = array(
+                'user_id' => $this->ion_auth->get_user_id(),
+                'propiedad_id' => $porpiedad_id,
                 'plan_anuncio' => $this->input->post('plan_anuncio'),
                 'monto_pago' => $this->input->post('monto_pago'),
                 'direccion_pago' => $this->input->post('direccion_pago'),
@@ -401,21 +415,61 @@ class User extends Base_Controller
                 'pauta_fb_pago' =>$this->input->post('pauta_fb_pago'),
                 'manta_pago' => $this->input->post('manta_pago'),
             );
-           // print_contenido($datos_de_pago);
+
+            $user_id = $datos_de_pago['user_id'];
+            $propiedad_id = $datos_de_pago['propiedad_id'];
+            $plan_anuncio = $datos_de_pago['plan_anuncio'];
+            $monto_pago = $datos_de_pago['monto_pago'];
+            $direccion_pago = $datos_de_pago['direccion_pago'];
+            $fecha_de_pago = $datos_de_pago['fecha_de_pago'];
+            $hora_pago = $datos_de_pago['hora_pago'];
+            // print_contenido($datos_de_pago);
 
             $this->User_model->guardar_pago($datos_de_pago);
+                $this->load->library('email');
+                //configuracion de correo
+                $config['mailtype'] = 'html';
+                $this->email->initialize($config);
+                $this->email->from('info@gpcasas.net', 'GP CASAS');
+                $this->email->to('info@gpcasas.net');
+                //$this->email->cc('info@gpcasas.net');
+                $this->email->bcc('csamayoa@zenstudiogt.com');
+                $this->email->subject('Pago plan de propiedad');
 
-            $datos_casa_draft = array(
-                'plan_propiedad' => $this->input->post('plan_anuncio'),
-                'user_id_propiedad' =>  $this->ion_auth->get_user_id(),
-            );
-            $porpiedad_id = $this->Propiedad_model->asignar_casa_dfraft($datos_casa_draft);
+                //mensaje
+                $message = '<html><body>';
+                $message .= '<img src="' . base_url() . '/ui/public/images/logo.png" alt="GP CASAS" />';
+                $message .= '<table rules="all" style="border-color: #666;" cellpadding="10">';
+                $message .= "<tr><td><strong>Usuario:</strong> </td><td>" . strip_tags($user_id) . "</td></tr>";
+                $message .= "<tr><td><strong>Propiedad:</strong> </td><td>" . strip_tags($propiedad_id) . "</td></tr>";
+                $message .= "<tr><td><strong>Monto:</strong> </td><td>" . strip_tags($monto_pago) . "</td></tr>";
+                $message .= "<tr><td><strong>Dirección</strong> </td><td>" . strip_tags($direccion_pago) . "</td></tr>";
+                $message .= "<tr><td><strong>Fecha de pago</strong> </td><td>" . strip_tags($fecha_de_pago) . "</td></tr>";
+                $message .= "<tr><td><strong>Hora de pago</strong> </td><td>" . strip_tags($hora_pago) . "</td></tr>";
+                $message .= '</table>';
+                $message .= '</body></html>';
+                $this->email->message($message);
+                //enviar correo
+                $this->email->send();
+                // Will only print the email headers, excluding the message subject and body
+                $this->email->print_debugger(array('headers'));
+                $this->session->set_flashdata('mensaje', 'Gracias por escribirnos pronto nos pondermos en contacto');
+                //redirect(base_url() . 'home/credito');
+
             redirect(base_url().'user/subir_propiedad_t/'.$porpiedad_id);
 
         }else{
             $this->session->set_flashdata('error', 'Seleccione plan por favor');
             redirect(base_url().'user/seleccionar_plan');
         }
+
+    }
+
+    function enviar_correo_credito()
+    {
+
+
+
 
     }
 
