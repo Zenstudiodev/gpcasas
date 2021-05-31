@@ -60,7 +60,7 @@ $hora_de_pago = array(
         <div class="col">
             <img src="<?php echo base_url()?>ui/public/images/forma_pago.jpg" class="img-fluid">
             <h2>Datos para recoger el pago</h2>
-            <form name="seleccion_anuncio" id="seleccion_anuncio" method="post" action="<?php echo base_url().'user/guardar_forma_pago';?>">
+            <form name="seleccion_anuncio" id="seleccion_anuncio" method="post" action="<?php echo base_url().'User/guardar_forma_pago';?>">
 
                 <hr>
 

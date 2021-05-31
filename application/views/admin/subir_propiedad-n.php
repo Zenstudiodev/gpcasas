@@ -1148,7 +1148,7 @@ $comentario_propiedad = array(
                     </div>
                 </div>
                 <hr>
-                <a class="btn btn-success" href="<?php echo base_url()?>user/perfil">Terminar</a>
+                <a class="btn btn-success" href="<?php echo base_url()?>User/perfil">Terminar</a>
             </form>
 
         </div>

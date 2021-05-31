@@ -33,3 +33,12 @@
 .caracteristicas_propiedades{
   color: $naranja;
 }
+
+#casas_perfil{
+  .carousel {
+    min-height: 251px;
+    overflow: hidden;
+    height: 251px;
+  }
+
+}

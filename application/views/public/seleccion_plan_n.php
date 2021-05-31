@@ -52,7 +52,7 @@ $clave = array(
     <div class="row">
         <div class="col">
             <h2>Selecciona tu anuncio</h2>
-            <form name="seleccion_anuncio" id="seleccion_anuncio" method="post" action="<?php echo base_url().'User/forma_pago';?>">
+            <form name="seleccion_anuncio" id="seleccion_anuncio" method="post" action="<?php echo base_url().'user/forma_pago';?>">
 
 
                 <div class="table-responsive">

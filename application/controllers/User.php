@@ -366,7 +366,7 @@ class User extends Base_Controller
 
                 $this->User_model->guardar_pago($datos_de_pago);
 
-                redirect(base_url().'user/subir_propiedad_t/'.$porpiedad_id);
+                redirect(base_url().'User/subir_propiedad_t/'.$porpiedad_id);
             }
             if($plan =='individual'){
                 $data['plan_anuncio'] = $plan;
@@ -384,7 +384,7 @@ class User extends Base_Controller
 
         }else{
             $this->session->set_flashdata('error', 'Seleccione plan por favor');
-            redirect(base_url().'user/seleccionar_plan');
+            redirect(base_url().'User/seleccionar_plan');
         }
 
     }
@@ -456,11 +456,11 @@ class User extends Base_Controller
                 $this->session->set_flashdata('mensaje', 'Gracias por escribirnos pronto nos pondermos en contacto');
                 //redirect(base_url() . 'home/credito');
 
-            redirect(base_url().'user/subir_propiedad_t/'.$porpiedad_id);
+            redirect(base_url().'User/subir_propiedad_t/'.$porpiedad_id);
 
         }else{
             $this->session->set_flashdata('error', 'Seleccione plan por favor');
-            redirect(base_url().'user/seleccionar_plan');
+            redirect(base_url().'User/seleccionar_plan');
         }
 
     }
