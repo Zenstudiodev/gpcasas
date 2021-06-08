@@ -60,8 +60,8 @@ $clave = array(
                         <thead class="thead-dark">
                         <tr>
                             <th>Característica</th>
-                            <th>Individuales</th>
-                            <th>Vip</th>
+                            <th class="text-center" >Individuales</th>
+                            <th class="text-center" >Vip</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -127,13 +127,13 @@ $clave = array(
                         </tr>
                         <tr>
                             <td>SELECCIONE OPCIÓN</td>
-                            <td>
+                            <td class="text-center">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="plan_anuncio"
                                            id="plan_anuncio_individual" value="individual" required>
                                 </div>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="plan_anuncio"
                                            id="plan_anuncio_vip"

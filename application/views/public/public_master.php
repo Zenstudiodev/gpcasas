@@ -170,10 +170,10 @@ if (!isset($sin_banner)) {
             <div class="col-6 col-md-5">
                 <ul class="footer_list">
                     <li><a>Quienes somos</a></li>
-                    <li><a  href="<?php echo base_url() ?>home/credito">Creditos Bancarios</a></li>
-                    <li><a>Serguro para vivienda</a></li>
-                    <li><a  href="<?php echo base_url() ?>user/seleccionar_plan">Anunciate</a></li>
-                    <li><a href="<?php echo base_url() ?>home/contacto">Contactenos</a></li>
+                    <li><a  href="<?php echo base_url() ?>Home/credito">Creditos Bancarios</a></li>
+                    <li><a href="<?php echo base_url() ?>Home/seguros/">Serguro para vivienda</a></li>
+                    <li><a  href="<?php echo base_url() ?>User/seleccionar_plan">Anunciate</a></li>
+                    <li><a href="<?php echo base_url() ?>Home/contacto">Contactenos</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md-3">

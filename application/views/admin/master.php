@@ -90,7 +90,7 @@ else{
             <div class="col-md-2">
                 <ul class="nav flex-column" id="top_menu">
                     <li class="nav-item">
-                        <a class="nav-link active" href="<?php echo base_url()?>User/seleccionar_plan">Subir propiedad</a>
+                        <a class="nav-link active" href="<?php echo base_url()?>Admin/asignar_propiedad">Subir propiedad</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url()?>admin/propiedades">Propiedades</a>

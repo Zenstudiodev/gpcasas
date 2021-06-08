@@ -36,7 +36,30 @@ class Admin extends Base_Controller
         echo $this->templates->render('admin/home', $data);
     }
 
-   /** propiedades**/
+    /** propiedades**/
+    public function asignar_propiedad(){
+        $datos_casa_draft = array(
+            'plan_propiedad' => 'vip',
+            'user_id_propiedad' =>  $this->ion_auth->get_user_id(),
+        );
+        $porpiedad_id = $this->Propiedad_model->asignar_casa_dfraft($datos_casa_draft);
+        /*$datos_de_pago = array(
+            'user_id' => $this->ion_auth->get_user_id(),
+            'propiedad_id' => $porpiedad_id,
+            'plan_anuncio' => $plan,
+            'monto_pago' => '0',
+            'direccion_pago' => '-',
+            'fecha_de_pago' => '-',
+            'hora_pago' => '-',
+            'pauta_fb_pago' =>'-',
+            'manta_pago' => '-',
+        );*/
+        // print_contenido($datos_de_pago);
+
+        //$this->User_model->guardar_pago($datos_de_pago);
+
+        redirect(base_url().'User/subir_propiedad_t/'.$porpiedad_id);
+    }
     public function subir_propiedad()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -373,7 +396,8 @@ class Admin extends Base_Controller
         $this->Propiedad_model->baja_propiedad($propiedad_id);
         redirect(base_url() . 'admin/propiedades');
     }
-    public function editar_propiedad(){
+    public function editar_propiedad()
+    {
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
             redirect(base_url() . 'User/login');
@@ -394,7 +418,8 @@ class Admin extends Base_Controller
         $data['departamentos'] = $this->Busqueda_model->get_departamentos();
         echo $this->templates->render('admin/editar_propiedad', $data);
     }
-    public function actualizar_propiedad(){
+    public function actualizar_propiedad()
+    {
         if (!$this->ion_auth->logged_in()) {
             // redirect them to the login page
             redirect(base_url() . 'User/login');
@@ -468,13 +493,13 @@ class Admin extends Base_Controller
         if ($this->ion_auth->is_admin()) {
             // redirect them to the login page
             redirect(base_url() . 'admin/editar_propiedad/' . $propiedad_id);
-        }
-        else{
+        } else {
             redirect(base_url() . 'User/perfil');
         }
 
     }
-    public function asignar_asesor_propiedad(){
+    public function asignar_asesor_propiedad()
+    {
         print_contenido($_POST);
 
         $datos_propiedad = array(

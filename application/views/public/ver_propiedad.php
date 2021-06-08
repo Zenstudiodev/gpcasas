@@ -340,8 +340,8 @@ if ($propiedad) {
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Datos de contacto</h5>
-                        <p>Correo de contacto: Info@gpcasas.net</p>
-                        <p>Teléfono: <a href="tel:+50251677220">5167 7220</a></p>
+                        <p>Correo de contacto: ivonnediaz@gpcasas.net</p>
+                        <p>Teléfono: <a href="tel:+50256496977">5649 6977</a></p>
 
                     </div>
                 </div>
