@@ -124,6 +124,48 @@ class Home extends Base_Controller
         }
 
     }
+    function enviar_correo_informacion()
+    {
+
+
+        $propiedad_id =$this->input->post('propiedad_id');
+        $nombre = $this->input->post('nombre');
+        $telefono = $this->input->post('telefono');
+        $email = $this->input->post('email');
+        $precio_propiedad = $this->input->post('mensaje_informacion');
+        if($email){
+            $this->load->library('email');
+            //configuracion de correo
+            $config['mailtype'] = 'html';
+            $this->email->initialize($config);
+            $this->email->from('info@gpcasas.net', 'GP CASAS');
+            $this->email->to($email);
+            $this->email->cc('info@gpcasas.net');
+            $this->email->bcc('csamayoa@zenstudiogt.com');
+            $this->email->subject('Solicitud de información de propiedad');
+
+            //mensaje
+            $message = '<html><body>';
+            $message .= '<img src="' . base_url() . '/ui/public/images/logo.png" alt="GP CASAS" />';
+            $message .= '<table rules="all" style="border-color: #666;" cellpadding="10">';
+            $message .= "<tr><td><strong>Nombre:</strong> </td><td>" . strip_tags($nombre) . "</td></tr>";
+            $message .= "<tr><td><strong>Teléfono:</strong> </td><td>" . strip_tags($telefono) . "</td></tr>";
+            $message .= "<tr><td><strong>Correo:</strong> </td><td>" . strip_tags($email) . "</td></tr>";
+            $message .= "<tr><td><strong>precio_propiedad</strong> </td><td>" . strip_tags($precio_propiedad) . "</td></tr>";
+            $message .= '</table>';
+            $message .= '</body></html>';
+            $this->email->message($message);
+            //enviar correo
+            $this->email->send();
+            // Will only print the email headers, excluding the message subject and body
+            $this->email->print_debugger(array('headers'));
+            $this->session->set_flashdata('mensaje', 'Gracias por escribirnos pronto nos pondermos en contacto');
+            redirect(base_url() . 'Propiedades/ver/'.$propiedad_id);
+        }else{
+            redirect(base_url() . 'home');
+        }
+
+    }
     function seguros()
     {
         $data = array();

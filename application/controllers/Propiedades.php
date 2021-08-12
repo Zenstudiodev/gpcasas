@@ -138,7 +138,6 @@ class Propiedades  extends Base_Controller
     }
     public function ver(){
 
-
         $propiedad_id= $this->uri->segment(3);
         $data['propiedad'] = $this->Propiedad_model->get_propiedad_by_id($propiedad_id);
         $data['sin_banner'] = 1;

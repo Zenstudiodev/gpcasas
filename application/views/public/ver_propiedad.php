@@ -13,6 +13,36 @@ $this->layout('public/public_master', array(
 if ($propiedad) {
     $propiedad = $propiedad->row();
 }
+
+$nombre_input = array(
+    'type' => 'text',
+    'name' => 'nombre',
+    'id' => 'nombre',
+    'class' => ' browser-default form-control',
+    'required' => 'required',
+);
+$telefono_input = array(
+    'type' => 'tel',
+    'name' => 'telefono',
+    'id' => 'telefono',
+    'class' => ' browser-default form-control',
+    'required' => 'required',
+);
+$correo_input = array(
+    'type' => 'email',
+    'name' => 'email',
+    'id' => 'email',
+    'class' => ' browser-default form-control',
+    'required' => 'required',
+);
+$mensaje_informacion = array(
+    'type' => 'text',
+    'name' => 'mensaje_informacion',
+    'id' => 'mensaje_informacion',
+    'class' => ' browser-default form-control',
+    'required' => 'required',
+    'value'=>'Quisiera información de la propiedad código: '. $propiedad->Id_propiedad,
+);
 ?>
 
 <?php $this->start('css_p') ?>
@@ -24,7 +54,13 @@ if ($propiedad) {
     <?php //print_contenido($propiedad); ?>
     <div class="container">
         <div class="row">
+            <div class="col">
+                <p>Código de propiedad <span class="codigo_propiedad"><?php echo $propiedad->Id_propiedad; ?></span></p>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-8">
+
                 <h2>
                     <?php echo $propiedad->titulo_propiedad; ?>
                 </h2>
@@ -52,6 +88,63 @@ if ($propiedad) {
             </div>
         </div>
         <hr>
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-success" href="https://wa.me/50256496977?text=<?php echo urlencode('Quisiera información de la propiedad código: ' . $propiedad->Id_propiedad . ' Titulo: ' . $propiedad->titulo_propiedad . ' Zona: ' . $propiedad->direccion_propiedad); ?>" target="_blank"> <i class="fab fa-whatsapp"></i> Pedir información</a>
+                <a class="btn btn-info" href="#" data-toggle="modal" data-target="#staticBackdrop"> <i class="far fa-envelope"></i> Pedir información</a>
+            </div>
+        </div>
+        <hr>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Pedir información</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="<?php echo base_url() ?>home/enviar_correo_informacion" method="post">
+                            <input type="hidden" name="propiedad_id" value="<?php echo $propiedad->Id_propiedad; ?>">
+                            <div class="form-group col-md-12">
+                                <label for="nombre">Nombre</label>
+                                <div class="input-group mb-3">
+                                    <?php echo form_input($nombre_input); ?>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="telefono">Teléfono</label>
+                                <div class="input-group mb-3">
+                                    <?php echo form_input($telefono_input); ?>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="email">Correo</label>
+                                <div class="input-group mb-3">
+                                    <?php echo form_input($correo_input); ?>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="nombre">Información Solicitada</label>
+                                <div class="input-group mb-3">
+                                    <?php echo form_textarea($mensaje_informacion); ?>
+                                </div>
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
         <div class="row">
             <div class="col-md-12">
                 <?php
@@ -387,6 +480,8 @@ if ($propiedad) {
             <div class="col">
                 <div class="alert alert-info" role="alert">
                     <h4 class="alert-heading">Esa propiedad no se encuentra disponible!</h4>
+                    <p>Busca otra propiedad</p>
+                    <p><a class="btn btn-success" href="<?php echo base_url()?>Busqueda/index/">Buscar propiedad</a> </p>
                 </div>
             </div>
         </div>

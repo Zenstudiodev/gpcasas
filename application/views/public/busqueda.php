@@ -123,7 +123,15 @@ $moneda_select_options = array(
 
 //max area
 
+//presupuesto
+$codigo = array(
+    'type' => 'number',
+    'name' => 'codigo',
+    'id' => 'codigo',
+    'value' => '0',
+    'class' => ' browser-default form-control',
 
+);
 ?>
 
 
@@ -212,6 +220,23 @@ $moneda_select_options = array(
                 <a class="btn btn-success btn-lg" id="busaqueda_boton">Buscar</a>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="codigo">Codigo</label>
+                    <div class="input-group mb-3">
+
+                        <?php echo form_input($codigo); ?>
+                        <div class="input-group-append">
+                            <button class="btn btn-success" type="button" id="ver_codigo_btn">Ver código</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
     </section>
 </div>
 
@@ -227,8 +252,17 @@ $moneda_select_options = array(
     var presupuesto;
     var moneda;
     var filtros;
+    var codigo;
 
 
+    $("#ver_codigo_btn").click(function () {
+        codigo = $("#codigo").val();
+
+        propiedad = '<?php echo base_url()?>' + 'Propiedades/ver/' + codigo;
+        window.location.assign(propiedad);
+
+
+    });
     $(document).ready(function () {
         $('#municipios option').remove();
         departamento = $("#departamentos").val();

@@ -74,8 +74,6 @@ if ($CI->ion_auth->logged_in()) {
                                             class="fas fa-sign-in-alt"></i></a>
                             <?php } ?>
                         </p>
-
-
                     <?php } else { ?>
                         <a class="top_boton" href="<?php echo base_url() ?>User/login">Ingresar <i
                                     class="fas fa-sign-in-alt"></i></a>
@@ -204,6 +202,8 @@ if (!isset($sin_banner)) {
 
 
 <?php echo $this->section('js_p') ?>
+
+<script src="//code.jivosite.com/widget/nP33H9KoDL" async></script>
 
 <script>
     //service

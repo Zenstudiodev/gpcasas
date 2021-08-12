@@ -96,13 +96,7 @@ else{
                         <a class="nav-link" href="<?php echo base_url()?>admin/propiedades">Propiedades</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url()?>admin/lista_usuarios">Lista de usuarios</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url()?>admin/banners_header">Banners</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                     </li>
                 </ul>
             </div>

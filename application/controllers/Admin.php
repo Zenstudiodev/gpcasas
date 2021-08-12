@@ -178,7 +178,7 @@ class Admin extends Base_Controller
         //$producto_id = $_SERVER['HTTP_PRODUCTO_ID'];
         //echo 'el id del producto es : ' . $producto_id;
         //obtenemos los datos del producto con el id de la cabecera
-        $datos_de_propiedad = $this->Propiedad_model->get_propiedad_by_id($propiedad_id);
+        $datos_de_propiedad = $this->Propiedad_model->get_propiedad_by_id_subir($propiedad_id);
         $datos_de_propiedad = $datos_de_propiedad->row();
 
         //obtenemos el numero de imagenes desde el producto
@@ -379,7 +379,7 @@ class Admin extends Base_Controller
         }
         $propiedad_id = $this->uri->segment(3);
         $data['asesores'] = $this->ion_auth->users()->result();
-        $data['propiedad'] = $this->Propiedad_model->get_propiedad_by_id($propiedad_id);
+        $data['propiedad'] = $this->Propiedad_model->get_propiedad_by_id_subir($propiedad_id);
         $data['fotos_propiedad'] = $this->Propiedad_model->get_fotos_de_propiedad_by_id($propiedad_id);
         echo $this->templates->render('admin/revisar_propiedad', $data);
 

@@ -24,7 +24,6 @@ class User extends Base_Controller
 
         $this->lang->load('auth');
     }
-
     public function login()
     {
         if ($this->session->flashdata('message')) {
@@ -35,7 +34,6 @@ class User extends Base_Controller
         $data['sin_banner'] = 1;
         echo $this->templates->render('public/login', $data);
     }
-
     public function registro()
     {
         $data['title'] = $this->lang->line('create_user_heading');
@@ -145,11 +143,9 @@ class User extends Base_Controller
 
 
     }
-
     public function guardar_usuario()
     {
     }
-
     public function perfil()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -159,12 +155,9 @@ class User extends Base_Controller
         $data['sin_banner'] = 1;
         $data['user_id'] = $this->ion_auth->get_user_id();
         $data['user'] = $this->User_model->get_user_by_id($data['user_id']);
-
         $data['casa_propias'] = $this->Propiedad_model->get_propiedaedes_by_user_id($data['user_id']);
-
         echo $this->templates->render('public/perfil', $data);
     }
-
     public function subir_propiedad()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -175,7 +168,6 @@ class User extends Base_Controller
         $data['menu'] = 'no';
         echo $this->templates->render('admin/subir_propiedad', $data);
     }
-
     public function subir_propiedad_t()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -187,7 +179,7 @@ class User extends Base_Controller
         $propiedad_id = $this->uri->segment(3);
         $data['propiedad_id'] = $propiedad_id;
         //datos de la propiedad
-        $data['propiedad'] = $this->Propiedad_model->get_propiedad_by_id($propiedad_id);
+        $data['propiedad'] = $this->Propiedad_model->get_propiedad_by_id_subir($propiedad_id);
         $data['fotos_propiedad'] = $this->Propiedad_model->get_fotos_de_propiedad_by_id($propiedad_id);
         echo $this->templates->render('admin/subir_propiedad-n', $data);
     }
@@ -464,7 +456,6 @@ class User extends Base_Controller
         }
 
     }
-
     function enviar_correo_credito()
     {
 
