@@ -20,6 +20,13 @@ class User_model extends CI_Model
         if ($query->num_rows() > 0) return $query;
         else return false;
     }
+    function get_users(){
+        //$this->db->where('id', $user_id);
+        $this->db->from('users');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
     function guardar_pago($data){
         $hoy = new DateTime();
         $datos_de_pago = array(

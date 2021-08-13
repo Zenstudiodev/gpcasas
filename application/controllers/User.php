@@ -181,6 +181,7 @@ class User extends Base_Controller
         //datos de la propiedad
         $data['propiedad'] = $this->Propiedad_model->get_propiedad_by_id_subir($propiedad_id);
         $data['fotos_propiedad'] = $this->Propiedad_model->get_fotos_de_propiedad_by_id($propiedad_id);
+        $data['data']= $this->User_model->get_users();
         echo $this->templates->render('admin/subir_propiedad-n', $data);
     }
     public function guardar_propiedad()

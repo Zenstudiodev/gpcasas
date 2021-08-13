@@ -14,6 +14,8 @@ $this->layout('admin/master',
     ));
 ?>
 <?php $this->start('css_p') ?>
+    <link href="/node_modules/datatables/media/css/jquery.dataTables.min.css"
+          rel="stylesheet">
 <?php $this->stop() ?>
 
 <?php $this->start('page_content') ?>
@@ -28,22 +30,22 @@ $this->layout('admin/master',
         <?php } ?>
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="<?php echo base_url()?>admin/propiedades">Activas</a>
+                <a class="nav-link active" href="<?php echo base_url() ?>admin/propiedades">Activas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url()?>admin/propiedades_pendientes">Pendientes</a>
+                <a class="nav-link" href="<?php echo base_url() ?>admin/propiedades_pendientes">Pendientes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url()?>admin/propiedades_de_baja">De baja</a>
+                <a class="nav-link" href="<?php echo base_url() ?>admin/propiedades_de_baja">De baja</a>
             </li>
         </ul>
         <h2>Propiedades activas</h2>
-        <?php if($propiedades_pendientes){ ?>
+        <?php if ($propiedades_pendientes) { ?>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" id="propiedades">
                     <thead>
                     <tr>
-                        <th>Acciones</th>
+
                         <th>Coódigo propiedad</th>
                         <th>Tipo</th>
                         <th>Estado</th>
@@ -53,19 +55,27 @@ $this->layout('admin/master',
                         <th>Correo</th>
                         <th>Teléfono</th>
                         <th>Fecha creación</th>
+                        <th>Acciones</th>
 
                     </tr>
                     </thead>
-                    <?php foreach ($propiedades_pendientes->result() as $propiedad) {?>
+                    <tfoot>
+                    <tr>
+                        <th>Coódigo propiedad</th>
+                        <th>Tipo</th>
+                        <th>Estado</th>
+                        <th>Departamento</th>
+                        <th>Municipio</th>
+                        <th>Zona</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Fecha creación</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </tfoot>
+                    <?php foreach ($propiedades_pendientes->result() as $propiedad) { ?>
                         <tr>
-                            <td>
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a type="button" class="btn btn-success" href="<?php echo base_url().'admin/editar_propiedad/'.$propiedad->Id_propiedad; ?>">Editar</a>
-                                    <a type="button" class="btn btn-primary" href="<?php echo base_url().'admin/revisar_propiedad/'.$propiedad->Id_propiedad; ?>">Revisar</a>
-                                    <!--<a type="button" class="btn btn-success" href="<?php echo base_url().'admin/aprobar_propiedad/'.$propiedad->Id_propiedad; ?>">Aprobar</a>-->
-                                    <a type="button" class="btn btn-danger" href="<?php echo base_url().'admin/baja_propiedad/'.$propiedad->Id_propiedad; ?>">Baja</a>
-                                </div>
-                            </td>
+
                             <td><?php echo $propiedad->Id_propiedad; ?></td>
                             <td><?php echo $propiedad->tipo_propiedad; ?></td>
                             <td><?php echo $propiedad->estado_propiedad; ?></td>
@@ -75,18 +85,60 @@ $this->layout('admin/master',
                             <td><?php echo $propiedad->correo_contacto; ?></td>
                             <td><?php echo $propiedad->telefono; ?></td>
                             <td><?php echo $propiedad->fecha_creacion_propiedad; ?></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a type="button" class="btn btn-info"
+                                       href="<?php echo base_url() . 'admin/subir_fotos/' . $propiedad->Id_propiedad; ?>">Subir
+                                        fotos</a>
+                                    <a type="button" class="btn btn-success"
+                                       href="<?php echo base_url() . 'admin/editar_propiedad/' . $propiedad->Id_propiedad; ?>">Editar</a>
+                                    <a type="button" class="btn btn-primary"
+                                       href="<?php echo base_url() . 'admin/revisar_propiedad/' . $propiedad->Id_propiedad; ?>">Revisar</a>
+                                    <!--<a type="button" class="btn btn-success" href="<?php echo base_url() . 'admin/aprobar_propiedad/' . $propiedad->Id_propiedad; ?>">Aprobar</a>-->
+                                    <a type="button" class="btn btn-danger"
+                                       href="<?php echo base_url() . 'admin/baja_propiedad/' . $propiedad->Id_propiedad; ?>">Baja</a>
+                                </div>
+                            </td>
 
                         </tr>
-                    <?php }?>
+                    <?php } ?>
                 </table>
             </div>
-        <?php }else{
+        <?php } else {
             echo 'no hay propiedades';
         } ?>
     </div>
 <?php $this->stop() ?>
 <?php $this->start('js_p') ?>
-    <script>
+    <script src="/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
 
-    </script>
+<script>
+    //propiedades
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        //$('#facturas').DataTable();
+        // Setup - add a text input to each footer cell
+        $('#propiedades tfoot th').each(function () {
+            var title = $(this).text();
+            $(this).html('<input type="text" class="form-control" placeholder="Buscar ' + title + '" />');
+        });
+
+        // DataTable
+        var table = $('#propiedades').DataTable();
+
+        // Apply the search
+        table.columns().every(function () {
+            var that = this;
+            $('input', this.footer()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+        //$('#propiedades').DataTable();
+    });
+
+</script>
 <?php $this->stop() ?>

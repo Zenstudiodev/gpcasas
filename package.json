@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Zenstudiodev/gpcasas#readme",
   "dependencies": {
     "animate.css": "^3.7.0",
+    "datatables": "^1.10.18",
     "event-stream": "^4.0.1",
     "lightbox2": "^2.10.0",
     "numeral": "^2.0.6"
