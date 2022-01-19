@@ -62,7 +62,8 @@ $precio_propiedad_input = array(
                             </button>
                         </div>
                     <?php } ?>
-                    <form action="<?php echo base_url() ?>home/enviar_correo_credito" method="post">
+                  <!--  <form action="<?php /*echo base_url() */?>home/enviar_correo_credito" method="post">-->
+                    <form action="" method="post">
                         <div class="form-group col-md-12">
                             <label for="nombre">Nombre</label>
                             <div class="input-group mb-3">

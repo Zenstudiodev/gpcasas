@@ -87,6 +87,9 @@ $this->layout('admin/master',
                             <td><?php echo $propiedad->fecha_creacion_propiedad; ?></td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
+
+                                    <a type="button" class="btn btn-info"
+                                       href="<?php echo base_url() . 'admin/generar_pdf/' . $propiedad->Id_propiedad; ?>">Generar pdf</a>
                                     <a type="button" class="btn btn-info"
                                        href="<?php echo base_url() . 'admin/subir_fotos/' . $propiedad->Id_propiedad; ?>">Subir
                                         fotos</a>

@@ -64,7 +64,7 @@ class Home extends Base_Controller
             $message .= '</body></html>';
             $this->email->message($message);
             //enviar correo
-            $this->email->send();
+            //$this->email->send();
             // Will only print the email headers, excluding the message subject and body
             $this->email->print_debugger(array('headers'));
             $this->session->set_flashdata('mensaje', 'Gracias por escribirnos pronto nos pondermos en contacto');
@@ -156,7 +156,7 @@ class Home extends Base_Controller
             $message .= '</body></html>';
             $this->email->message($message);
             //enviar correo
-            $this->email->send();
+            //$this->email->send();
             // Will only print the email headers, excluding the message subject and body
             $this->email->print_debugger(array('headers'));
             $this->session->set_flashdata('mensaje', 'Gracias por escribirnos pronto nos pondermos en contacto');
@@ -175,10 +175,9 @@ class Home extends Base_Controller
         $data['sin_banner'] = 1;
         echo $this->templates->render('public/seguros', $data);
     }
-    function enviar_correo_seguros()
+    function enviar_correo_seguros_()
     {
-
-
+        exit();
         $nombre = $this->input->post('nombre');
         $telefono = $this->input->post('telefono');
         $email = $this->input->post('email');
@@ -206,7 +205,7 @@ class Home extends Base_Controller
             $message .= '</body></html>';
             $this->email->message($message);
             //enviar correo
-            $this->email->send();
+            //$this->email->send();
             // Will only print the email headers, excluding the message subject and body
             $this->email->print_debugger(array('headers'));
             $this->session->set_flashdata('mensaje', 'Gracias por escribirnos pronto nos pondermos en contacto');

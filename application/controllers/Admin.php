@@ -37,10 +37,11 @@ class Admin extends Base_Controller
     }
 
     /** propiedades**/
-    public function asignar_propiedad(){
+    public function asignar_propiedad()
+    {
         $datos_casa_draft = array(
             'plan_propiedad' => 'vip',
-            'user_id_propiedad' =>  $this->ion_auth->get_user_id(),
+            'user_id_propiedad' => $this->ion_auth->get_user_id(),
         );
         $porpiedad_id = $this->Propiedad_model->asignar_casa_dfraft($datos_casa_draft);
         /*$datos_de_pago = array(
@@ -58,8 +59,9 @@ class Admin extends Base_Controller
 
         //$this->User_model->guardar_pago($datos_de_pago);
 
-        redirect(base_url().'User/subir_propiedad_t/'.$porpiedad_id);
+        redirect(base_url() . 'User/subir_propiedad_t/' . $porpiedad_id);
     }
+
     public function subir_propiedad()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -74,6 +76,7 @@ class Admin extends Base_Controller
         $data['departamentos'] = $this->Busqueda_model->get_departamentos();
         echo $this->templates->render('admin/subir_propiedad', $data);
     }
+
     public function guardar_propiedad()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -147,6 +150,7 @@ class Admin extends Base_Controller
         }
         //redirect a lista de propiedades
     }
+
     public function subir_fotos()
     {
         //comprobar logeo
@@ -167,6 +171,7 @@ class Admin extends Base_Controller
         echo $this->templates->render('admin/subir_imagenes_propiedad', $data);
 
     }
+
     public function guardar_imagen()
     {
         // print_contenido($_FILES);
@@ -265,6 +270,7 @@ class Admin extends Base_Controller
 
         }
     }
+
     public function borrar_imagen()
     {
 
@@ -303,6 +309,7 @@ class Admin extends Base_Controller
 
         }
     }
+
     public function procesar_foto()
     {
         /* echo '<pre>';
@@ -317,6 +324,7 @@ class Admin extends Base_Controller
 
         file_put_contents('/home2/gpautos/gpcasas/web/propiedades_pic/' . $id_propiedad . ' (' . $numero_foto . ').jpg', $image);
     }
+
     public function propiedades()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -332,6 +340,7 @@ class Admin extends Base_Controller
         $data['propiedades_pendientes'] = $this->Propiedad_model->get_propiedades_activas();
         echo $this->templates->render('admin/lista_propiedades', $data);
     }
+
     public function propiedades_pendientes()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -347,6 +356,7 @@ class Admin extends Base_Controller
         $data['propiedades_pendientes'] = $this->Propiedad_model->get_propiedades_pendientes();
         echo $this->templates->render('admin/lista_propiedades_pendientes', $data);
     }
+
     public function propiedades_de_baja()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -362,6 +372,7 @@ class Admin extends Base_Controller
         $data['propiedades_pendientes'] = $this->Propiedad_model->get_propiedades_de_baja();
         echo $this->templates->render('admin/lista_propiedades_de_baja', $data);
     }
+
     public function revisar_propiedad()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -384,18 +395,21 @@ class Admin extends Base_Controller
         echo $this->templates->render('admin/revisar_propiedad', $data);
 
     }
+
     public function aprobar_propiedad()
     {
         $propiedad_id = $this->uri->segment(3);
         $this->Propiedad_model->aprobar_propiedad($propiedad_id);
         redirect(base_url() . 'admin');
     }
+
     public function baja_propiedad()
     {
         $propiedad_id = $this->uri->segment(3);
         $this->Propiedad_model->baja_propiedad($propiedad_id);
         redirect(base_url() . 'admin/propiedades');
     }
+
     public function editar_propiedad()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -418,6 +432,7 @@ class Admin extends Base_Controller
         $data['departamentos'] = $this->Busqueda_model->get_departamentos();
         echo $this->templates->render('admin/editar_propiedad', $data);
     }
+
     public function actualizar_propiedad()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -498,6 +513,7 @@ class Admin extends Base_Controller
         }
 
     }
+
     public function asignar_asesor_propiedad()
     {
         print_contenido($_POST);
@@ -509,6 +525,254 @@ class Admin extends Base_Controller
         //actualizar propiedad
         $this->Propiedad_model->asignar_asesor($datos_propiedad);
     }
+
+    public function generar_pdf()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/login');
+        }
+        if (!$this->ion_auth->is_admin()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/perfil');
+        }
+        if (!$this->uri->segment(3)) {
+            redirect(base_url() . 'admin/propiedades');
+        } else {
+
+        }
+        $propiedad_id = $this->uri->segment(3);
+        $propiedad = $this->Propiedad_model->get_propiedad_by_id($propiedad_id);
+
+
+        if ($propiedad) {
+            $propiedad = $propiedad->row();
+        } else {
+            redirect(base_url() . 'admin/propiedades');
+        }
+        // print_contenido($propiedad);
+
+        $propuesta_no = '';
+        $codigo_propiedad = $propiedad->Id_propiedad;
+        $moneda_propiedad = $propiedad->moneda_propiedad;
+        $valor_propiedad = $propiedad->precio_propiedad;
+        $fecha = '';
+        $nombre_cliente = '';
+        $correo_cliente = '';
+        $telefono_cliente = '';
+        $tipo_inmueble = $propiedad->tipo_propiedad;
+        $tipo_negociacion = $propiedad->tipo_vendedor;
+        $ubicacion = $propiedad->direccion_propiedad . ', ' . id_departamento_a_nombre($propiedad->id_departamento) . ', ' . id_municipio_a_nombre($propiedad->id_municipio) . ' Zona ' . $propiedad->id_zona;
+        $departamento = id_departamento_a_nombre($propiedad->id_departamento);
+        $banos_completos = $propiedad->baños_completos_propiedad;
+        $banos_visitas = $propiedad->baño_visita_propiedad;
+        $sala = $propiedad->sala_propiedad;
+        $agua_potable = $propiedad->agua_propiedad;
+        $parqueo = $propiedad->parqueo_propiedad;
+        $cocina = $propiedad->cocina_propiedad;
+        $niveles = $propiedad->niveles_porpiedad;
+        $balcon = $propiedad->balcon_propiedad;
+        //$cancha_fut=$propiedad->sala_propiedad;
+        //$juegos_infantiles=$propiedad->sala_propiedad;
+        //$camaras_seguridad=$propiedad->sala_propiedad;
+        //$walkiing_closet=$propiedad->sala_propiedad;
+        //$amenidades=$propiedad->sala_propiedad;
+        $mantenimiento = $propiedad->sala_propiedad;
+        $comedor = $propiedad->comedor_propiedad;
+        $lavanderia = $propiedad->lavanderia_propiedad;
+        $habitaciones = $propiedad->habitaciones_propiedad;
+        $sala_familiar = $propiedad->sala_famiiar_propiedad;
+        $cuarto_servicio = $propiedad->cuarto_servicio_propiedad;
+        $pergola = $propiedad->pergola_propiedad;
+        $garita_seguridad = $propiedad->garita_control_propiedad;
+        $seguridad_privada = $propiedad->seguridad_privada_propiedad;
+        $observaciones = $propiedad->comentario_propiedad;
+        $gp_contacto = $propiedad->nombre_contacto_propiedad;
+        $telefono = $propiedad->telefono;
+        $correo = $propiedad->correo_contacto;
+
+        //generar pdf
+        // create new PDF document
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+        // set document information
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('GP Compras');
+        $pdf->SetTitle('Pedido ');
+        $pdf->SetSubject('Solicitud de pago por planilla');
+        $pdf->SetKeywords('GP compras');
+        // remove default header/footer
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        // set default header data
+        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE . ' 061', PDF_HEADER_STRING);
+        // set header and footer fonts
+        //$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+        $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+        // set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        // set margins
+        $pdf->SetMargins(PDF_MARGIN_LEFT, 0, PDF_MARGIN_RIGHT);
+        //$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+        // set auto page breaks
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        // set image scale factor
+
+        // ---------------------------------------------------------
+        // set font
+        //$pdf->SetFont('helvetica', '', 10);
+        // add a page
+        $pdf->AddPage();
+        /* NOTE:
+         * *********************************************************
+         * You can load external XHTML using :
+         *
+         * $html = file_get_contents('/path/to/your/file.html');
+         *
+         * External CSS files will be automatically loaded.
+         * Sometimes you need to fix the path of the external CSS.
+         * *********************************************************
+         */
+        // define some HTML content with style
+        $html = '<style>
+        .t-center,h1{text-align:center}#cuadro_firma,.datos_productos table,.datos_productos td,.datos_productos th{border:1px solid #000}.w-100{width:100%}.w-90{width:90%}.w-80{width:80%}.w-70{width:70%}.w-60{width:60%}.w-50{width:50%}.w-40{width:40%}.w-30{width:30%}.w-20{width:20%}.w-10{width:10%}.forma_pdf{width:800px;background:#f7f4f3;font-family:Arial}.forma_pdf_container{margin:10px auto;width:97%}.titulo{color:#f19800;font-size:24px;font-weight:700;padding-top:11px;display:block}#logo{height:auto;width:180px}h1{font-size:30px}.datos_cliente{margin-bottom:20px}table{border-collapse:separate!important;border-spacing:0!important;padding:5px}.datos_productos{margin:10px auto}.tl-d{text-align:right}#entrega{margin:40px auto}#cuadro_firma{width:300px;height:160px}
+</style>';
+
+        $html .= '<div class="forma_pdf" style=" width: 800px; background: #f7f4f3;     font-family: Arial;">';
+        $html .= '<div id="table_container">';
+        $html .= '<table style="width: 100%;">';
+        $html .= '<tr>';
+        $html .= '<td colspan="2" style="text-align: center;padding: 0.5cm 0cm;">';
+        $html .= '<a href="https://gpcasas.net">GPCASA.NET</a>';
+        $html .= '</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td rowspan="4">';
+        $html .= '<div id="img_wraper" style="width: 14cm; height: 10cm;overflow: hidden;">';
+        $html .= '<img src="https://gpcasas.net//web/propiedades_pic/156.jpg" style="width: 100%;">';
+        $html .= '</div>';
+        $html .= '</td>';
+        $html .= '<td class="t_header">';
+        $html .= '<b>PROPUESTA</b> 005';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td class="t_header">';
+        $html .= '<b>CODIGO</b> 156';
+        $html .= '</td>';
+        $html .= '</tr>';
+        $html .= '<td class="t_header"><b>VALOR</b>$750.00 ';
+        $html .= '</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td class="t_header"><b>FECHA</b> 2/12/2021';
+        $html .= '</td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $html .= '<table>';
+        $html .= '<tr>';
+        $html .= '<td>Cliente:</td>';
+        $html .= '<td>Alexandro Cáseres</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>Correo</td>';
+        $html .= '<td>caceres.gt@gmail.com</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>Telefono</td>';
+        $html .= '<td>5538 1539</td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+        $html .= '<table>';
+        $html .= '<tr>';
+        $html .= '<td>Tipo de inmueble </td>';
+        $html .= '<td>Tipo de Negociación</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td colspan="2">Ubicación</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td colspan="2">Departamento</td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+        $html .= '<table>';
+        $html .= '<tr>';
+        $html .= '<td>Baños completos</td>';
+        $html .= '<td>Comedor</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>Baño visitas</td>';
+        $html .= '<td>Lavanderia</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>Sala</td>';
+        $html .= '<td>Habitaciones</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>Agua potable</td>';
+        $html .= '<td>Sala Familiar</td>';
+        $html .= '</tr>';
+        $html .= '<td>Parqueo</td>';
+        $html .= '<td>Cuarto de Servicio</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>Cocina</td>';
+        $html .= '<td>Walking Closet</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>Niveles</td>';
+        $html .= '<td>Pérgola</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>Balcon</td>';
+        $html .= '<td>Garita de Seguridad</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>Cancha de Fut</td>';
+        $html .= '<td>Amenidades</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>Juegos Infantiles</td>';
+        $html .= '<td>Seguridad privada</td>';
+        $html .= '</tr>';
+        $html .= '<tr>';
+        $html .= '<td>Camaras de seguridad</td>';
+        $html .= '<td>Mantenimiento</td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+        $html .= '<table>';
+        $html .= '<tr>';
+        $html .= '<td>Observaciones</td>';
+        $html .= '</tr>';
+        $html .= '</table>';
+
+
+        $html .= '</div>';
+        $html .= '</div>';
+
+// output the HTML content
+        $pdf->writeHTML($html, true, false, true, false, '');
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // reset pointer to the last page
+        $pdf->lastPage();
+        // ---------------------------------------------------------
+        //Close and output PDF document
+        //$apdf = $pdf->Output('/home2/gpautos/gpcompras-/pdf/solicitud_planilla/solicitud_pedido_'.$pedido_id.'.pdf', 'F');
+        //$this->email->attach('/home2/gpautos/gpcompras-/pdf/solicitud_planilla/solicitud_pedido_'.$pedido_id.'.pdf');
+        //$pdf->Output('laura pausini', 'I');
+
+        //============================================================
+        // END OF FILE
+        //============================================================
+
+//Close and output PDF document
+        $pdf->Output('example_039.pdf', 'I');
+
+
+    }
+
     /*public function borrar_imagen()
     {
         //Id de imagen desde segmento URL
@@ -529,8 +793,8 @@ class Admin extends Base_Controller
 
             //echo 'la imagen no existe';
         }
-    }
-    */
+    }*/
+
 
     //banners
     public function banners()
@@ -545,18 +809,23 @@ class Admin extends Base_Controller
         }
 
     }
+
     public function banners_inactivos()
     {
     }
+
     public function crear_banner()
     {
     }
+
     public function guardar_banner()
     {
     }
+
     public function desactivar_banner()
     {
     }
+
     public function crear_banner_header()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -575,6 +844,7 @@ class Admin extends Base_Controller
 
         echo $this->templates->render('admin/admin_crear_banner_header', $data);
     }
+
     public function guardar_banner_header()
     {
         // print_contenido($_POST);
@@ -615,6 +885,7 @@ class Admin extends Base_Controller
 
 
     }
+
     public function banners_header()
     {
         if (!$this->ion_auth->logged_in()) {
@@ -628,6 +899,7 @@ class Admin extends Base_Controller
         $data['banners'] = $this->Banners_model->banners_header();
         echo $this->templates->render('admin/admin_banners_header', $data);
     }
+
     public function editar_banner_header()
     {
         //id banner
@@ -635,6 +907,7 @@ class Admin extends Base_Controller
         $data['banner_data'] = $this->Banners_model->banner_header_data($data['id_banner']);
         echo $this->templates->render('admin/admin_editar_banner_header', $data);
     }
+
     public function actualizar_banner_header()
     {
         /* echo '<pre>';
@@ -655,6 +928,7 @@ class Admin extends Base_Controller
         $this->Banners_model->actualizar_banners_header($post_data);
         redirect(base_url() . 'admin/banners_header/');
     }
+
     public function actualizar_banner()
     {
         $post_data = array(
