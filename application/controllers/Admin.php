@@ -557,9 +557,15 @@ class Admin extends Base_Controller
         $moneda_propiedad = $propiedad->moneda_propiedad;
         $valor_propiedad = $propiedad->precio_propiedad;
         $fecha = '';
-        $nombre_cliente = '';
-        $correo_cliente = '';
-        $telefono_cliente = '';
+        /**
+        datos de cliente a quien mandar la informacion
+		 **/
+        $nombre_cliente = 'Alexandro Cáseres-';
+        $correo_cliente = 'caceres.gt@gmail.com';
+        $telefono_cliente = '55381539';
+
+
+
         $tipo_inmueble = $propiedad->tipo_propiedad;
         $tipo_negociacion = $propiedad->tipo_vendedor;
         $ubicacion = $propiedad->direccion_propiedad . ', ' . id_departamento_a_nombre($propiedad->id_departamento) . ', ' . id_municipio_a_nombre($propiedad->id_municipio) . ' Zona ' . $propiedad->id_zona;
@@ -638,119 +644,41 @@ class Admin extends Base_Controller
         $html = '<style>
         .t-center,h1{text-align:center}#cuadro_firma,.datos_productos table,.datos_productos td,.datos_productos th{border:1px solid #000}.w-100{width:100%}.w-90{width:90%}.w-80{width:80%}.w-70{width:70%}.w-60{width:60%}.w-50{width:50%}.w-40{width:40%}.w-30{width:30%}.w-20{width:20%}.w-10{width:10%}.forma_pdf{width:800px;background:#f7f4f3;font-family:Arial}.forma_pdf_container{margin:10px auto;width:97%}.titulo{color:#f19800;font-size:24px;font-weight:700;padding-top:11px;display:block}#logo{height:auto;width:180px}h1{font-size:30px}.datos_cliente{margin-bottom:20px}table{border-collapse:separate!important;border-spacing:0!important;padding:5px}.datos_productos{margin:10px auto}.tl-d{text-align:right}#entrega{margin:40px auto}#cuadro_firma{width:300px;height:160px}
 </style>';
-
         $html .= '<div class="forma_pdf" style=" width: 800px; background: #f7f4f3;     font-family: Arial;">';
         $html .= '<div id="table_container">';
-        $html .= '<table style="width: 100%;">';
-        $html .= '<tr>';
-        $html .= '<td colspan="2" style="text-align: center;padding: 0.5cm 0cm;">';
-        $html .= '<a href="https://gpcasas.net">GPCASA.NET</a>';
-        $html .= '</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td rowspan="4">';
-        $html .= '<div id="img_wraper" style="width: 14cm; height: 10cm;overflow: hidden;">';
-        $html .= '<img src="https://gpcasas.net//web/propiedades_pic/156.jpg" style="width: 100%;">';
+
+
+		$html .= '<table style="width: 100%;" border="1">';
+		$html .= '<tbody>';
+		$html .= '<tr><td colspan="2" style="text-align: center;padding: 0.5cm 0cm;"><a href="https://gpcasas.net">GPCASA.NET</a></td></tr>';
+		$html .= '<tr><td rowspan="4"><div id="img_wraper" style="width: 14cm; height: 10cm;overflow: hidden;"><img src="https://gpcasas.net//web/propiedades_pic/156.jpg" style="width: 14cm;"></div></td><td class="t_header"><b>PROPUESTA</b>005</td></tr>';
+		$html .= '<tr><td class="t_header"><b>CODIGO</b>156</td></tr>';
+		$html .= '<tr><td class="t_header"><b>VALOR</b>$750.00</td></tr>';
+		$html .= '<tr><td class="t_header"><b>FECHA</b>2/12/2021</td></tr>';
+		$html .= '</table>';
+		$html .= '</tbody>';
+		$html .= '<table>';
+
+        $html .= '<table>';
+		$html .= '<tr>';
+		$html .= '<td>Cliente:</td>';
+		$html .= '<td>'.$nombre_cliente.'</td>';
+		$html .= '</tr>';
+		$html .= '<tr>';
+		$html .= '<td>Correo</td>';
+		$html .= '<td>'.$correo_cliente.'</td>';
+		$html .= '</tr>';
+		$html .= '<tr>';
+		$html .= '<td>Telefono</td>';
+		$html .= '<td>'.$telefono_cliente.'</td>';
+		$html .= '</tr>';
+		$html .= '</table>';
+        $html .= '';
+        $html .= '';
         $html .= '</div>';
-        $html .= '</td>';
-        $html .= '<td class="t_header">';
-        $html .= '<b>PROPUESTA</b> 005';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td class="t_header">';
-        $html .= '<b>CODIGO</b> 156';
-        $html .= '</td>';
-        $html .= '</tr>';
-        $html .= '<td class="t_header"><b>VALOR</b>$750.00 ';
-        $html .= '</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td class="t_header"><b>FECHA</b> 2/12/2021';
-        $html .= '</td>';
-        $html .= '</tr>';
-        $html .= '</table>';
-
-        $html .= '<table>';
-        $html .= '<tr>';
-        $html .= '<td>Cliente:</td>';
-        $html .= '<td>Alexandro Cáseres</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td>Correo</td>';
-        $html .= '<td>caceres.gt@gmail.com</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td>Telefono</td>';
-        $html .= '<td>5538 1539</td>';
-        $html .= '</tr>';
-        $html .= '</table>';
-        $html .= '<table>';
-        $html .= '<tr>';
-        $html .= '<td>Tipo de inmueble </td>';
-        $html .= '<td>Tipo de Negociación</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td colspan="2">Ubicación</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td colspan="2">Departamento</td>';
-        $html .= '</tr>';
-        $html .= '</table>';
-        $html .= '<table>';
-        $html .= '<tr>';
-        $html .= '<td>Baños completos</td>';
-        $html .= '<td>Comedor</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td>Baño visitas</td>';
-        $html .= '<td>Lavanderia</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td>Sala</td>';
-        $html .= '<td>Habitaciones</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td>Agua potable</td>';
-        $html .= '<td>Sala Familiar</td>';
-        $html .= '</tr>';
-        $html .= '<td>Parqueo</td>';
-        $html .= '<td>Cuarto de Servicio</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td>Cocina</td>';
-        $html .= '<td>Walking Closet</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td>Niveles</td>';
-        $html .= '<td>Pérgola</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td>Balcon</td>';
-        $html .= '<td>Garita de Seguridad</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td>Cancha de Fut</td>';
-        $html .= '<td>Amenidades</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td>Juegos Infantiles</td>';
-        $html .= '<td>Seguridad privada</td>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td>Camaras de seguridad</td>';
-        $html .= '<td>Mantenimiento</td>';
-        $html .= '</tr>';
-        $html .= '</table>';
-
-        $html .= '<table>';
-        $html .= '<tr>';
-        $html .= '<td>Observaciones</td>';
-        $html .= '</tr>';
-        $html .= '</table>';
 
 
-        $html .= '</div>';
-        $html .= '</div>';
+
 
 // output the HTML content
         $pdf->writeHTML($html, true, false, true, false, '');
