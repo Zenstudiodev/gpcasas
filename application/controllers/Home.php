@@ -91,6 +91,7 @@ class Home extends Base_Controller
         $telefono = $this->input->post('telefono');
         $email = $this->input->post('email');
         $precio_propiedad = $this->input->post('precio_propiedad');
+        exit();
         if($email){
             $this->load->library('email');
             //configuracion de correo
@@ -112,9 +113,9 @@ class Home extends Base_Controller
             $message .= "<tr><td><strong>precio_propiedad</strong> </td><td>" . strip_tags($precio_propiedad) . "</td></tr>";
             $message .= '</table>';
             $message .= '</body></html>';
-            $this->email->message($message);
+           // $this->email->message($message);
             //enviar correo
-            $this->email->send();
+            //$this->email->send();
             // Will only print the email headers, excluding the message subject and body
             $this->email->print_debugger(array('headers'));
             $this->session->set_flashdata('mensaje', 'Gracias por escribirnos pronto nos pondermos en contacto');
