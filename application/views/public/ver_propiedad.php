@@ -434,7 +434,7 @@ $mensaje_informacion = array(
                     <div class="card-body">
                         <h5 class="card-title">Datos de contacto</h5>
                         <p>Correo de contacto: ivonnediaz@gpcasas.net</p>
-                        <p>Teléfono: <a href="tel:+50256496977">5649 6977</a></p>
+                        <p>Teléfono: <a href="tel:+502<?php echo $propiedad->telefono; ?>"><?php echo $propiedad->telefono; ?></a></p>
 
                     </div>
                 </div>
