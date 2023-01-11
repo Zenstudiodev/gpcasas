@@ -801,6 +801,36 @@ class Admin extends Base_Controller
 
 	}
 
+	public function asignar_asesores(){
+        if (!$this->ion_auth->logged_in()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/login');
+        }
+        if (!$this->ion_auth->is_admin()) {
+            // redirect them to the login page
+            redirect(base_url() . 'User/perfil');
+        }
+
+        $data['menu'] = 'si';
+        $data['propiedades_pendientes'] = $this->Propiedad_model->get_propiedades_activas();
+
+        //obtener asesores grupo 3
+        $asesores = $this->User_model->get_users_in_group('3')->result();
+        $data['asesores'] = $asesores;
+        //print_contenido($asesores);
+        echo $this->templates->render('admin/asignar_asesor', $data);
+    }
+    public function asignar_asesor() {
+        print_contenido($_POST);
+
+        $datos = array(
+            'propiedad_asesor_id' => $this->input->post('propiedad_asesor_id'),
+            'Id_propiedad' => $this->input->post('Id_propiedad'),
+        );
+        // print_contenido($datos);
+        $this->Propiedad_model->asignar_asesor($datos);
+    }
+
 	/*public function borrar_imagen()
 	{
 		//Id de imagen desde segmento URL

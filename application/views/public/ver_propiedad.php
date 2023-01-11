@@ -47,6 +47,13 @@ $mensaje_informacion = array(
 
 <?php $this->start('css_p') ?>
 <link rel="stylesheet" href="<?php echo base_url() ?>/ui/vendor/lightbox2/css/lightbox.min.css">
+
+<title><?php
+if ($propiedad) {
+    echo $propiedad->Id_propiedad . ' ' . $propiedad->titulo_propiedad.' '.id_municipio_a_nombre($propiedad->id_municipio).' '.id_departamento_a_nombre($propiedad->id_departamento);
+} else {
+    echo 'Propiedad no disponible';
+} ?> - GP CASAS Guatemala</title>
 <?php $this->stop() ?>
 
 <?php $this->start('page_content') ?>
@@ -435,6 +442,7 @@ $mensaje_informacion = array(
                         <h5 class="card-title">Datos de contacto</h5>
                         <p>Correo de contacto: ivonnediaz@gpcasas.net</p>
                         <p>Teléfono: <a href="tel:+502<?php echo $propiedad->telefono; ?>"><?php echo $propiedad->telefono; ?></a></p>
+                        <p><a href="https://wa.me/502<?php echo $propiedad->telefono; ?>?text=estoy interesado en la popiedad <?php echo $propiedad->Id_propiedad; ?> - <?php echo $propiedad->titulo_propiedad; ?>" class="btn btn-success" target="_blank"> <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar información</a></p>
 
                     </div>
                 </div>

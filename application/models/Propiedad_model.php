@@ -347,14 +347,11 @@ class Propiedad_model extends CI_Model
 
     }
     public function asignar_asesor($data){
-
-        $propiedad_id = $data['id_propiedad'];
-        $datos_propiedad = array(
-            'asesor_id_propiedad' => $data['id_asesor'],
+        $datos = array(
+            'propiedad_asesor_id'=> $data['propiedad_asesor_id'],
         );
-        //print_contenido($datos_propiedad);
-        $this->db->where('Id_propiedad', $data['id_propiedad']);
-        $query = $this->db->update('propiedades', $datos_propiedad);
+        $this->db->where('Id_propiedad', $data['Id_propiedad']);
+        $query = $this->db->update('propiedades', $datos);
     }
 
     //imagenes propiedad
@@ -404,6 +401,8 @@ class Propiedad_model extends CI_Model
         return $insert_id;
 
     }
+
+
 
 
 }

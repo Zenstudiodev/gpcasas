@@ -45,4 +45,14 @@ class User_model extends CI_Model
         // insertamon en la base de datos
         $this->db->insert('pagos', $datos_de_pago);
     }
+
+    function get_users_in_group($grupo_id){
+        $this->db->where('users_groups.group_id', $grupo_id);
+        $this->db->select('users.id, users.username, users.email, users.first_name, users.last_name, users.company, users.phone, users.direccion, users_groups.group_id');
+        $this->db->from('users');
+        $this->db->join('users_groups', 'users_groups.user_id = users.id');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
 }

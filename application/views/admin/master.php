@@ -96,6 +96,9 @@ else{
                         <a class="nav-link" href="<?php echo base_url()?>admin/propiedades">Propiedades</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url()?>admin/asignar_asesores">Asignar asesor</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url()?>admin/banners_header">Banners</a>
                     </li>
                 </ul>
