@@ -220,6 +220,15 @@ class Propiedad_model extends CI_Model
         if ($query->num_rows() > 0) return $query;
         else return false;
     }
+    public function get_propiedad_editar_by_id($id)
+    {
+        //$this->db->where('estado_propiedad', 'alta');
+        $this->db->where('Id_propiedad', $id);
+        $this->db->from('propiedades');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
     public function get_propiedad_by_id_subir($id)
     {
         //$this->db->where('estado_propiedad', 'alta');

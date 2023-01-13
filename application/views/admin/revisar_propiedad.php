@@ -69,12 +69,12 @@ foreach ($departamentos->result() as $departamento) {
                         <div class="card-body">
                             <ul class="list-group">
                                 <li class="list-group-item">Asesor
-                                    asignado <span id="assesor_asignado"><?php echo $propiedad->asesor_id_propiedad; ?></span> </li>
+                                    asignado <span id="assesor_asignado"><?php echo $propiedad->propiedad_asesor_id; ?></span> </li>
                                 <li class="list-group-item">
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="identity">Asignar asesor</label>
-                                            <?php echo form_dropdown($asesores_select, $asesores_select_options) ?>
+                                            <?php echo form_dropdown($asesores_select, $asesores_select_options, $propiedad->propiedad_asesor_id) ?>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <!--<input type="submit" value="asignar" class="btn btn-success">-->

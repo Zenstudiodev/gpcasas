@@ -440,9 +440,23 @@ if ($propiedad) {
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Datos de contacto</h5>
-                        <p>Correo de contacto: ivonnediaz@gpcasas.net</p>
-                        <p>Teléfono: <a href="tel:+502<?php echo $propiedad->telefono; ?>"><?php echo $propiedad->telefono; ?></a></p>
-                        <p><a href="https://wa.me/502<?php echo $propiedad->telefono; ?>?text=estoy interesado en la popiedad <?php echo $propiedad->Id_propiedad; ?> - <?php echo $propiedad->titulo_propiedad; ?>" class="btn btn-success" target="_blank"> <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar información</a></p>
+                        <?php if($propiedad->propiedad_asesor_id == 0){?>
+                            <p>Correo de contacto: <?php echo $propiedad->correo_contacto; ?></p>
+                            <p>Teléfono: <a href="tel:+502<?php echo $propiedad->telefono; ?>"><?php echo $propiedad->telefono; ?></a></p>
+                            <p><a href="https://wa.me/502<?php echo $propiedad->telefono; ?>?text=estoy interesado en la popiedad <?php echo $propiedad->Id_propiedad; ?> - <?php echo $propiedad->titulo_propiedad; ?>" class="btn btn-success" target="_blank"> <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar información</a></p>
+                        <?php }else{
+                            $asesor = get_datos_asesor_by_id($propiedad->propiedad_asesor_id);
+                            //print_contenido($asesor);
+
+                            ?>
+                            <p>Correo de contacto: <?php echo $asesor->email; ?></p>
+                            <p>Teléfono: <a href="tel:+502<?php echo $asesor->phone; ?>"><?php echo $asesor->phone; ?></a></p>
+                            <p><a href="https://wa.me/502<?php echo $asesor->phone; ?>?text=estoy interesado en la popiedad <?php echo $propiedad->Id_propiedad; ?> - <?php echo $propiedad->titulo_propiedad; ?>" class="btn btn-success" target="_blank"> <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar información</a></p>
+                        <?php } ?>
+                        <?php //echo $propiedad->propiedad_asesor_id; ?>
+
+
+
 
                     </div>
                 </div>

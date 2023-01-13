@@ -168,10 +168,11 @@ $zonas_input = array(
 
 $tamaño_terreno_propiedad_input = array(
     'type' => 'number',
-    'name' => 'tamaño_terreno_propiedad',
-    'id' => 'tamaño_terreno_propiedad',
-    'value'=> $propiedad->tamaño_terreno_propiedad,
+    'name' => 'tamano_terreno_propiedad',
+    'id' => 'tamano_terreno_propiedad',
+    'value'=> $propiedad->tamano_terreno_propiedad,
     'class' => ' browser-default form-control',
+    'required' => 'required'
 );
 $tipo_medida_propiedad_select = array(
     'name' => 'tipo_medida_propiedad',
@@ -653,9 +654,8 @@ $comentario_propiedad = array(
                         </div>
                     </div>
                 </div>
-
             </div>
-
+            <h4>datos propietario</h4>
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="identity">Telefono</label>
@@ -700,6 +700,51 @@ $comentario_propiedad = array(
                 </div>
 
             </div>
+            <!--<h4>datos asesor</h4>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="identity">Telefono</label>
+                    <div class="input-group">
+                        <?php /*echo form_input($telefono_input); */?>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                Whatsapp
+                                <div class="form-check ">
+                                    <?php /*echo form_radio($telefono_wp_s); */?>
+                                    <label class="form-check-label" for="telefono_wp_s">Si</label>
+
+                                    <?php /*echo form_radio($telefono_wp_n); */?>
+                                    <label class="form-check-label" for="telefono_wp_n">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="identity">Telefono 2</label>
+                    <div class="input-group">
+                        <?php /*echo form_input($telefono2_input); */?>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                Whatsapp
+                                <div class="form-check ">
+                                    <?php /*echo form_radio($telefono2_wp_s); */?>
+                                    <label class="form-check-label" for="telefono2_wp_s">Si</label>
+
+                                    <?php /*echo form_radio($telefono2_wp_n); */?>
+                                    <label class="form-check-label" for="telefono2_wp_n">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+
+                    <label for="correo_contacto">Correo contacto</label>
+                    <?php /*echo form_input($correo_contacto_input); */?>
+                </div>
+
+            </div>-->
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="identity">Tipo de propiedad</label>

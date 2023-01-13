@@ -445,7 +445,7 @@ class Admin extends Base_Controller
 		}
 		$data['menu'] = 'si';
 		$propiedad_id = $this->uri->segment(3);
-		$data['propiedad'] = $this->Propiedad_model->get_propiedad_by_id($propiedad_id);
+		$data['propiedad'] = $this->Propiedad_model->get_propiedad_editar_by_id($propiedad_id);
 		$data['fotos_propiedad'] = $this->Propiedad_model->get_fotos_de_propiedad_by_id($propiedad_id);
 		$data['departamentos'] = $this->Busqueda_model->get_departamentos();
 		echo $this->templates->render('admin/editar_propiedad', $data);
@@ -478,7 +478,7 @@ class Admin extends Base_Controller
 			'id_municipio' => $this->input->post('id_municipio'),
 			'id_zona' => $this->input->post('id_zona'),
 			'direccion_propiedad' => $this->input->post('direccion_propiedad'),
-			'tamaño_terreno_propiedad' => $this->input->post('tamaño_terreno_propiedad'),
+			'tamano_terreno_propiedad' => $this->input->post('tamano_terreno_propiedad'),
 			'tipo_medida_propiedad' => $this->input->post('tipo_medida_propiedad'),
 			'medida_construccion_propiedad' => $this->input->post('medida_construccion_propiedad'),
 			'medida_oficina_propiedad' => $this->input->post('medida_oficina_propiedad'),
@@ -516,7 +516,8 @@ class Admin extends Base_Controller
 			'agua_propiedad' => $this->input->post('agua_propiedad'),
 			'luz_propiedad' => $this->input->post('luz_propiedad'),
 			'cable_internet_propiedad' => $this->input->post('cable_internet_propiedad'),
-			'comentario_propiedad' => $this->input->post('comentario_propiedad')
+			'nombre_contacto_propiedad' => '-',
+			'comentario_propiedad' => $this->input->post('comentario_propiedad'),
 		);
 		//actualizar propiedad
 		$this->Propiedad_model->actualizar_propiedad($datos_propiedad);
@@ -537,8 +538,8 @@ class Admin extends Base_Controller
 		print_contenido($_POST);
 
 		$datos_propiedad = array(
-			'id_asesor' => $this->input->post('id_asesor'),
-			'id_propiedad' => $this->input->post('id_propiedad'),
+			'propiedad_asesor_id' => $this->input->post('id_asesor'),
+			'Id_propiedad' => $this->input->post('id_propiedad'),
 		);
 		//actualizar propiedad
 		$this->Propiedad_model->asignar_asesor($datos_propiedad);
