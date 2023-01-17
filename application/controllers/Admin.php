@@ -459,6 +459,7 @@ class Admin extends Base_Controller
 		}
 		//print_contenido($_POST);
 
+		//exit();
 		$user_id = $this->ion_auth->get_user_id();
 		$datos_propiedad = array(
 			'id_propiedad' => $this->input->post('id_propiedad'),

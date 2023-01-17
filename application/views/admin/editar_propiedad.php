@@ -1109,6 +1109,8 @@ $comentario_propiedad = array(
 <?php $this->stop() ?>
 <?php $this->start('js_p') ?>
     <script>
+        var municipio;
+         municipio = '<?php echo $propiedad->id_municipio; ?>';
         $(document).ready(function () {
             $('#id_municipio option').remove();
             departamento = $("#id_departamento").val();
@@ -1120,11 +1122,11 @@ $comentario_propiedad = array(
                     $.each(data, function (key, value) {
                         $('#id_municipio').append('<option value="' + value.id_municipio + '">' + value.nombre_municipio + '</option>');
                     });
+                    $("#id_municipio").val(municipio);
                     // $('select').material_select();
                 }
             });
         });
-
         //Actualizar municipios
         $("#id_departamento").change(function (e) {
             $('#id_municipio option').remove();
