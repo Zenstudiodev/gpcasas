@@ -136,7 +136,7 @@ class Home extends Base_Controller
     function enviar_correo_informacion()
     {
 
-
+        //print_contenido($_POST);
         $propiedad_id =$this->input->post('propiedad_id');
         $nombre = $this->input->post('nombre');
         $telefono = $this->input->post('telefono');
@@ -165,7 +165,7 @@ class Home extends Base_Controller
             $message .= '</body></html>';
             $this->email->message($message);
             //enviar correo
-            //$this->email->send();
+            $this->email->send();
             // Will only print the email headers, excluding the message subject and body
             $this->email->print_debugger(array('headers'));
             $this->session->set_flashdata('mensaje', 'Gracias por escribirnos pronto nos pondermos en contacto');

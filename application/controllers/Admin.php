@@ -310,7 +310,7 @@ class Admin extends Base_Controller
 				//echo 'imagen existe';
 				if (unlink('/home2/gpautos/gpcasas/web/propiedades_pic/' . $nombre_imagen)) {
 					$this->session->set_flashdata('mensaje', 'se borro la imagen');
-					redirect(base_url() . '/admin/subir_fotos/' . $data['prducto_id']);
+					redirect(base_url() . '/User/subir_propiedad_t/' . $data['prducto_id']);
 				} else {
 					echo 'no se borro';
 				}
@@ -323,7 +323,7 @@ class Admin extends Base_Controller
 
 		} else {
 			$this->session->set_flashdata('mensaje', 'imagen no existe');
-			redirect(base_url() . '/admin/subir_fotos/' . $data['prducto_id']);
+			redirect(base_url() . '/User/subir_propiedad_t/' . $data['prducto_id']);
 
 		}
 	}
@@ -793,7 +793,7 @@ class Admin extends Base_Controller
 // ---------------------------------------------------------
 
 //Close and output PDF document
-		$pdf->Output('example_051.pdf', 'I');
+		$pdf->Output('example_051.pdf', 'D');
 
 //============================================================+
 // END OF FILE

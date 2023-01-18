@@ -42,6 +42,12 @@ $this->layout('public/public_master',
                     <h2>Venta</h2>
                 </a>
             </div>
+            <div class="col-6 col-sm-6 col-md-2 negro_gb home_tile">
+                <a href="<?php echo base_url() ?>user/seleccionar_plan/">
+                    <span class="home_tile_icon"><i class="fa fa-map-marker"></i></span>
+                    <h2>Anunciate</h2>
+                </a>
+            </div>
             <div class="col-6 col-sm-6 col-md-2 azul_bg home_tile">
                 <a href="<?php echo base_url() ?>home/credito/">
                     <span class="home_tile_icon"><i class="fas fa-hand-holding-usd"></i></span>
@@ -52,17 +58,12 @@ $this->layout('public/public_master',
                 <span class="home_tile_icon">
                     <i class="fas fa-tape"></i>
                 </span>
-                <h2>Remodelación</h2>
+                <h2>Remodelación <small>Próximamente</small></h2>
+
             </div>
             <div class="col-6 col-sm-6 col-md-2 gris_bg home_tile">
                 <span class="home_tile_icon"><i class="fas fa-shopping-cart"></i></span>
-                <h2>Tienda</h2>
-            </div>
-            <div class="col-6 col-sm-6 col-md-2 negro_gb home_tile">
-                <a href="<?php echo base_url() ?>user/seleccionar_plan/">
-                    <span class="home_tile_icon"><i class="fa fa-map-marker"></i></span>
-                    <h2>Anunciate</h2>
-                </a>
+                <h2>Tienda <br><small>Próximamente</small></h2>
             </div>
         </div>
     </div>

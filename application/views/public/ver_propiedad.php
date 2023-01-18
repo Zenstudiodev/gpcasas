@@ -94,13 +94,13 @@ if ($propiedad) {
                 <p><span class="badge badge-info"><?php echo $propiedad->modo_propiedad; ?></span></p>
             </div>
         </div>
-        <hr>
+        <!--<hr>
         <div class="row">
             <div class="col">
-                <a class="btn btn-success" href="https://wa.me/50256496977?text=<?php echo urlencode('Quisiera información de la propiedad código: ' . $propiedad->Id_propiedad . ' Titulo: ' . $propiedad->titulo_propiedad . ' Zona: ' . $propiedad->direccion_propiedad); ?>" target="_blank"> <i class="fab fa-whatsapp"></i> Pedir información</a>
-                <a class="btn btn-info" href="#" data-toggle="modal" data-target="#staticBackdrop"> <i class="far fa-envelope"></i> Pedir información</a>
+                <a class="btn btn-success" href="https://wa.me/50256496977?text=<?php /*echo urlencode('Quisiera información de la propiedad código: ' . $propiedad->Id_propiedad . ' Titulo: ' . $propiedad->titulo_propiedad . ' Zona: ' . $propiedad->direccion_propiedad); */?>" target="_blank"> <i class="fab fa-whatsapp"></i> Pedir información</a>
+
             </div>
-        </div>
+        </div>-->
         <hr>
 
         <!-- Modal -->
@@ -434,6 +434,9 @@ if ($propiedad) {
         </div>
         <hr>
 
+        <!-- Go to www.addthis.com/dashboard to customize your tools --> <div class="addthis_inline_share_toolbox"></div>
+        <hr>
+
         <div class="row">
             <div class="col">
                 <hr>
@@ -444,6 +447,7 @@ if ($propiedad) {
                             <p>Correo de contacto: <?php echo $propiedad->correo_contacto; ?></p>
                             <p>Teléfono: <a href="tel:+502<?php echo $propiedad->telefono; ?>"><?php echo $propiedad->telefono; ?></a></p>
                             <p><a href="https://wa.me/502<?php echo $propiedad->telefono; ?>?text=estoy interesado en la popiedad <?php echo $propiedad->Id_propiedad; ?> - <?php echo $propiedad->titulo_propiedad; ?>" class="btn btn-success" target="_blank"> <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar información</a></p>
+                            <a><a class="btn btn-info" href="#" data-toggle="modal" data-target="#staticBackdrop"> <i class="far fa-envelope"></i> Solicitar información por correo</a></a>
                         <?php }else{
                             $asesor = get_datos_asesor_by_id($propiedad->propiedad_asesor_id);
                             //print_contenido($asesor);
@@ -452,6 +456,7 @@ if ($propiedad) {
                             <p>Correo de contacto: <?php echo $asesor->email; ?></p>
                             <p>Teléfono: <a href="tel:+502<?php echo $asesor->phone; ?>"><?php echo $asesor->phone; ?></a></p>
                             <p><a href="https://wa.me/502<?php echo $asesor->phone; ?>?text=estoy interesado en la popiedad <?php echo $propiedad->Id_propiedad; ?> - <?php echo $propiedad->titulo_propiedad; ?>" class="btn btn-success" target="_blank"> <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar información</a></p>
+                            <a><a class="btn btn-info" href="#" data-toggle="modal" data-target="#staticBackdrop"> <i class="far fa-envelope"></i> Solicitar información por correo</a></a>
                         <?php } ?>
                         <?php //echo $propiedad->propiedad_asesor_id; ?>
 
@@ -513,6 +518,8 @@ if ($propiedad) {
 <?php $this->start('js_p') ?>
 <script src="<?php echo base_url(); ?>/ui/vendor/lightbox2/js/lightbox-plus-jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>/ui/vendor/numeral/numeral.min.js"></script>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-63c705902d119a79"></script>
 <script>
     lightbox.option({
         'resizeDuration': 200,

@@ -52,6 +52,7 @@ if ($CI->ion_auth->logged_in()) {
             <div class="row align-items-center">
                 <div class="d-block d-sm-none col-2 ">
                     <a id="movil_menu_open">
+                        menu
                         <i class="fas fa-bars"></i>
                     </a>
                     <a id="movil_menu_close">
@@ -126,7 +127,7 @@ if (!isset($sin_banner)) {
                                         <div class="item <?php if ($start_banner < 1) {
                                             echo 'active';
                                         } ?> ">
-                                            <a href="<?php echo $banner->link_bh ?>" target="_blank"
+                                            <a href="<?php echo $banner->link_bh ?>"
                                                banner_id="<?php echo $banner->id_bh; ?>">
                                                 <img src="<?php echo base_url() .'ui/public/images/banners/'. $banner->imagen_bh.'.jpg'; ?>" class="img-fluid">
                                             </a>
