@@ -111,6 +111,16 @@ if (!isset($sin_banner)) {
                         <li><a>Reglamento</a></li>
                         <li><a href="<?php echo base_url() ?>home/contacto">Contactanos</a></li>
                     </ul>
+
+                    <div class="container add-button">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-8 col_add_btn">
+                                <button class=" btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> Instalar app</button>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
                 <div class="col-md-9">
                     <div id="banner_container">

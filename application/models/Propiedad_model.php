@@ -255,104 +255,58 @@ class Propiedad_model extends CI_Model
         $moneda = $filtros['moneda'];
         $presupuesto = $filtros['presupuesto'];
         $modo = $filtros['modo'];
-        $departamento = '';
-        $municipio = '';
-        $zona = '';
-        $precio_min = '';
-        $precio_max = '';
+        $departamento = $filtros['departamento'];
+        $municipio = $filtros['municipio'];
+        $zona = $filtros['zona'];
 
-
-        if ($filtros['presupuesto'] == '0') {
-
-
-            if ($tipo != 'TODOS') {
-                $this->db->where('tipo_propiedad', $tipo);
-            }
-            if ($modo != 'TODOS') {
-                $this->db->where('modo_propiedad', $modo);
-            }
-            $zona = $filtros['zona'];
-            if ($zona != 'TODOS') {
-                $this->db->where('id_zona', $filtros['zona']);
-            }
-            //propiedades activas
-            $this->db->where('estado_propiedad', 'alta');
-            $this->db->from('propiedades');
-            $query = $this->db->get();
-            if ($query->num_rows() > 0) return $query;
-            else return false;
-        } else {
-
+        if ($moneda =='Q'){
             $valor_en_quetzales = $filtros['presupuesto'];
             $valor_en_dolares = $filtros['presupuesto'] / 8.00;
-            $moneda_presupuesto = $filtros['moneda'];
-
-
-            //Moneda presupuesto
-            if ($moneda == 'd') {
-                $this->db->where('moneda_propiedad', '$');
-                echo $moneda;
-            }
-
-            //tipo propiedad
-            if ($tipo != 'TODOS') {
-                $this->db->where('tipo_propiedad', $tipo);
-            }
-            //modo propiedad
-            if ($modo != 'TODOS') {
-                $this->db->where('modo_propiedad', $modo);
-            }
-            // zona
-            $zona = $filtros['zona'];
-            if ($zona != 'TODOS') {
-                $this->db->where('id_zona', $filtros['zona']);
-            }
-            //departamento
-            //municipio
-            //presupuesto
-
-
-            //propiedades activas
-            $this->db->where('moneda_propiedad', 'alta');
-            $this->db->where('estado_propiedad', 'alta');
-            $this->db->from('propiedades');
-            $resultado_dolar = $this->db->get();
-            if ($resultado_dolar->num_rows() > 0) return $resultado_dolar;
-            else return false;
-
-
-            $valor_en_quetzales = $filtros['presupuesto'];
-            $valor_en_dolares = $filtros['presupuesto'] / 8.00;
-
-            echo $valor_en_dolares;
-
-            $this->db->where('tipo_propiedad', $filtros['tipo']);
-            $this->db->where('modo_propiedad', $filtros['modo']);
-            $zona = $filtros['zona'];
-            if ($zona != 'TODOS') {
-                $this->db->where('id_zona', $filtros['zona']);
-            }
-            //propiedades activas
-            $this->db->where('estado_propiedad', 'alta');
-            $this->db->from('propiedades');
-            $resultados_en_q = $this->db->get();
-           /* if ($resultados_en_q->num_rows() > 0) return $resultados_en_q;
-            else return false;*/
-
-
-
-
-            /*$valor_en_quetzales = $filtros['presupuesto'];
-            $valor_en_dolares = $filtros['presupuesto'] / 8.00;
-            $this->db->where('estado_propiedad', 'alta');
-
-            $this->db->from('propiedades');
-            $query = $this->db->get();
-            if ($query->num_rows() > 0) return $query;
-            else return false;*/
-
+            $presupuesto = $valor_en_quetzales;
 
         }
+        if ($moneda =='d'){
+            $valor_en_quetzales = $filtros['presupuesto']* 8.00;
+            $valor_en_dolares = $filtros['presupuesto'] ;
+            $presupuesto = $valor_en_quetzales;
+        }
+       /* echo 'Q.-'.$valor_en_quetzales;
+        echo '$.-'.$valor_en_dolares;*/
+       //echo 'presupesto -'.$presupuesto;
+
+
+
+
+
+        if ($tipo != 'TODOS') {
+            $this->db->where('tipo_propiedad', $tipo);
+        }
+        if ($presupuesto != '0') {
+            $this->db->where('precio_propiedad <=', $presupuesto);
+        }
+
+        if ($modo != 'TODOS') {
+            $this->db->where('modo_propiedad', $modo);
+        }
+        if ($departamento != 'TODOS') {
+            $this->db->where('id_departamento', $departamento);
+        }
+        if ($municipio != 'TODOS') {
+            //echo 'vamos a buscar municipio';
+            $this->db->where('id_municipio', $municipio);
+        }
+        if ($zona != 'TODOS') {
+            $this->db->where('id_zona', $filtros['zona']);
+        }
+        //propiedades activas
+        $this->db->where('estado_propiedad', 'alta');
+        $this->db->from('propiedades');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+
+
+
 
     }
     public function asignar_asesor($data){
