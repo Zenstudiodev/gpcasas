@@ -55,8 +55,11 @@ $this->layout('public/public_master',
 
             </div>
             <div class="col-6 col-sm-6 col-md-2 gris_bg home_tile">
+
+                <a href="<?php echo base_url() ?>/productos/categoria/1">
                 <span class="home_tile_icon"><i class="fas fa-shopping-cart"></i></span>
                 <h2>Tienda <br><small>Próximamente</small></h2>
+                </a>
             </div>
         </div>
     </div>

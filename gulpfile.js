@@ -1,6 +1,27 @@
 /**
  * Created by Carlos on 22/09/2018.
  */
+
+var gulp = require("gulp"),
+    livereload = require("gulp-livereload");
+const sass = require('gulp-sass')(require('sass'));
+
+
+
+gulp.task('sass', () => {
+    return gulp.src('./ui/public/scss/**/*.scss') // Selecciona todos los archivos .scss en la carpeta sass
+        .pipe(sass().on('error', sass.logError)) // Compila los archivos Sass
+        .pipe(gulp.dest('./ui/public/css/')); // Guarda los archivos compilados en la carpeta dist/css
+});
+
+gulp.task('watch', () => {
+    livereload.listen();
+    gulp.watch('./ui/public/scss/**/*.scss', ['sass']);
+});
+
+
+
+/*
 var gulp = require("gulp"),
     watch = require("gulp-watch"),
     plumber = require("gulp-plumber"),
@@ -14,12 +35,10 @@ var gulp = require("gulp"),
     imagemin = require("gulp-imagemin"),
     livereload = require("gulp-livereload"),
     notify = require("gulp-notify");
+*/
 
-var onError = function(err){
-    console.log("Se ha producido un error: ", err.message);
-    this.emit("end");
-}
 
+/*
 gulp.task("sass", function(){
     return gulp.src("./ui/public/scss/style.scss")
         .pipe(plumber({errorHandler:onError}))
@@ -35,8 +54,8 @@ gulp.task("sass", function(){
 });
 gulp.task("watch", function(){
     livereload.listen();
-    gulp.watch("./ui/public/scss/**/*.scss", ["sass"])
-});
+    gulp.watch("./ui/public/scss/!**!/!*.scss", ["sass"])
+});*/
 gulp.task("default", gulp.parallel('sass'),  gulp.series('watch'), function(){
 
 });

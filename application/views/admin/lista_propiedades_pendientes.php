@@ -16,7 +16,7 @@ $this->layout('admin/master',
 <?php $this->stop() ?>
 
 <?php $this->start('page_content') ?>
-<div class="container">
+<div class="container-fluid">
     <?php if (isset($message)) { ?>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong><?php echo $message; ?></strong>
@@ -27,10 +27,10 @@ $this->layout('admin/master',
     <?php } ?>
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" href="<?php echo base_url()?>admin/propiedades">Activas</a>
+            <a class="nav-link " href="<?php echo base_url()?>admin/propiedades">Activas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url()?>admin/propiedades_pendientes">Pendientes</a>
+            <a class="nav-link active" href="<?php echo base_url()?>admin/propiedades_pendientes">Pendientes</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url()?>admin/propiedades_de_baja">De baja</a>
@@ -45,6 +45,7 @@ $this->layout('admin/master',
                <th>Coódigo propiedad</th>
                <th>Tipo</th>
                <th>Estado</th>
+               <th>Nombre</th>
                <th>Departamento</th>
                <th>Municipio</th>
                <th>Zona</th>
@@ -59,6 +60,7 @@ $this->layout('admin/master',
                   <td><?php echo $propiedad->Id_propiedad; ?></td>
                   <td><?php echo $propiedad->tipo_propiedad; ?></td>
                   <td><?php echo $propiedad->estado_propiedad; ?></td>
+                  <td><?php echo $propiedad->nombre_contacto_propiedad; ?></td>
                   <td><?php echo id_departamento_a_nombre($propiedad->id_departamento); ?></td>
                   <td><?php echo id_municipio_a_nombre($propiedad->id_municipio); ?></td>
                   <td><?php echo $propiedad->id_zona; ?></td>

@@ -138,11 +138,60 @@ class Home extends Base_Controller
 
         //print_contenido($_POST);
         $propiedad_id =$this->input->post('propiedad_id');
+        $tipo_propiedad = $this->input->post('tipo_propiedad');
+        $modo_propiedad = $this->input->post('modo_propiedad');
         $nombre = $this->input->post('nombre');
         $telefono = $this->input->post('telefono');
         $email = $this->input->post('email');
-        $precio_propiedad = $this->input->post('mensaje_informacion');
-        if($email){
+        $mensaje = $this->input->post('mensaje_informacion');
+
+        $captcha=$_POST['g-recaptcha-response'];
+        //$captcha=$_GET["g-recaptcha-response"];
+        $response =file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".G_CAPTCHA_SEC."&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']);
+        $response = json_decode($response);
+        //print_contenido($_POST);
+        //print_contenido($response);
+        //echo $response->success;
+        //exit();
+        if($response->success){
+
+            // Inicializar la solicitud CURL
+            $curl = curl_init();
+
+            // Establecer la URL del otro dominio
+            curl_setopt($curl, CURLOPT_URL, 'https://gpautos.net/Seguimientos/guardar_registro_propiedad_gpcasas');
+
+            // Establecer el método de solicitud como POST
+            curl_setopt($curl, CURLOPT_POST, true);
+
+            // Establecer los datos a enviar en la solicitud
+            $data = json_encode(array(
+                'propiedad_id' => $propiedad_id,
+                'tipo_propiedad' => $tipo_propiedad,
+                'modo_propiedad' => $modo_propiedad,
+                'nombre' => $nombre,
+                'telefono' => $telefono,
+                'email' => $email,
+                'mensaje' => $mensaje,
+            ));
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+
+            // Establecer las cabeceras
+            $headers = array(
+                'Content-Type: application/json'
+            );
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+            // Deshabilitar la verificación de certificado SSL (solo para fines de prueba)
+            //curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+            // Enviar la solicitud
+            curl_exec($curl);
+
+            // Cerrar la solicitud CURL
+            curl_close($curl);
+
+
             $this->load->library('email');
             //configuracion de correo
             $config['mailtype'] = 'html';
@@ -160,7 +209,7 @@ class Home extends Base_Controller
             $message .= "<tr><td><strong>Nombre:</strong> </td><td>" . strip_tags($nombre) . "</td></tr>";
             $message .= "<tr><td><strong>Teléfono:</strong> </td><td>" . strip_tags($telefono) . "</td></tr>";
             $message .= "<tr><td><strong>Correo:</strong> </td><td>" . strip_tags($email) . "</td></tr>";
-            $message .= "<tr><td><strong>precio_propiedad</strong> </td><td>" . strip_tags($precio_propiedad) . "</td></tr>";
+            $message .= "<tr><td><strong>Mensaje</strong> </td><td>" . strip_tags($mensaje) . "</td></tr>";
             $message .= '</table>';
             $message .= '</body></html>';
             $this->email->message($message);
@@ -171,7 +220,7 @@ class Home extends Base_Controller
             $this->session->set_flashdata('mensaje', 'Gracias por escribirnos pronto nos pondermos en contacto');
             redirect(base_url() . 'Propiedades/ver/'.$propiedad_id);
         }else{
-            redirect(base_url() . 'home');
+            redirect(base_url() . 'Propiedades/ver/'.$propiedad_id);
         }
 
     }

@@ -62,6 +62,18 @@ if ($propiedad) {
     <div class="container">
         <div class="row">
             <div class="col">
+                <?php if (isset($mensaje)) { ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <?php echo $mensaje ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
                 <p>Código de propiedad <span class="codigo_propiedad"><?php echo $propiedad->Id_propiedad; ?></span></p>
             </div>
         </div>
@@ -116,6 +128,8 @@ if ($propiedad) {
                     <div class="modal-body">
                         <form action="<?php echo base_url() ?>home/enviar_correo_informacion" method="post">
                             <input type="hidden" name="propiedad_id" value="<?php echo $propiedad->Id_propiedad; ?>">
+                            <input type="hidden" name="tipo_propiedad" value="<?php echo $propiedad->tipo_propiedad; ?>">
+                            <input type="hidden" name="modo_propiedad" value="<?php echo $propiedad->modo_propiedad; ?>">
                             <div class="form-group col-md-12">
                                 <label for="nombre">Nombre</label>
                                 <div class="input-group mb-3">
@@ -140,11 +154,12 @@ if ($propiedad) {
                                     <?php echo form_textarea($mensaje_informacion); ?>
                                 </div>
                             </div>
+                            <div id="html_element"></div>
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button type="submit" id="solicitar_info" class="btn btn-primary">Enviar</button>
                     </div>
                     </form>
                 </div>
@@ -153,7 +168,7 @@ if ($propiedad) {
 
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <?php
                 $imagenes_propiedad = get_imgenes_propiedad_public($propiedad->Id_propiedad);
                 ?>
@@ -193,6 +208,35 @@ if ($propiedad) {
                 <?php } ?>
 
 
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Datos de contacto</h5>
+                        <?php if($propiedad->propiedad_asesor_id == 0){?>
+                            <p>Correo de contacto: <?php echo $propiedad->correo_contacto; ?></p>
+                            <p>Teléfono: <a href="tel:+502<?php echo $propiedad->telefono; ?>"><?php echo preg_replace('/\s+/', '', $propiedad->telefono); ?></a></p>
+                            <p><a href="https://wa.me/502<?php echo preg_replace('/\s+/', '', $propiedad->telefono); ?>?text=estoy interesado en la popiedad <?php echo $propiedad->Id_propiedad; ?> - <?php echo $propiedad->titulo_propiedad; ?>" class="btn btn-success" target="_blank"> <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar información</a></p>
+                            <a><a class="btn btn-info" href="#" data-toggle="modal" data-target="#staticBackdrop"> <i class="far fa-envelope"></i> Solicitar información por correo</a></a>
+                        <?php }else{
+                            $asesor = get_datos_asesor_by_id($propiedad->propiedad_asesor_id);
+                            //print_contenido($asesor);
+
+                            ?>
+                            <p>Correo de contacto: <?php echo $asesor->email; ?></p>
+                            <p>Teléfono: <a href="tel:+502<?php echo $asesor->phone; ?>"><?php echo $asesor->phone; ?></a></p>
+                            <p><a href="https://wa.me/502<?php echo $asesor->phone; ?>?text=estoy interesado en la popiedad <?php echo $propiedad->Id_propiedad; ?> - <?php echo $propiedad->titulo_propiedad; ?>" class="btn btn-success" target="_blank"> <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar información</a></p>
+                            <a><a class="btn btn-info" href="#" data-toggle="modal" data-target="#staticBackdrop"> <i class="far fa-envelope"></i> Solicitar información por correo</a></a>
+                        <?php } ?>
+                        <?php //echo $propiedad->propiedad_asesor_id; ?>
+
+
+
+
+                    </div>
+                </div>
+
+                <?php //print_contenido($propiedad); ?>
             </div>
 
         </div>
@@ -435,40 +479,8 @@ if ($propiedad) {
         <hr>
 
         <!-- Go to www.addthis.com/dashboard to customize your tools --> <div class="addthis_inline_share_toolbox"></div>
-        <hr>
-
-        <div class="row">
-            <div class="col">
-                <hr>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Datos de contacto</h5>
-                        <?php if($propiedad->propiedad_asesor_id == 0){?>
-                            <p>Correo de contacto: <?php echo $propiedad->correo_contacto; ?></p>
-                            <p>Teléfono: <a href="tel:+502<?php echo $propiedad->telefono; ?>"><?php echo $propiedad->telefono; ?></a></p>
-                            <p><a href="https://wa.me/502<?php echo $propiedad->telefono; ?>?text=estoy interesado en la popiedad <?php echo $propiedad->Id_propiedad; ?> - <?php echo $propiedad->titulo_propiedad; ?>" class="btn btn-success" target="_blank"> <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar información</a></p>
-                            <a><a class="btn btn-info" href="#" data-toggle="modal" data-target="#staticBackdrop"> <i class="far fa-envelope"></i> Solicitar información por correo</a></a>
-                        <?php }else{
-                            $asesor = get_datos_asesor_by_id($propiedad->propiedad_asesor_id);
-                            //print_contenido($asesor);
-
-                            ?>
-                            <p>Correo de contacto: <?php echo $asesor->email; ?></p>
-                            <p>Teléfono: <a href="tel:+502<?php echo $asesor->phone; ?>"><?php echo $asesor->phone; ?></a></p>
-                            <p><a href="https://wa.me/502<?php echo $asesor->phone; ?>?text=estoy interesado en la popiedad <?php echo $propiedad->Id_propiedad; ?> - <?php echo $propiedad->titulo_propiedad; ?>" class="btn btn-success" target="_blank"> <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar información</a></p>
-                            <a><a class="btn btn-info" href="#" data-toggle="modal" data-target="#staticBackdrop"> <i class="far fa-envelope"></i> Solicitar información por correo</a></a>
-                        <?php } ?>
-                        <?php //echo $propiedad->propiedad_asesor_id; ?>
 
 
-
-
-                    </div>
-                </div>
-
-                <?php //print_contenido($propiedad); ?>
-            </div>
-        </div>
         <hr>
         <div class="row">
             <div class="col">
@@ -532,6 +544,43 @@ if ($propiedad) {
     var string = numeral(<?php echo $propiedad->precio_propiedad; ?>).format('0,0.00');
     $("#precio_propiedad_h").html(string)
     // '1,000'
+</script>
+
+<script type="text/javascript">
+    var onloadCallback = function () {
+        grecaptcha.render('html_element', {
+            'sitekey': '6LdFJboZAAAAAImwK35wp6voSvlfso3EJfk9g4X-\n',
+            'callback': correctCaptcha
+        });
+    };
+
+</script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+</script>
+
+
+<script type="text/javascript">
+    var correctCaptcha = function (response) {
+        //console.log(response);
+        if (response == 0) {
+            console.log(response);
+        }
+        else {
+            console.log(response);
+            $("#solicitar_info").show();
+            document.getElementById('captcha').innerHTML = "Captcha completed";
+            return true;
+        }
+
+
+    };
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#solicitar_info").hide();
+
+    });
 </script>
 <?php $this->stop() ?>
 
