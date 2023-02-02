@@ -94,7 +94,7 @@ if ($propiedad) {
                     <i class="fas fa-bed"></i> Cuartos <span
                             class="badge badge-success"><?php echo $propiedad->habitaciones_propiedad; ?></span>
                     <i class="fas fa-parking"></i> Parqueo <span
-                            class="badge badge-success"><?php echo $propiedad->garage_propiedad; ?> </span>
+                            class="badge badge-success"><?php echo $propiedad->parqueo_propiedad; ?> </span>
                     <i class="fas fa-toilet"></i> Baños <span
                             class="badge badge-success"><?php echo $propiedad->baños_completos_propiedad; ?></span>
 
@@ -260,6 +260,7 @@ if ($propiedad) {
             <div class="col-md-4">
                 <ul class="list-group">
                     <?php if($propiedad->habitaciones_propiedad != '0'){?>
+                        <?php //echo gettype($propiedad->habitaciones_propiedad); ?>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-check-circle caracteristicas_propiedades"></i> Habitaciones </span>
                         <span class="badge badge-secondary "><?php echo $propiedad->habitaciones_propiedad; ?></span>
@@ -419,13 +420,14 @@ if ($propiedad) {
                         <span class="badge badge-secondary "><?php echo $propiedad->pergola_propiedad; ?></span>
                     </li>
                     <?php }?>
-                    <?php if($propiedad->habitaciones_propiedad != 'no'){?>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span><i class="fas fa-check-circle caracteristicas_propiedades"></i> Menaje</span>
-                        <span class="badge badge-secondary "><?php echo $propiedad->menaje_propiedad; ?></span>
-                    </li>
-                    <?php }?>
-                    <?php if($propiedad->nombre_condominio_propiedad != ' '){?>
+                    <?php if($propiedad->habitaciones_propiedad != 'incluye'){?>
+                    <?php }else{?>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-check-circle caracteristicas_propiedades"></i> Menaje</span>
+                            <span class="badge badge-secondary "><?php echo $propiedad->menaje_propiedad; ?></span>
+                        </li>
+                    <?php  }?>
+                    <?php if($propiedad->nombre_condominio_propiedad != null){?>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-check-circle caracteristicas_propiedades"></i> Nombre condominio</span>
                         <span class="badge badge-secondary "><?php echo $propiedad->nombre_condominio_propiedad; ?></span>

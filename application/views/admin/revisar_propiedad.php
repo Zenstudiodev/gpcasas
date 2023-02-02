@@ -455,7 +455,8 @@ foreach ($departamentos->result() as $departamento) {
                    href="<?php echo base_url() . 'admin/propiedades_pendientes/' ?>">Regresar</a>
                 <a type="button" class="btn btn-secondary"
                    href="<?php echo base_url() . 'admin/aprobar_propiedad/' . $propiedad->Id_propiedad ?>">Aprobar</a>
-            </div>
+                <a type="button" class="btn btn-secondary"
+                   href="<?php echo base_url() . 'admin/baja_propiedad/' . $propiedad->Id_propiedad ?>">Dar de baja</a>
         </div>
     <?php } ?>
 </div>

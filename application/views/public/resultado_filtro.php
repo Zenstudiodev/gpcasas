@@ -42,11 +42,8 @@ $CI =& get_instance();
                     <?php if ($casa->moneda_propiedad == '$' && $casa->precio_propiedad <= $presupuesto_d) { ?>
                         <div class="col-md-4 filtro_card">
                             <div class="card">
-
                                 <?php if ($imagenes_propiedad) { ?>
                                     <div class="card animated  zoomIn ">
-
-
                                         <div id="carrusel_producto_<?php echo $casa->Id_propiedad; ?>"
                                              class="carousel slide" data-ride="carousel">
                                             <div class="carousel-inner">
@@ -78,15 +75,11 @@ $CI =& get_instance();
                                                 <span class="sr-only">Next</span>
                                             </a>
                                         </div>
-
                                     </div>
                                 <?php } else { ?>
                                     <img src="<?php echo base_url() ?>/ui/public/images/img-placeholder.png"
                                          class="card-img-top" alt="...">
                                 <?php } ?>
-
-
-
 
                                 <?php
                                 /*
@@ -206,10 +199,13 @@ $CI =& get_instance();
                         </div>
                     <?php } else {} ?>
                 <?php } else {} ?>
-
-                <?php if ($smoneda == 'Q' && $casa->precio_propiedad <= $presupuesto_q) { ?>
+                 <?php if ($smoneda == 'Q') { ?>
                     <?php if ($casa->moneda_propiedad == '$' && $casa->precio_propiedad <= $presupuesto_d) { ?>
+
                         <div class="col-md-4 filtro_card">
+                           <!-- <?php /*echo ($casa->moneda_propiedad)  */?>
+                            <?php /*echo ($casa->precio_propiedad ) */?>
+                            --><?php /*echo ($presupuesto_d)  */?>
                             <div class="card">
 
                                 <?php if ($imagenes_propiedad) { ?>
@@ -294,7 +290,9 @@ $CI =& get_instance();
                     <?php if ($casa->moneda_propiedad == 'Q' && $casa->precio_propiedad <= $presupuesto_q) { ?>
                         <div class="col-md-4 filtro_card">
                             <div class="card">
-
+                                <?php /*echo ($casa->moneda_propiedad)  */?><!--
+                                <?php /*echo ($casa->precio_propiedad ) */?>
+                                --><?php /*echo ($presupuesto_q)  */?>
                                 <?php if ($imagenes_propiedad) { ?>
                                     <div class="card animated  zoomIn ">
 
@@ -375,87 +373,94 @@ $CI =& get_instance();
                         </div>
                     <?php } else {} ?>
                 <?php } else {} ?>
-                <div class="col-md-4 filtro_card">
-                    <div class="card">
+                <?php if ($presupuesto == '0') { ?>
+                    <div class="col-md-4 filtro_card">
+                        <div class="card">
 
-                        <?php if ($imagenes_propiedad) { ?>
-                            <div class="card animated  zoomIn ">
+                            <?php if ($imagenes_propiedad) { ?>
+                                <div class="card animated  zoomIn ">
 
 
-                                <div id="carrusel_producto_<?php echo $casa->Id_propiedad; ?>"
-                                     class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                        <?php
-                                        $start_banner = 0;
-                                        foreach ($imagenes_propiedad->result() as $imagen) { ?>
-                                            <div class="carousel-item item_list_r_filtro <?php if ($start_banner < 1) {
-                                                echo 'active';
-                                            } ?>">
-                                                <img class="card-img-top"
-                                                     src="<?php echo base_url() . 'web/propiedades_pic/' . $imagen->nombre_imagen; ?>"
-                                                     alt="<?php echo $casa->Id_propiedad; ?>">
-                                            </div>
-                                            <?php $start_banner++ ?>
-                                        <?php } ?>
+                                    <div id="carrusel_producto_<?php echo $casa->Id_propiedad; ?>"
+                                         class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <?php
+                                            $start_banner = 0;
+                                            foreach ($imagenes_propiedad->result() as $imagen) { ?>
+                                                <div class="carousel-item item_list_r_filtro <?php if ($start_banner < 1) {
+                                                    echo 'active';
+                                                } ?>">
+                                                    <img class="card-img-top"
+                                                         src="<?php echo base_url() . 'web/propiedades_pic/' . $imagen->nombre_imagen; ?>"
+                                                         alt="<?php echo $casa->Id_propiedad; ?>">
+                                                </div>
+                                                <?php $start_banner++ ?>
+                                            <?php } ?>
+                                        </div>
+                                        <a class="carousel-control-prev"
+                                           href="#carrusel_producto_<?php echo $casa->Id_propiedad; ?>"
+                                           role="button"
+                                           data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next"
+                                           href="#carrusel_producto_<?php echo $casa->Id_propiedad; ?>"
+                                           role="button"
+                                           data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
                                     </div>
-                                    <a class="carousel-control-prev"
-                                       href="#carrusel_producto_<?php echo $casa->Id_propiedad; ?>"
-                                       role="button"
-                                       data-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                    <a class="carousel-control-next"
-                                       href="#carrusel_producto_<?php echo $casa->Id_propiedad; ?>"
-                                       role="button"
-                                       data-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
+
                                 </div>
+                            <?php } else { ?>
+                                <img src="<?php echo base_url() ?>/ui/public/images/img-placeholder.png"
+                                     class="card-img-top" alt="...">
+                            <?php } ?>
 
-                            </div>
-                        <?php } else { ?>
-                            <img src="<?php echo base_url() ?>/ui/public/images/img-placeholder.png"
+
+
+
+                            <?php
+                            /*
+                            if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $casa->Id_propiedad . ' (1).jpg')) { ?>
+                            <img src="<?php echo base_url() . 'web/propiedades_pic/' . $casa->Id_propiedad . ' (1).jpg' ?>"
                                  class="card-img-top" alt="...">
-                        <?php } ?>
+                            <?php }else{ ?>
+                                <img src="<?php echo base_url() ?>/ui/public/images/img-placeholder.png" class="card-img-top" alt="...">
+                            <?php } */ ?>
 
+                            <div class="card-body">
+                                <div class="modo_propiedad">
+                                    <span class="badge badge-secondary"><?php echo $casa->modo_propiedad; ?></span>
+                                </div>
+                                <h5 class="card-title">
+                                    <div><?php echo $casa->tipo_propiedad; ?> </div>
+                                </h5>
+                                <div class="precio_propiedad_listado">
+                                    <?php echo $casa->moneda_propiedad; ?><?php echo $casa->precio_propiedad; ?>
+                                </div>
+                                <p>
+                                    Zona <?php echo $casa->id_zona; ?>
+                                    | <?php echo id_departamento_a_nombre($casa->id_departamento); ?>
+                                </p>
+                                <p>
+                                    <a class="btn btn-info"
+                                       href="<?php echo base_url() . 'Propiedades/ver/' . $casa->Id_propiedad ?>">Ver
+                                        Propiedad</a>
+                                </p>
 
-
-
-                        <?php
-                        /*
-                        if (file_exists('/home2/gpautos/gpcasas/web/propiedades_pic/' . $casa->Id_propiedad . ' (1).jpg')) { ?>
-                        <img src="<?php echo base_url() . 'web/propiedades_pic/' . $casa->Id_propiedad . ' (1).jpg' ?>"
-                             class="card-img-top" alt="...">
-                        <?php }else{ ?>
-                            <img src="<?php echo base_url() ?>/ui/public/images/img-placeholder.png" class="card-img-top" alt="...">
-                        <?php } */ ?>
-
-                        <div class="card-body">
-                            <div class="modo_propiedad">
-                                <span class="badge badge-secondary"><?php echo $casa->modo_propiedad; ?></span>
                             </div>
-                            <h5 class="card-title">
-                                <div><?php echo $casa->tipo_propiedad; ?> </div>
-                            </h5>
-                            <div class="precio_propiedad_listado">
-                                <?php echo $casa->moneda_propiedad; ?><?php echo $casa->precio_propiedad; ?>
-                            </div>
-                            <p>
-                                Zona <?php echo $casa->id_zona; ?>
-                                | <?php echo id_departamento_a_nombre($casa->id_departamento); ?>
-                            </p>
-                            <p>
-                                <a class="btn btn-info"
-                                   href="<?php echo base_url() . 'Propiedades/ver/' . $casa->Id_propiedad ?>">Ver
-                                    Propiedad</a>
-                            </p>
-
                         </div>
+                        <?php //print_contenido($casa); ?>
                     </div>
-                    <?php //print_contenido($casa); ?>
-                </div>
+                <?php } else {} ?>
+
+
+
+
+
             <?php } ?>
         </div>
     <?php } else { ?>
@@ -470,4 +475,3 @@ $CI =& get_instance();
 <?php $this->stop() ?>
 <?php $this->start('js_p') ?>
 <?php $this->stop() ?>
-

@@ -300,6 +300,7 @@ class Propiedad_model extends CI_Model
         }
         //propiedades activas
         $this->db->where('estado_propiedad', 'alta');
+        $this->db->order_by('precio_propiedad', 'desc');
         $this->db->from('propiedades');
         $query = $this->db->get();
         if ($query->num_rows() > 0) return $query;

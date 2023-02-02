@@ -235,7 +235,7 @@ $clave = array(
                 total_precio = total_precio + precio_manta;
             }
             if($('#check_pauta').prop('checked')){
-                total_precio = total_precio + precio_manta;
+                total_precio = total_precio + precio_pauta_redes;
             }
         }
         if (tipo_anuncio == 'vip') {

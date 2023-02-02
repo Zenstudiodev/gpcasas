@@ -118,7 +118,7 @@ $user = $user->row();
                                                 <div><?php echo $casa->tipo_propiedad; ?> </div>
                                             </h5>
                                             <div class="precio_propiedad_listado">
-                                                Q.<?php echo $casa->precio_propiedad; ?>
+                                                <?php echo $casa->moneda_propiedad; ?> <?php echo $casa->precio_propiedad; ?>
                                             </div>
                                             Zona <?php echo $casa->id_zona; ?>
                                             | <?php echo id_departamento_a_nombre($casa->id_departamento); ?>
@@ -197,7 +197,7 @@ $user = $user->row();
                                                 <div><?php echo $casa->tipo_propiedad; ?> </div>
                                             </h5>
                                             <div class="precio_propiedad_listado">
-                                                Q.<?php echo $casa->precio_propiedad; ?>
+                                                <?php echo $casa->moneda_propiedad; ?> <?php echo $casa->precio_propiedad; ?>
                                             </div>
                                             Zona <?php echo $casa->id_zona; ?>
                                             | <?php echo id_departamento_a_nombre($casa->id_departamento); ?>
@@ -275,7 +275,7 @@ $user = $user->row();
                                                 <div><?php echo $casa->tipo_propiedad; ?> </div>
                                             </h5>
                                             <div class="precio_propiedad_listado">
-                                                Q.<?php echo $casa->precio_propiedad; ?>
+                                                <?php echo $casa->moneda_propiedad; ?> <?php echo $casa->precio_propiedad; ?>
                                             </div>
                                             Zona <?php echo $casa->id_zona; ?>
                                             | <?php echo id_departamento_a_nombre($casa->id_departamento); ?>

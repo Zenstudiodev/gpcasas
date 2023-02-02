@@ -124,6 +124,7 @@ class Propiedades  extends Base_Controller
         }
         $data['presupuesto_d'] = $presupuesto_d;
         $data['presupuesto_q'] = $presupuesto_q;
+        $data['presupuesto'] = $presupuesto;
 
 
         $filtros=array(

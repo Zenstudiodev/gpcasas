@@ -46,9 +46,10 @@ $tipo_vendedor_options = array(
     'intermediario' => 'Intermediario',
 );
 $precio_input = array(
-    'type' => 'text',
+    'type' => 'number',
     'name' => 'precio',
     'id' => 'precio',
+    'steps' => 'any',
     'class' => ' browser-default form-control',
     'required' => 'required',
     'value' => $propiedad->precio_propiedad
@@ -399,9 +400,23 @@ $garage_propiedad_select = array(
 $garage_propiedad_options = array(
     'no' => 'no',
     '1 carro' => '1 carro',
-    '2 carro' => '2 carro',
-    '3 carro' => '3 carro',
-    '4 carro' => '4 carro',
+    '2 carros' => '2 carros',
+    '3 carros' => '3 carros',
+    '4 carros' => '4 carros',
+    'más de 4 carros' => 'más de 4 carros'
+);
+$parqueo_propiedad_select = array(
+    'name' => 'parqueo_propiedad',
+    'id' => 'parqueo_propiedad',
+    'class' => ' browser-default form-control',
+    'required' => 'required'
+);
+$parqueo_propiedad_options = array(
+    'no' => 'no',
+    '1 carro' => '1 carro',
+    '2 carros' => '2 carros',
+    '3 carros' => '3 carros',
+    '4 carros' => '4 carros',
     'más de 4 carros' => 'más de 4 carros'
 );
 $parqueo_propiedad_s = array(
@@ -728,6 +743,38 @@ $comentario_propiedad = array(
                                     </div>
 
                                 </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="habitaciones_propiedad">Habitaciones</label>
+                                        <?php echo form_input($habitaciones_propiedad_input); ?>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="baños_completos_propiedad">Baños completos</label>
+                                        <?php echo form_input($baños_completos_propiedad_input); ?>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="baño_visita_propiedad">Baño de visitas</label>
+                                        <?php echo form_input($baño_visita_propiedad_input); ?>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                    <label for="baño_visita_propiedad">Niveles</label>
+                                    <?php echo form_input($niveles_porpiedad); ?>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="cable_internet_propiedad">parqueo propiedad</label>
+                                        <div class="form-check ">
+                                            <?php echo form_dropdown($parqueo_propiedad_select, $parqueo_propiedad_options, $propiedad->parqueo_propiedad ) ?>
+
+                                            <?php /*echo form_radio($parqueo_propiedad_s); */?><!--
+                                            <label class="form-check-label" for="cable_internet_propiedad_s">Si</label>
+                                            <?php /*echo form_radio($parqueo_propiedad_n); */?>
+                                            <label class="form-check-label" for="cable_internet_propiedad_n">No</label>-->
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="comentario_propiedad">Descripción</label>
                                     <?php echo form_textarea($comentario_propiedad); ?>
@@ -843,20 +890,6 @@ $comentario_propiedad = array(
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
-                                        <label for="habitaciones_propiedad">Habitaciones</label>
-                                        <?php echo form_input($habitaciones_propiedad_input); ?>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="baños_completos_propiedad">Baños completos</label>
-                                        <?php echo form_input($baños_completos_propiedad_input); ?>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="baño_visita_propiedad">Baño de visitas</label>
-                                        <?php echo form_input($baño_visita_propiedad_input); ?>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
                                         <label for="habitaciones_propiedad">Balcón</label>
                                         <div class="form-check ">
                                             <?php echo form_radio($balcon_propiedad_s); ?>
@@ -866,10 +899,6 @@ $comentario_propiedad = array(
                                             <label class="form-check-label" for="balcon_propiedad_n">No</label>
                                         </div>
 
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="baño_visita_propiedad">Niveles</label>
-                                        <?php echo form_input($niveles_porpiedad); ?>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="habitaciones_propiedad">Cocina</label>
@@ -972,15 +1001,6 @@ $comentario_propiedad = array(
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label for="cable_internet_propiedad">parqueo propiedad</label>
-                                        <div class="form-check ">
-                                            <?php echo form_radio($parqueo_propiedad_s); ?>
-                                            <label class="form-check-label" for="cable_internet_propiedad_s">Si</label>
-                                            <?php echo form_radio($parqueo_propiedad_n); ?>
-                                            <label class="form-check-label" for="cable_internet_propiedad_n">No</label>
-                                        </div>
-                                    </div>
                                     <div class="form-group col-md-4">
                                         <label for="parqueo_visitas_propiedad">Parqueo visitas</label>
                                         <?php echo form_dropdown($parqueo_visitas_propiedad_select, $parqueo_visitas_propiedad_options,$propiedad->parqueo_visitas_propiedad ); ?>
@@ -1347,7 +1367,8 @@ $comentario_propiedad = array(
         gas_propano_propiedad = $("input[name='gas_propano_propiedad']:checked").val();
         calentador_agua_propiedad = $("input[name='desayunador_propiedad']:checked").val();
         garage_propiedad = $("#garage_propiedad option:selected").text();
-        parqueo_propiedad =  $("input[name='parqueo_propiedad']:checked").val();
+        //parqueo_propiedad =  $("input[name='parqueo_propiedad']:checked").val();
+        parqueo_propiedad =  $("#parqueo_propiedad option:selected").text();
         parqueo_visitas_propiedad =$("#parqueo_visitas_propiedad option:selected").text();
         seguridad_privada_propiedad = $("input[name='seguridad_privada_propiedad']:checked").val();
         garita_control_propiedad = $("input[name='garita_control_propiedad']:checked").val();
@@ -1496,7 +1517,11 @@ $comentario_propiedad = array(
 </script>
 
 <script>
+    var municipio;
+    municipio = '<?php echo $propiedad->id_municipio; ?>';
+
     $(document).ready(function () {
+
         $('#id_municipio option').remove();
         departamento = $("#id_departamento").val();
         $.ajax({
@@ -1508,6 +1533,9 @@ $comentario_propiedad = array(
                     $('#id_municipio').append('<option value="' + value.id_municipio + '">' + value.nombre_municipio + '</option>');
                 });
                 // $('select').material_select();
+                $("#id_municipio").val(municipio);
+                const $select = document.querySelector('#id_municipio');
+                $select.value = municipio;
             }
         });
     });
@@ -1524,6 +1552,7 @@ $comentario_propiedad = array(
                 $.each(data, function (key, value) {
                     $('#id_municipio').append('<option value="' + value.id_municipio + '">' + value.nombre_municipio + '</option>');
                 });
+                $("#id_municipio").val(municipio);
             }
         });
     });

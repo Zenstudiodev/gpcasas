@@ -102,6 +102,7 @@ $presupuesto = array(
     'name' => 'presupuesto',
     'id' => 'presupuesto',
     'value' => '0',
+    'step' => '1',
     'class' => ' browser-default form-control',
 
 );
@@ -128,7 +129,7 @@ $codigo = array(
     'type' => 'number',
     'name' => 'codigo',
     'id' => 'codigo',
-    'value' => '0',
+    'placeholder' => 'codigo de propiedad',
     'class' => ' browser-default form-control',
 
 );
