@@ -98,11 +98,13 @@ $CI =& get_instance();
                                         <div><?php echo $casa->tipo_propiedad; ?> </div>
                                     </h5>
                                     <div class="precio_propiedad_listado">
-                                        <?php echo $casa->moneda_propiedad; ?><?php echo $casa->precio_propiedad; ?>
+                                        <?php echo $casa->moneda_propiedad; ?><span class="precio_propiedad"><?php echo $casa->precio_propiedad; ?></span>
+
+
                                     </div>
                                     <p>
-                                        Zona <?php echo $casa->id_zona; ?>
-                                        | <?php echo id_departamento_a_nombre($casa->id_departamento); ?>
+                                        Zona <?php echo $casa->id_zona; ?> <br>
+                                        <?php echo id_departamento_a_nombre($casa->id_departamento); ?> | <?php echo id_municipio_a_nombre($casa->id_municipio); ?>
                                     </p>
                                     <p>
                                         <a class="btn btn-info"
@@ -181,11 +183,11 @@ $CI =& get_instance();
                                         <div><?php echo $casa->tipo_propiedad; ?> </div>
                                     </h5>
                                     <div class="precio_propiedad_listado">
-                                        <?php echo $casa->moneda_propiedad; ?><?php echo $casa->precio_propiedad; ?>
+                                        <?php echo $casa->moneda_propiedad; ?><span class="precio_propiedad"><?php echo $casa->precio_propiedad; ?></span>
                                     </div>
                                     <p>
-                                        Zona <?php echo $casa->id_zona; ?>
-                                        | <?php echo id_departamento_a_nombre($casa->id_departamento); ?>
+                                        Zona <?php echo $casa->id_zona; ?> <br>
+                                        <?php echo id_departamento_a_nombre($casa->id_departamento); ?> | <?php echo id_municipio_a_nombre($casa->id_municipio); ?>
                                     </p>
                                     <p>
                                         <a class="btn btn-info"
@@ -270,11 +272,11 @@ $CI =& get_instance();
                                         <div><?php echo $casa->tipo_propiedad; ?> </div>
                                     </h5>
                                     <div class="precio_propiedad_listado">
-                                        <?php echo $casa->moneda_propiedad; ?><?php echo $casa->precio_propiedad; ?>
+                                        <?php echo $casa->moneda_propiedad; ?><span class="precio_propiedad"><?php echo $casa->precio_propiedad; ?></span>
                                     </div>
                                     <p>
-                                        Zona <?php echo $casa->id_zona; ?>
-                                        | <?php echo id_departamento_a_nombre($casa->id_departamento); ?>
+                                        Zona <?php echo $casa->id_zona; ?> <br>
+                                        <?php echo id_departamento_a_nombre($casa->id_departamento); ?> | <?php echo id_municipio_a_nombre($casa->id_municipio); ?>
                                     </p>
                                     <p>
                                         <a class="btn btn-info"
@@ -355,11 +357,11 @@ $CI =& get_instance();
                                         <div><?php echo $casa->tipo_propiedad; ?> </div>
                                     </h5>
                                     <div class="precio_propiedad_listado">
-                                        <?php echo $casa->moneda_propiedad; ?><?php echo $casa->precio_propiedad; ?>
+                                        <?php echo $casa->moneda_propiedad; ?><span class="precio_propiedad"><?php echo $casa->precio_propiedad; ?></span>
                                     </div>
                                     <p>
-                                        Zona <?php echo $casa->id_zona; ?>
-                                        | <?php echo id_departamento_a_nombre($casa->id_departamento); ?>
+                                        Zona <?php echo $casa->id_zona; ?> <br>
+                                        <?php echo id_departamento_a_nombre($casa->id_departamento); ?> | <?php echo id_municipio_a_nombre($casa->id_municipio); ?>
                                     </p>
                                     <p>
                                         <a class="btn btn-info"
@@ -439,11 +441,11 @@ $CI =& get_instance();
                                     <div><?php echo $casa->tipo_propiedad; ?> </div>
                                 </h5>
                                 <div class="precio_propiedad_listado">
-                                    <?php echo $casa->moneda_propiedad; ?><?php echo $casa->precio_propiedad; ?>
+                                    <?php echo $casa->moneda_propiedad; ?><span class="precio_propiedad"><?php echo $casa->precio_propiedad; ?></span>
                                 </div>
                                 <p>
-                                    Zona <?php echo $casa->id_zona; ?>
-                                    | <?php echo id_departamento_a_nombre($casa->id_departamento); ?>
+                                    Zona <?php echo $casa->id_zona; ?> <br>
+                                    <?php echo id_departamento_a_nombre($casa->id_departamento); ?> | <?php echo id_municipio_a_nombre($casa->id_municipio); ?>
                                 </p>
                                 <p>
                                     <a class="btn btn-info"
@@ -474,4 +476,17 @@ $CI =& get_instance();
 
 <?php $this->stop() ?>
 <?php $this->start('js_p') ?>
+<script src="<?php echo base_url(); ?>/ui/vendor/numeral/numeral.min.js"></script>
+<script>
+    $( document ).ready(function() {
+        $('.precio_propiedad').each(function() {
+
+            // console.log($(this).first().text());
+            var string = numeral($(this).first().text()).format('0,0.00');
+            console.log(string);
+            $(this).html(string)
+
+        });
+    });
+</script>
 <?php $this->stop() ?>

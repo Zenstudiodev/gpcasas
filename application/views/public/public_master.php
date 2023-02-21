@@ -26,13 +26,15 @@ if ($CI->ion_auth->logged_in()) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#dcdcdc">
+    <?php echo $this->section('meta'); ?>
+
     <link rel="manifest" href="/manifest.webmanifest">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo base_url() ?>ui/public/css/style.css">
-    <?php echo $this->section('css_p') ?>
-    <title>GP CASAS</title>
+
+    <?php echo $this->section('css_p'); ?>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZFRL5LG9ZK"></script>
@@ -43,10 +45,10 @@ if ($CI->ion_auth->logged_in()) {
 
         gtag('config', 'G-ZFRL5LG9ZK');
     </script>
+
 </head>
 <body>
 <header>
-
     <div id="top_header">
         <div class="container-fluid">
             <div class="row align-items-center">
@@ -173,12 +175,10 @@ if (!isset($sin_banner)) {
 
 
 <section id="main_content">
-
-</section>
-
 <!-- Content Wrapper. Contains page content -->
 <?php echo $this->section('page_content') ?>
 <!-- /.content-wrapper -->
+</section>
 <footer>
     <div class="container">
         <div class="row justify-content-center">
@@ -207,7 +207,6 @@ if (!isset($sin_banner)) {
         </div>
     </div>
 </footer>
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -221,11 +220,9 @@ if (!isset($sin_banner)) {
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/90b8541e9b.js"  crossorigin="anonymous" ></script>
 
-
 <?php echo $this->section('js_p') ?>
 
 <script src="//code.jivosite.com/widget/nP33H9KoDL" async></script>
-
 <script>
     //service
     // CODELAB: Register service worker.
@@ -238,7 +235,6 @@ if (!isset($sin_banner)) {
         });
     }*/
 </script>
-
 <script>
     $("#movil_menu_open").click(function () {
         $("#top_menu").addClass('movil_menu_display');

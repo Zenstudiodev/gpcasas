@@ -657,6 +657,7 @@ $comentario_propiedad = array(
 <?php $this->start('css_p') ?>
 <!-- Dropzone -->
 <link rel="stylesheet" href="<?php base_url() ?>/ui/vendor/dropzone/dropzone.css">
+<link rel="stylesheet" href="<?php echo base_url() ?>/ui/vendor/cropperjs/cropper.min.css"/>
 <?php $this->stop() ?>
 
 <?php $this->start('page_content') ?>
@@ -1214,24 +1215,25 @@ $comentario_propiedad = array(
                                 <div class="row">
                                     <?php foreach ($fotos_propiedad->result() as $imagen) { ?>
                                         <div class="col-md-4">
-                                            <div class="box box-default">
-                                                <div class="box-header with-border">
-                                                    <i class="fas fa-file-image"></i>
+                                            <div class="card" >
+                                                <?php // print_contenido($imagen); ?>
+                                                <img class="card-img-top" src="<?php echo base_url() . '/web/propiedades_pic/' . $imagen->nombre_imagen; ?>" alt="Card image cap">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><i class="fas fa-file-image"></i> <?php echo $imagen->nombre_imagen ?></h5>
+                                                    <p class="card-text">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">orden</label>
+                                                        <input type="number" min="1" class="form-control orden_input" id="orden_image_<?php echo $propiedad->Id_propiedad ?>" value="<?php echo $imagen->orden_imagen;?>" casa_id="<?php echo $propiedad->Id_propiedad ?>" imagen_id="<?php echo $imagen->imagen_id; ?>"  placeholder="">
 
-                                                    <h3 class="box-title"><?php echo $imagen->nombre_imagen ?></h3>
-                                                </div>
-                                                <!-- /.box-header -->
-                                                <div class="box-body">
-                                                    <img class="img-fluid pad img_subida"
-                                                         src="<?php echo base_url() . '/web/propiedades_pic/' . $imagen->nombre_imagen; ?>"
-                                                         alt="Photo">
+                                                    </div>
+                                                    </p>
                                                     <a href="<?php echo base_url() . 'admin/borrar_imagen/' . $imagen->imagen_id . '/' . $propiedad->Id_propiedad; ?>"
                                                        class="btn btn-danger btn-xs">
                                                         <i class="fa fa-trash" aria-hidden="true"></i> Borrar
                                                     </a>
                                                 </div>
-                                                <!-- /.box-body -->
                                             </div>
+
                                         </div>
                                     <?php } ?>
                                 </div>
@@ -1251,8 +1253,64 @@ $comentario_propiedad = array(
                     </div>
                 <?php } ?>
 
-
+                <div class="col s12 m3">
+                    <div class="card upl_card">
+                        <div class="card-image">
+                            <label class="" title="img_9">
+                                <?php
+                                if (file_exists('/home2/gpautos/public_html/web/images_cont/' . $carro->id_carro . ' (9).jpg')) { ?>
+                                    <img src="<?php  echo base_url().'web/images_cont/' . $carro->id_carro . ' (9).jpg' ?>"
+                                         id="img_9_placeholder" >
+                                <?php } else { ?>
+                                    <img src="<?php echo base_url(); ?>ui/public/images/upl_assets/9.jpg"
+                                         id="img_9_placeholder">
+                                <?php } ?>
+                                <input type="file" class="sr-only" id="input_img_9" name="input_img_9"
+                                       accept="image/*">
+                            </label>
+                        </div>
+                        <div class="card-content">
+                            <div class="progress" id="progress_img_9">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                     id="progress_bar_img_9" role="progressbar"
+                                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%
+                                </div>
+                            </div>
+                            <div class="alert" role="alert" id="alert_img_9"></div>
+                        </div>
+                        <div class="card-action">
+                            subir imágen (toque la imágen)
+                        </div>
+                    </div>
+                </div>
             </div>
+
+        </div>
+    </div>
+    <!-- Modal Structure -->
+
+    <div id="modal1" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Ajustar Imagen</h4>
+            <div class="img-container">
+                <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+            </div>
+        </div>
+        <div class="modal-footer">
+
+            <a class="waves-effect waves-light btn" id="zoom_in_btn">
+                <i class="icon-zoom-in"></i>Acercar
+            </a>
+            <a class="waves-effect waves-light btn" id="zoom_off_btn">
+                <i class="icon-zoom-out"></i>Alejar
+            </a>
+            <a class="waves-effect waves-light btn" id="rotate_btn">
+                <i class="material-icons left">crop_rotate</i>Girar
+            </a>
+            <a href="#!" class="modal-action modal-close waves-effect waves-light btn" id="crop">
+                Subir imagenes
+            </a>
+
         </div>
     </div>
 
@@ -1262,6 +1320,7 @@ $comentario_propiedad = array(
 <?php $this->start('js_p') ?>
 <!-- Dropzone js-->
 <script src="<?php echo base_url(); ?>/ui/vendor/dropzone/dropzone.js"></script>
+<script src="<?php echo base_url() ?>/ui/vendor/cropperjs/cropper.min.js"></script>
 <!-- page script -->
 <script>
 
@@ -1328,6 +1387,16 @@ $comentario_propiedad = array(
     var cable_internet_propiedad;
     var comentario_propiedad;
 
+    function detectBrowser() {
+        var N = navigator.appName;
+        var UA = navigator.userAgent;
+        var temp;
+        var browserVersion = UA.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+        if (browserVersion && (temp = UA.match(/version\/([\.\d]+)/i)) != null)
+            browserVersion[2] = temp[1];
+        browserVersion = browserVersion ? [browserVersion[1], browserVersion[2]] : [N, navigator.appVersion, '-?'];
+        return browserVersion;
+    };
     //$("input[name='cerradura_c']:checked").val();
 
     $("#subir_casa_form").change(function () {
@@ -1512,16 +1581,718 @@ $comentario_propiedad = array(
             location.reload();
             /* Maybe display some more file information on your page */
         });
-    })
+    });
 
+    $(".orden_input").change(function (e) {
+        console.log('change');
+        console.log($(this).val());
+        console.log($(this).attr('casa_id'));
+        console.log($(this).attr('imagen_id'));
+
+        var orden;
+        var casa_id;
+        var imagen_id;
+
+        orden = $(this).val();
+        casa_id = $(this).attr('casa_id');
+        imagen_id = $(this).attr('imagen_id');
+
+
+
+        form_data = {
+            orden: orden,
+            casa_id: casa_id,
+            imagen_id: imagen_id
+        };
+
+        $.ajax({
+            method: "POST",
+            url: "<?php echo base_url()?>Propiedades/actualizar_orden_img",
+            data: form_data
+        })
+            .done(function (msg) {
+                console.log("Data Saved: " + msg);
+                location.reload();
+
+            });
+    });
+
+
+    <?php
+    if ($fotos_propiedad) {
+    ?>
+    <div class="row">
+        <?php foreach ($fotos_propiedad->result() as $imagen) { ?>
+        <?php } ?>
+
+    <?php } ?>
+
+    //croperr
+    window.addEventListener('DOMContentLoaded', function () {
+        var img_1 = document.getElementById('img_1_placeholder');
+        var input_1 = document.getElementById('input_img_1');
+        var progress_img_1 = $('#progress_img_1');
+        var progress_bar_img_1 = $('#progress_bar_img_1');
+        var alert_img_1 = $('#alert_img_1');
+
+        var img_2 = document.getElementById('img_2_placeholder');
+        var input_2 = document.getElementById('input_img_2');
+        var progress_img_2 = $('#progress_img_2');
+        var progress_bar_img_2 = $('#progress_bar_img_2');
+        var alert_img_2 = $('#alert_img_2');
+
+        var img_3 = document.getElementById('img_3_placeholder');
+        var input_3 = document.getElementById('input_img_3');
+        var progress_img_3 = $('#progress_img_3');
+        var progress_bar_img_3 = $('#progress_bar_img_3');
+        var alert_img_3 = $('#alert_img_3');
+
+        var img_4 = document.getElementById('img_4_placeholder');
+        var input_4 = document.getElementById('input_img_4');
+        var progress_img_4 = $('#progress_img_4');
+        var progress_bar_img_4 = $('#progress_bar_img_4');
+        var alert_img_4 = $('#alert_img_4');
+
+        var img_5 = document.getElementById('img_5_placeholder');
+        var input_5 = document.getElementById('input_img_5');
+        var progress_img_5 = $('#progress_img_5');
+        var progress_bar_img_5 = $('#progress_bar_img_5');
+        var alert_img_5 = $('#alert_img_5');
+
+        var img_6 = document.getElementById('img_6_placeholder');
+        var input_6 = document.getElementById('input_img_6');
+        var progress_img_6 = $('#progress_img_6');
+        var progress_bar_img_6 = $('#progress_bar_img_6');
+        var alert_img_6 = $('#alert_img_6');
+
+        var img_7 = document.getElementById('img_7_placeholder');
+        var input_7 = document.getElementById('input_img_7');
+        var progress_img_7 = $('#progress_img_7');
+        var progress_bar_img_7 = $('#progress_bar_img_7');
+        var alert_img_7 = $('#alert_img_7');
+
+        var img_8 = document.getElementById('img_8_placeholder');
+        var input_8 = document.getElementById('input_img_8');
+        var progress_img_8 = $('#progress_img_8');
+        var progress_bar_img_8 = $('#progress_bar_img_8');
+        var alert_img_8 = $('#alert_img_8');
+
+        var img_9 = document.getElementById('img_9_placeholder');
+        var input_9 = document.getElementById('input_img_9');
+        var progress_img_9 = $('#progress_img_9');
+        var progress_bar_img_9 = $('#progress_bar_img_9');
+        var alert_img_9 = $('#alert_img_9');
+
+        var img_10 = document.getElementById('img_10_placeholder');
+        var input_10 = document.getElementById('input_img_10');
+        var progress_img_10 = $('#progress_img_10');
+        var progress_bar_img_10 = $('#progress_bar_img_10');
+        var alert_img_10 = $('#alert_img_10');
+
+
+        var avatar = document.getElementById('avatar');
+        var image = document.getElementById('image');
+        var input = document.getElementById('input');
+        var $progress = $('.progress');
+        var $progressBar = $('.progress-bar');
+        var $alert = $('.alert');
+        var $modal = $('#modal');
+        var cropper;
+
+        //herramientas zoom
+        $("#zoom_in_btn").click(function () {
+            cropper.zoom(0.1);
+        });
+        $("#zoom_off_btn").click(function () {
+            cropper.zoom(-0.1);
+        });
+        $("#rotate_btn").click(function () {
+            cropper.rotate(90);
+        });
+
+
+        $('[data-toggle="tooltip"]').tooltip();
+
+        //img 1 event listener
+        input_1.addEventListener('change', function (e) {
+            img_placeholder = 'img_1_placeholder';
+            imagen_number = 1;
+            progress = progress_img_1;
+            alert = alert_img_1;
+
+            var files = e.target.files;
+            var done = function (url) {
+                input_1.value = '';
+                image.src = url;
+                console.log(input_1.id);
+                $('#modal1').modal('open', {
+                    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                    opacity: .5, // Opacity of modal background
+                    inDuration: 300, // Transition in duration
+                    outDuration: 200, // Transition out duration
+                    startingTop: '0%', // Starting top style attribute
+                    endingTop: '0%', // Ending top style attribute
+                    ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                        // alert("Ready");
+                        //console.log(modal, trigger);
+                        cropper = new Cropper(image, {
+                            aspectRatio: '1.7777777777777777',
+                            viewMode: 2,
+                            autoCropArea: 1,
+                            dragMode: 'move',
+                        });
+                    },
+                    complete: function () {
+                        //    alert('Closed');
+                        cropper.destroy();
+                        cropper = null;
+                    } // Callback for Modal close
+                });
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+                file = files[0];
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    reader.onload = function (e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+        //img 2 event listener
+        input_2.addEventListener('change', function (e) {
+            img_placeholder = 'img_2_placeholder';
+            imagen_number = 2;
+            progress = progress_img_2;
+            alert = alert_img_2;
+
+            var files = e.target.files;
+            var done = function (url) {
+                input_1.value = '';
+                image.src = url;
+                console.log(input_1.id);
+                $('#modal1').modal('open', {
+                    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                    opacity: .5, // Opacity of modal background
+                    inDuration: 300, // Transition in duration
+                    outDuration: 200, // Transition out duration
+                    startingTop: '0%', // Starting top style attribute
+                    endingTop: '0%', // Ending top style attribute
+                    ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                        // alert("Ready");
+                        //console.log(modal, trigger);
+                        cropper = new Cropper(image, {
+                            aspectRatio: '1.7777777777777777',
+                            viewMode: 2,
+                            autoCropArea: 1,
+                            dragMode: 'move',
+                        });
+                    },
+                    complete: function () {
+                        //    alert('Closed');
+                        cropper.destroy();
+                        cropper = null;
+                    } // Callback for Modal close
+                });
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+                file = files[0];
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    reader.onload = function (e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+        //img 3 event listener
+        input_3.addEventListener('change', function (e) {
+            img_placeholder = 'img_3_placeholder';
+            imagen_number = 3;
+            progress = progress_img_3;
+            alert = alert_img_3;
+
+            var files = e.target.files;
+            var done = function (url) {
+                input_1.value = '';
+                image.src = url;
+                $('#modal1').modal('open', {
+                    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                    opacity: .5, // Opacity of modal background
+                    inDuration: 300, // Transition in duration
+                    outDuration: 200, // Transition out duration
+                    startingTop: '0%', // Starting top style attribute
+                    endingTop: '0%', // Ending top style attribute
+                    ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                        // alert("Ready");
+                        //console.log(modal, trigger);
+                        cropper = new Cropper(image, {
+                            aspectRatio: '1.7777777777777777',
+                            viewMode: 1,
+                            autoCropArea: 1,
+                            dragMode: 'move',
+                        });
+                    },
+                    complete: function () {
+                        //    alert('Closed');
+                        cropper.destroy();
+                        cropper = null;
+                    } // Callback for Modal close
+                });
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+                file = files[0];
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    reader.onload = function (e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+        //img 4 event listener
+        input_4.addEventListener('change', function (e) {
+            img_placeholder = 'img_4_placeholder';
+            imagen_number = 4;
+            progress = progress_img_4;
+            alert = alert_img_4;
+
+            var files = e.target.files;
+            var done = function (url) {
+                input_1.value = '';
+                image.src = url;
+                $('#modal1').modal('open', {
+                    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                    opacity: .5, // Opacity of modal background
+                    inDuration: 300, // Transition in duration
+                    outDuration: 200, // Transition out duration
+                    startingTop: '0%', // Starting top style attribute
+                    endingTop: '0%', // Ending top style attribute
+                    ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                        // alert("Ready");
+                        //console.log(modal, trigger);
+                        cropper = new Cropper(image, {
+                            aspectRatio: '1.7777777777777777',
+                            viewMode: 1,
+                            autoCropArea: 1,
+                            dragMode: 'move',
+                        });
+                    },
+                    complete: function () {
+                        //    alert('Closed');
+                        cropper.destroy();
+                        cropper = null;
+                    } // Callback for Modal close
+                });
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+                file = files[0];
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    reader.onload = function (e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+        //img 5 event listener
+        input_5.addEventListener('change', function (e) {
+            img_placeholder = 'img_5_placeholder';
+            imagen_number = 5;
+            progress = progress_img_5;
+            alert = alert_img_5;
+
+            var files = e.target.files;
+            var done = function (url) {
+                input_1.value = '';
+                image.src = url;
+                $('#modal1').modal('open', {
+                    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                    opacity: .5, // Opacity of modal background
+                    inDuration: 300, // Transition in duration
+                    outDuration: 200, // Transition out duration
+                    startingTop: '0%', // Starting top style attribute
+                    endingTop: '0%', // Ending top style attribute
+                    ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                        // alert("Ready");
+                        //console.log(modal, trigger);
+                        cropper = new Cropper(image, {
+                            aspectRatio: '1.7777777777777777',
+                            viewMode: 1,
+                            autoCropArea: 1,
+                            dragMode: 'move',
+                        });
+                    },
+                    complete: function () {
+                        //    alert('Closed');
+                        cropper.destroy();
+                        cropper = null;
+                    } // Callback for Modal close
+                });
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+                file = files[0];
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    reader.onload = function (e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+        //img 6 event listener
+        input_6.addEventListener('change', function (e) {
+            img_placeholder = 'img_6_placeholder';
+            imagen_number = 6;
+            progress = progress_img_6;
+            alert = alert_img_6;
+
+            var files = e.target.files;
+            var done = function (url) {
+                input_1.value = '';
+                image.src = url;
+                $('#modal1').modal('open', {
+                    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                    opacity: .5, // Opacity of modal background
+                    inDuration: 300, // Transition in duration
+                    outDuration: 200, // Transition out duration
+                    startingTop: '0%', // Starting top style attribute
+                    endingTop: '0%', // Ending top style attribute
+                    ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                        // alert("Ready");
+                        //console.log(modal, trigger);
+                        cropper = new Cropper(image, {
+                            aspectRatio: '1.7777777777777777',
+                            viewMode: 1,
+                            autoCropArea: 1,
+                            dragMode: 'move',
+                        });
+                    },
+                    complete: function () {
+                        //    alert('Closed');
+                        cropper.destroy();
+                        cropper = null;
+                    } // Callback for Modal close
+                });
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+                file = files[0];
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    reader.onload = function (e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+        //img 7 event listener
+        input_7.addEventListener('change', function (e) {
+            img_placeholder = 'img_7_placeholder';
+            imagen_number = 7;
+            progress = progress_img_7;
+            alert = alert_img_7;
+
+            var files = e.target.files;
+            var done = function (url) {
+                input_1.value = '';
+                image.src = url;
+                $('#modal1').modal('open', {
+                    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                    opacity: .5, // Opacity of modal background
+                    inDuration: 300, // Transition in duration
+                    outDuration: 200, // Transition out duration
+                    startingTop: '0%', // Starting top style attribute
+                    endingTop: '0%', // Ending top style attribute
+                    ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                        // alert("Ready");
+                        //console.log(modal, trigger);
+                        cropper = new Cropper(image, {
+                            aspectRatio: '1.7777777777777777',
+                            viewMode: 1,
+                            autoCropArea: 1,
+                            dragMode: 'move',
+                        });
+                    },
+                    complete: function () {
+                        //    alert('Closed');
+                        cropper.destroy();
+                        cropper = null;
+                    } // Callback for Modal close
+                });
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+                file = files[0];
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    reader.onload = function (e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+        //img 8 event listener
+        input_8.addEventListener('change', function (e) {
+            img_placeholder = 'img_8_placeholder';
+            imagen_number = 8;
+            progress = progress_img_8;
+            alert = alert_img_8;
+
+            var files = e.target.files;
+            var done = function (url) {
+                input_1.value = '';
+                image.src = url;
+                $('#modal1').modal('open', {
+                    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                    opacity: .5, // Opacity of modal background
+                    inDuration: 300, // Transition in duration
+                    outDuration: 200, // Transition out duration
+                    startingTop: '0%', // Starting top style attribute
+                    endingTop: '0%', // Ending top style attribute
+                    ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                        // alert("Ready");
+                        //console.log(modal, trigger);
+                        cropper = new Cropper(image, {
+                            aspectRatio: '1.7777777777777777',
+                            viewMode: 1,
+                            autoCropArea: 1,
+                            dragMode: 'move',
+                        });
+                    },
+                    complete: function () {
+                        //    alert('Closed');
+                        cropper.destroy();
+                        cropper = null;
+                    } // Callback for Modal close
+                });
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+                file = files[0];
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    reader.onload = function (e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+        //img 9 event listener
+        input_9.addEventListener('change', function (e) {
+            img_placeholder = 'img_9_placeholder';
+            imagen_number = 9;
+            progress = progress_img_9;
+            alert = alert_img_9;
+
+            var files = e.target.files;
+            var done = function (url) {
+                input_1.value = '';
+                image.src = url;
+                $('#modal1').modal('open', {
+                    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                    opacity: .5, // Opacity of modal background
+                    inDuration: 300, // Transition in duration
+                    outDuration: 200, // Transition out duration
+                    startingTop: '0%', // Starting top style attribute
+                    endingTop: '0%', // Ending top style attribute
+                    ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                        // alert("Ready");
+                        //console.log(modal, trigger);
+                        cropper = new Cropper(image, {
+                            aspectRatio: '1.7777777777777777',
+                            viewMode: 1,
+                            autoCropArea: 1,
+                            dragMode: 'move',
+                        });
+                    },
+                    complete: function () {
+                        //    alert('Closed');
+                        cropper.destroy();
+                        cropper = null;
+                    } // Callback for Modal close
+                });
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+                file = files[0];
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    reader.onload = function (e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+        //img 10 event listener
+        input_10.addEventListener('change', function (e) {
+            img_placeholder = 'img_10_placeholder';
+            imagen_number = 10;
+            progress = progress_img_10;
+            alert = alert_img_10;
+
+            var files = e.target.files;
+            var done = function (url) {
+                input_1.value = '';
+                image.src = url;
+                $('#modal1').modal('open', {
+                    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                    opacity: .5, // Opacity of modal background
+                    inDuration: 300, // Transition in duration
+                    outDuration: 200, // Transition out duration
+                    startingTop: '0%', // Starting top style attribute
+                    endingTop: '0%', // Ending top style attribute
+                    ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+                        // alert("Ready");
+                        //console.log(modal, trigger);
+                        cropper = new Cropper(image, {
+                            aspectRatio: '1.7777777777777777',
+                            viewMode: 1,
+                            autoCropArea: 1,
+                            dragMode: 'move',
+                        });
+                    },
+                    complete: function () {
+                        //    alert('Closed');
+                        cropper.destroy();
+                        cropper = null;
+                    } // Callback for Modal close
+                });
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+                file = files[0];
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    reader.onload = function (e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+
+        //crop and upload
+        document.getElementById('crop').addEventListener('click', function () {
+            var initialAvatarURL;
+            var canvas;
+            //$modal.modal('close');
+            $('#modal1').modal('close');
+            if (cropper) {
+                canvas = cropper.getCroppedCanvas({
+                    width: 638,
+                    height: 359,
+                });
+                console.log(img_placeholder);
+                avatar = document.getElementById(img_placeholder);
+                initialAvatarURL = avatar.src;
+                avatar.src = canvas.toDataURL();
+
+                $progress = progress;
+                $progress.show();
+
+                $alert = alert;
+                $alert.removeClass('alert-success alert-warning');
+                canvas.toBlob(function (blob) {
+                    var formData = new FormData();
+                    formData.append('imagen', blob);
+                    formData.append('id_carro', '<?php echo $propiedad->Id_propiedad; ?>');
+                    formData.append('img_number', imagen_number);
+                    //$.ajax('https://jsonplaceholder.typicode.com/posts', {
+                    $.ajax('<?php echo base_url()?>cliente/procesar_foto', {
+                        method: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        xhr: function () {
+                            var xhr = new XMLHttpRequest();
+                            xhr.upload.onprogress = function (e) {
+                                var percent = '0';
+                                var percentage = '0%';
+                                if (e.lengthComputable) {
+                                    percent = Math.round((e.loaded / e.total) * 100);
+                                    percentage = percent + '%';
+                                    $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
+                                }
+                            };
+                            return xhr;
+                        },
+                        success: function (msg) {
+                            console.log(msg);
+                            $alert.show().addClass('alert-success').text('Upload success');
+                        },
+                        error: function () {
+                            avatar.src = initialAvatarURL;
+                            $alert.show().addClass('alert-warning').text('Upload error');
+                        },
+                        complete: function () {
+                            $progress.hide();
+                        },
+                    });
+                });
+            }
+        });
+    });
 </script>
 
 <script>
     var municipio;
     municipio = '<?php echo $propiedad->id_municipio; ?>';
-
     $(document).ready(function () {
-
         $('#id_municipio option').remove();
         departamento = $("#id_departamento").val();
         $.ajax({
@@ -1538,6 +2309,12 @@ $comentario_propiedad = array(
                 $select.value = municipio;
             }
         });
+        //cropper
+        $(".iframe-container-bottom").remove();
+        console.log('removido');
+        detectBrowser();
+        $(".progress").hide();
+        $(".alert").hide();
     });
 
     //Actualizar municipios

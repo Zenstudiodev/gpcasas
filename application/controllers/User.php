@@ -152,10 +152,24 @@ class User extends Base_Controller
             // redirect them to the login page
             redirect(base_url() . 'User/login');
         }
+        if($this->uri->segment(3)){
+            $estado_propiedades= $this->uri->segment(3);
+        }else{
+            $estado_propiedades= false;
+        }
         $data['sin_banner'] = 1;
         $data['user_id'] = $this->ion_auth->get_user_id();
         $data['user'] = $this->User_model->get_user_by_id($data['user_id']);
-        $data['casa_propias'] = $this->Propiedad_model->get_propiedaedes_by_user_id($data['user_id']);
+        if ($estado_propiedades=='inactivas') {
+            // get baja
+            $data['casa_propias'] = $this->Propiedad_model->get_propiedades_baja_by_user_id($data['user_id']);
+            $data['casa_propias_pendientes'] = $this->Propiedad_model->get_propiedades_pendientes_by_user_id($data['user_id']);
+        }else{
+            // get alta
+            $data['casa_propias'] = $this->Propiedad_model->get_propiedades_alta_by_user_id($data['user_id']);
+            $data['casa_propias_pendientes'] = $this->Propiedad_model->get_propiedades_pendientes_by_user_id($data['user_id']);
+        }
+        $data['estado_propiedades'] = $estado_propiedades;
         echo $this->templates->render('public/perfil', $data);
     }
     public function subir_propiedad()

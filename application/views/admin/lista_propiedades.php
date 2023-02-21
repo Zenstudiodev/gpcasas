@@ -104,7 +104,7 @@ $this->layout('admin/master',
                                        href="<?php echo base_url() . 'admin/subir_fotos/' . $propiedad->Id_propiedad; ?>">Subir
                                         fotos</a>
                                     <a type="button" class="btn btn-success"
-                                       href="<?php echo base_url() . 'admin/editar_propiedad/' . $propiedad->Id_propiedad; ?>">Editar</a>
+                                       href="<?php echo base_url() . 'User/subir_propiedad_t/' . $propiedad->Id_propiedad; ?>">Editar</a>
                                     <a type="button" class="btn btn-primary"
                                        href="<?php echo base_url() . 'admin/revisar_propiedad/' . $propiedad->Id_propiedad; ?>">Revisar</a>
                                     <!--<a type="button" class="btn btn-success" href="<?php echo base_url() . 'admin/aprobar_propiedad/' . $propiedad->Id_propiedad; ?>">Aprobar</a>-->

@@ -163,4 +163,19 @@ class Propiedades  extends Base_Controller
     public function v_360(){
         echo $this->templates->render('public/ver_propiedad_360');
 }
+    public function actualizar_orden_img(){
+       // print_r($_POST);
+        $orden=$this->input->post('orden');
+        $casa_id=$this->input->post('casa_id');
+        $imagen_id=$this->input->post('imagen_id');
+
+        $orden_imagen=array(
+            'orden'=>$orden,
+            'casa_id'=>$casa_id,
+            'imagen_id'=>$imagen_id
+        );
+
+        $this->Propiedad_model->actualizar_orden_imagen($orden_imagen);
+
+    }
 }

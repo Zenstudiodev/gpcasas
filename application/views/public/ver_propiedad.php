@@ -44,9 +44,31 @@ $mensaje_informacion = array(
     'value'=>'Quisiera información de la propiedad código: '. $propiedad->Id_propiedad,
 );
 ?>
+<?php
+$imagenes_propiedad = get_imgenes_propiedad_public($propiedad->Id_propiedad);
+?>
+<?php $this->start('meta'); ?>
+<meta property="og:url" content="<?php echo base_url().'Propiedades/ver/'.$propiedad->Id_propiedad; ?>" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="<?php echo $propiedad->Id_propiedad . ' ' . $propiedad->titulo_propiedad.' '.id_municipio_a_nombre($propiedad->id_municipio).' '.id_departamento_a_nombre($propiedad->id_departamento); ?>" />
+<meta property="og:description" content="<?php echo$propiedad->comentario_propiedad; ?> " />
+<?php
+if($imagenes_propiedad){
+    $og_imagen=$imagenes_propiedad->row();
+   // print_contenido($og_imagen);
+?>
+    <meta property="og:image" content="<?php echo base_url() . '/web/propiedades_pic/' . $og_imagen->nombre_imagen; ?>" />
+<?php
+}
+?>
 
-<?php $this->start('css_p') ?>
+
+<?php $this->stop() ?>
+
+<?php $this->start('css_p'); ?>
+
 <link rel="stylesheet" href="<?php echo base_url() ?>/ui/vendor/lightbox2/css/lightbox.min.css">
+
 
 <title><?php
 if ($propiedad) {
@@ -169,9 +191,7 @@ if ($propiedad) {
 
         <div class="row">
             <div class="col-md-8">
-                <?php
-                $imagenes_propiedad = get_imgenes_propiedad_public($propiedad->Id_propiedad);
-                ?>
+
                 <?php if ($imagenes_propiedad) { ?>
                     <?php
                     $start_banner = 0;

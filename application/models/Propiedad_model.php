@@ -247,6 +247,33 @@ class Propiedad_model extends CI_Model
         if ($query->num_rows() > 0) return $query;
         else return false;
     }
+    public function get_propiedades_alta_by_user_id($user_id)
+    {
+        $this->db->where('user_id_propiedad', $user_id);
+        $this->db->where('estado_propiedad', 'alta');
+        $this->db->from('propiedades');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
+    public function get_propiedades_pendientes_by_user_id($user_id)
+    {
+        $this->db->where('user_id_propiedad', $user_id);
+        $this->db->where('estado_propiedad', 'pendiente');
+        $this->db->from('propiedades');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
+    public function get_propiedades_baja_by_user_id($user_id)
+    {
+        $this->db->where('user_id_propiedad', $user_id);
+        $this->db->where('estado_propiedad', 'baja');
+        $this->db->from('propiedades');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) return $query;
+        else return false;
+    }
 
     public function resultado_filtro($filtros)
     {
@@ -322,7 +349,7 @@ class Propiedad_model extends CI_Model
     public function get_fotos_de_propiedad_by_id($propiedad_id)
     {
         $this->db->where('propiedad_id', $propiedad_id);
-        $this->db->order_by('nombre_imagen', 'desc');
+        $this->db->order_by('orden_imagen', 'ASC');
         $query = $this->db->get('imagenes_propiedad');
         if ($query->num_rows() > 0) return $query;
         else return false;
@@ -351,6 +378,14 @@ class Propiedad_model extends CI_Model
     {
         $this->db->where('imagen_id', $imagen_id);
         $this->db->delete('imagenes_propiedad');
+    }
+
+    function actualizar_orden_imagen($data){
+        $datos = array(
+            'orden_imagen'=> $data['orden'],
+        );
+        $this->db->where('imagen_id', $data['imagen_id']);
+        $query = $this->db->update('imagenes_propiedad', $datos);
     }
 
     function asignar_casa_dfraft($data){
