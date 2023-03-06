@@ -329,19 +329,17 @@ class Admin extends Base_Controller
 		}
 	}
 
-	public function procesar_foto()
+	public function cortar_foto()
 	{
-		/* echo '<pre>';
-				 print_r($_FILES);
-				 echo '</pre>';
-				 echo '<pre>';
-				 print_r($_POST);
-				 echo '</pre>';*/
+		print_contenido($_FILES);
+		print_contenido($_POST);
 		$image = file_get_contents($_FILES['imagen']['tmp_name']);
-		$id_propiedad = $_POST['id_propiedad'];
-		$numero_foto = $_POST['img_number'];
+		$nombre_imagen = $_POST['nombre_imagen'];
+		//echo $nombre_imagen;
 
-		file_put_contents('/home2/gpautos/gpcasas/web/propiedades_pic/' . $id_propiedad . ' (' . $numero_foto . ').jpg', $image);
+		//$numero_foto = $_POST['img_number'];
+
+		file_put_contents('/home2/gpautos/gpcasas/web/propiedades_pic/' . $nombre_imagen, $image);
 	}
 
 	public function propiedades()

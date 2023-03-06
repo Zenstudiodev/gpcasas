@@ -1227,7 +1227,7 @@ $comentario_propiedad = array(
 
                                                     </div>
                                                     </p>
-                                                    <button type="button" class="btn btn-primary" data-target="#modal" data-toggle="modal" data-coper_img="<?php echo base_url() . '/web/propiedades_pic/' . $imagen->nombre_imagen; ?>">
+                                                    <button type="button" class="btn btn-primary" data-target="#modal" data-toggle="modal" data-image_name="<?php echo $imagen->nombre_imagen ?>" data-coper_img="<?php echo base_url() . '/web/propiedades_pic/' . $imagen->nombre_imagen; ?>">
                                                         ajustar
                                                     </button>
                                                     <a href="<?php echo base_url() . 'admin/borrar_imagen/' . $imagen->imagen_id . '/' . $propiedad->Id_propiedad; ?>"
@@ -1261,13 +1261,6 @@ $comentario_propiedad = array(
 
             </div>
             <div class="container">
-                <h1>Cropper in a Bootstrap modal</h1>
-
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-target="#modal" data-toggle="modal">
-                    Launch the demo
-                </button>
-
                 <!-- Modal -->
                 <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog">
                     <div class="modal-dialog modal-lg" role="dialog">
@@ -1275,42 +1268,29 @@ $comentario_propiedad = array(
                             <div class="modal-body">
                                 <div class="img-container">
                                     <img id="image_cropper" src="https://gpcasas.net//web/propiedades_pic/51.jpg" alt="Picture" style="max-height:400px;">
+                                    <input type="hidden" id="modal_image_name" >
                                 </div>
                             </div>
                             <div class="modal-footer">
+                                <a class="btn btn-info" id="zoom_in_btn">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> Acercar
+                                </a>
+                                <a class="btn btn-info" id="zoom_off_btn">
+                                    <i class="fa-solid fa-magnifying-glass-minus"></i> Alejar
+                                </a>
+                                <a class="btn btn-info" id="rotate_btn">
+                                    <i class="fa-solid fa-rotate-right"></i>Girar
+                                </a>
+                                <a href="#!" class="btn btn-success" id="crop">
+                                    <i class="fa-solid fa-crop"></i> Cortar y guardar
+                                </a>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
-                                <button type="button" class="btn btn-primary">Cortar y guardar</button>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-    </div>
-    <!-- Modal Structure -->
-
-    <div id="modal1" class="modal modal-fixed-footer">
-        <div class="modal-content">
-            <h4>Ajustar Imagen</h4>
-            <div class="img-container">
-                <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
-            </div>
-        </div>
-        <div class="modal-footer">
-
-            <a class="waves-effect waves-light btn" id="zoom_in_btn">
-                <i class="icon-zoom-in"></i>Acercar
-            </a>
-            <a class="waves-effect waves-light btn" id="zoom_off_btn">
-                <i class="icon-zoom-out"></i>Alejar
-            </a>
-            <a class="waves-effect waves-light btn" id="rotate_btn">
-                <i class="material-icons left">crop_rotate</i>Girar
-            </a>
-            <a href="#!" class="modal-action modal-close waves-effect waves-light btn" id="crop">
-                Subir imagenes
-            </a>
 
         </div>
     </div>
@@ -1331,13 +1311,17 @@ $comentario_propiedad = array(
         var cropper;
 
         $('#modal').on('shown.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var recipient = button.data('coper_img') // Extract info from data-* attributes
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var recipient = button.data('coper_img'); // Extract info from data-* attributes
+            var nombre_imagen = button.data('image_name');
+            $('#modal_image_name').val(nombre_imagen);
+            console.log(nombre_imagen);
+
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
             modal.find('#image_cropper').attr("src", recipient);
-            cropper = new Cropper(image, {
+            cropper = new Cropper(image , {
                // aspectRatio: '1.7777777777777777',
                 viewMode: 2,
                 autoCropArea: 1,
@@ -1352,7 +1336,92 @@ $comentario_propiedad = array(
             canvasData = cropper.getCanvasData();
             cropper.destroy();
         });
+
+
+        var cropper;
+
+        //herramientas zoom
+        $("#zoom_in_btn").click(function () {
+            cropper.zoom(0.1);
+        });
+        $("#zoom_off_btn").click(function () {
+            cropper.zoom(-0.1);
+        });
+        $("#rotate_btn").click(function () {
+            cropper.rotate(90);
+        });
+
+
+
+        //crop and upload
+        document.getElementById('crop').addEventListener('click', function () {
+            var initialAvatarURL;
+            var canvas;
+            //$modal.modal('close');
+            $('#modal1').modal('close');
+            if (cropper) {
+                canvas = cropper.getCroppedCanvas({
+                    width: 638,
+                    height: 359,
+                });
+               // console.log(img_placeholder);
+                avatar = document.getElementById('image_cropper');
+                initialAvatarURL = avatar.src;
+                avatar.src = canvas.toDataURL();
+
+               /* $progress = progress;
+                $progress.show();*/
+
+                $alert = alert;
+                //$alert.removeClass('alert-success alert-warning');
+                canvas.toBlob(function (blob) {
+                    var formData = new FormData();
+                    formData.append('imagen', blob);
+                    formData.append('id_propiedad', '<?php echo $propiedad->Id_propiedad; ?>');
+                    nombre_imagen = $('#modal_image_name').val();
+                    console.log(nombre_imagen);
+                    formData.append('nombre_imagen', nombre_imagen);
+                    //formData.append('img_number', imagen_number);
+                    //$.ajax('https://jsonplaceholder.typicode.com/posts', {
+                    $.ajax('<?php echo base_url()?>admin/cortar_foto', {
+                        method: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        xhr: function () {
+                            var xhr = new XMLHttpRequest();
+                            xhr.upload.onprogress = function (e) {
+                                var percent = '0';
+                                var percentage = '0%';
+                                if (e.lengthComputable) {
+                                    percent = Math.round((e.loaded / e.total) * 100);
+                                    percentage = percent + '%';
+                                   // $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
+                                }
+                            };
+                            return xhr;
+                        },
+                        success: function (msg) {
+                            console.log(msg);
+                            window.location.reload();
+                            //$alert.show().addClass('alert-success').text('Upload success');
+                        },
+                        error: function () {
+                            avatar.src = initialAvatarURL;
+                            $alert.show().addClass('alert-warning').text('Upload error');
+                        },
+                        complete: function () {
+                            //$progress.hide();
+                            window.location.reload();
+                        },
+                    });
+                });
+            }
+        });
     });
+
+
+
 </script>
 
 <script>
