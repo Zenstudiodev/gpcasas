@@ -101,6 +101,9 @@ else{
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url()?>admin/banners_header">Banners</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url()?>auth">Listado de usuarios</a>
+                    </li>
                 </ul>
             </div>
             <div class="col-md-10">

@@ -63,4 +63,17 @@ function get_datos_asesor_by_id($asesor_id){
     return $asesor->row();
 }
 
+function nombre_asesor($asesor_id){
+    $ci =& get_instance();
+
+    $asesor = $ci->User_model->get_user_by_id($asesor_id);
+    if($asesor){
+        $asesor =  $asesor->row();
+        return $asesor->first_name;
+    }else{
+        return '';
+    }
+
+}
+
 ?>

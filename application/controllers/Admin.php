@@ -249,6 +249,8 @@ class Admin extends Base_Controller
 		);
 		//guadramos el nombre generado de la imagen y la asignamos a producto
 		$this->Propiedad_model->guardar_foto_tabla_fotos($datos_imagen);
+        $this->Propiedad_model->propiedad_a_pendiente($propiedad_id);
+
 		//print_r($datos_imagen);
 
 		if (!empty($_FILES['imagen_propiedad']['name'])) { //si se envio un archivo

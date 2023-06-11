@@ -48,7 +48,6 @@ $this->layout('admin/master',
                     <thead>
                     <tr>
 
-                        <th>Coódigo propiedad</th>
                         <th>Tipo</th>
                         <th>Estado</th>
                         <th>nombre</th>
@@ -58,13 +57,14 @@ $this->layout('admin/master',
                         <th>Correo</th>
                         <th>Teléfono</th>
                         <th>Fecha creación</th>
+                        <th>Asesor</th>
+                        <th>Coódigo propiedad</th>
                         <th>Acciones</th>
 
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
-                        <th>Coódigo propiedad</th>
                         <th>Tipo</th>
                         <th>Estado</th>
                         <th>nombre</th>
@@ -74,13 +74,14 @@ $this->layout('admin/master',
                         <th>Correo</th>
                         <th>Teléfono</th>
                         <th>Fecha creación</th>
+                        <th>Asesor</th>
+                        <th>Coódigo propiedad</th>
                         <th>Acciones</th>
                     </tr>
                     </tfoot>
                     <?php foreach ($propiedades_pendientes->result() as $propiedad) { ?>
                         <tr>
 
-                            <td><?php echo $propiedad->Id_propiedad; ?></td>
                             <td><?php echo $propiedad->tipo_propiedad; ?></td>
                             <td><?php echo $propiedad->estado_propiedad; ?></td>
                             <td><?php echo $propiedad->nombre_contacto_propiedad; ?></td>
@@ -90,6 +91,8 @@ $this->layout('admin/master',
                             <td><?php echo $propiedad->correo_contacto; ?></td>
                             <td><?php echo $propiedad->telefono; ?></td>
                             <td><?php echo $propiedad->fecha_creacion_propiedad; ?></td>
+                            <td><?php echo nombre_asesor($propiedad->propiedad_asesor_id); ?></td>
+                            <td><?php echo $propiedad->Id_propiedad; ?></td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <button type="button" class="btn btn-primary generar_pdf" data-toggle="modal"
